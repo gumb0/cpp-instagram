@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src\Curl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CurlInitializer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ExceptionHelpers.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\cpp-instagram\Client.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cpp-instagram\Exception.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cpp-instagram\User.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Curl.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CurlApi.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CurlApiImpl.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CurlInitializer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ExceptionHelpers.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{b42f5f2d-6568-4791-ae3d-fc0da0356a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{5288c40e-0b95-409c-a892-cc93b3fffe58}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -9,10 +9,10 @@ namespace Instagram
     typedef size_t (*WriteCallback)(char* ptr, size_t size, size_t nmemb, void* userdata);
 
     // The virtual interface wrapper over libcurl, it is needed to mock libcurl calls in unit tests
-    class ICurlApi
+    class CurlApi
     {
     public:
-        virtual ~ICurlApi() {}
+        virtual ~CurlApi() {}
 
         virtual CURLcode curl_global_init(long flags) = 0;
         virtual void curl_global_cleanup() = 0;
@@ -25,7 +25,7 @@ namespace Instagram
         virtual CURLcode curl_easy_perform(CURL* handle) = 0;
     };
 
-    typedef std::shared_ptr<ICurlApi> CurlApiPtr;
+    typedef std::shared_ptr<CurlApi> CurlApiPtr;
 
 }
 

@@ -6,7 +6,7 @@
 namespace Instagram
 {
     // The virtual interface wrapper over libcurl, it is needed to mock libcurl calls in unit tests
-    class CurlApiImpl : public ICurlApi /* noncopyable? */
+    class CurlApiImpl : public CurlApi
     {
     public:
         // ICurlApi methods

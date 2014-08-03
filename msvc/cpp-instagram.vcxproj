@@ -11,19 +11,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Curl.cpp" />
+    <ClCompile Include="..\src\ClientImpl.cpp" />
+    <ClCompile Include="..\src\CurlImpl.cpp" />
     <ClCompile Include="..\src\CurlInitializer.cpp" />
     <ClCompile Include="..\src\ExceptionHelpers.cpp" />
+    <ClCompile Include="..\src\UserImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\cpp-instagram\Client.h" />
     <ClInclude Include="..\include\cpp-instagram\Exception.h" />
     <ClInclude Include="..\include\cpp-instagram\User.h" />
+    <ClInclude Include="..\src\ClientImpl.h" />
     <ClInclude Include="..\src\Curl.h" />
     <ClInclude Include="..\src\CurlApi.h" />
     <ClInclude Include="..\src\CurlApiImpl.h" />
+    <ClInclude Include="..\src\CurlImpl.h" />
     <ClInclude Include="..\src\CurlInitializer.h" />
     <ClInclude Include="..\src\ExceptionHelpers.h" />
+    <ClInclude Include="..\src\UserImpl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9EAC0142-2C53-41E7-B4C1-6D2DA3129C55}</ProjectGuid>
@@ -55,10 +60,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\include\cpp-instagram;$(LIBCURL_HOME)\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\include\cpp-instagram;$(BOOST_HOME);$(LIBCURL_HOME)\include;$(JSONCPP_HOME)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>..\include\cpp-instagram;$(LIBCURL_HOME)\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\include\cpp-instagram;$(BOOST_HOME);$(LIBCURL_HOME)\include;$(JSONCPP_HOME)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

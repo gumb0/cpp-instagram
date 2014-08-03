@@ -5,7 +5,7 @@
 
 #include <gmock/gmock.h>
 
-class MockCurlApi: public Instagram::ICurlApi
+class MockCurlApi: public Instagram::CurlApi
 {
 public:
     MOCK_METHOD1(curl_global_init, CURLcode(long flags));

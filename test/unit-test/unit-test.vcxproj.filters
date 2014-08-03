@@ -6,5 +6,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockCurlApi.h" />
+    <ClInclude Include="MockCurl.h" />
   </ItemGroup>
 </Project>

@@ -1,9 +1,9 @@
-#include "Curl.h"
+#include "CurlImpl.h"
 #include "ExceptionHelpers.h"
 
 using namespace Instagram;
 
-Curl::Curl(CurlApiPtr curlApi) : 
+CurlImpl::CurlImpl(CurlApiPtr curlApi) : 
     mCurlApi(curlApi),
     mHandle(mCurlApi->curl_easy_init())
 {
@@ -11,12 +11,12 @@ Curl::Curl(CurlApiPtr curlApi) :
         Throw(CURL_EASY_INIT_FAILED);
 }
 
-Curl::~Curl()
+CurlImpl::~CurlImpl()
 {
     mCurlApi->curl_easy_cleanup(mHandle);
 }
 
-std::string Curl::get(const std::string& url)
+std::string CurlImpl::get(const std::string& url)
 {
     setUrl(url);
     setGetMethod();
@@ -29,19 +29,19 @@ std::string Curl::get(const std::string& url)
     return result;
 }
 
-void Curl::setUrl(const std::string& url)
+void CurlImpl::setUrl(const std::string& url)
 {
     if (CURLcode result = mCurlApi->curl_easy_setopt_string(mHandle, CURLOPT_URL, url.c_str()))
         ThrowCurl(CURL_SETTING_URL_FAILED, result);
 }
 
-void Curl::setGetMethod()
+void CurlImpl::setGetMethod()
 {
     if (CURLcode result = mCurlApi->curl_easy_setopt_long(mHandle, CURLOPT_HTTPGET, 1))
         ThrowCurl(CURL_SETTING_GET_METHOD_FAILED, result);
 }
 
-void Curl::setReceiveCallback(std::string& outResult)
+void CurlImpl::setReceiveCallback(std::string& outResult)
 {
     if (CURLcode result = mCurlApi->curl_easy_setopt_func(mHandle, CURLOPT_WRITEFUNCTION, onDataReceived))
         ThrowCurl(CURL_SETTING_WRITE_FUNCTION_FAILED, result);
@@ -50,7 +50,7 @@ void Curl::setReceiveCallback(std::string& outResult)
         ThrowCurl(CURL_SETTING_WRITE_DATA_FAILED, result);
 }
 
-size_t Curl::onDataReceived(char* buffer, size_t size, size_t nmemb, void* context)
+size_t CurlImpl::onDataReceived(char* buffer, size_t size, size_t nmemb, void* context)
 {
     std::string* s = static_cast<std::string*>(context);
     s->append(buffer, nmemb * size);
@@ -58,7 +58,7 @@ size_t Curl::onDataReceived(char* buffer, size_t size, size_t nmemb, void* conte
     return nmemb * size;
 }
 
-void Curl::perform()
+void CurlImpl::perform()
 {
     if (CURLcode result = mCurlApi->curl_easy_perform(mHandle))
         ThrowCurl(CURL_PERFORM_FAILED, result);

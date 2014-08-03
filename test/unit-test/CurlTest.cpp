@@ -1,4 +1,4 @@
-#include "Curl.h"
+#include "CurlImpl.h"
 #include "CurlInitializer.h"
 #include "Exception.h"
 #include "MockCurlApi.h"
@@ -36,8 +36,8 @@ TEST(CurlConstructTest, ThrowsIfEasyInitFails)
 
     EXPECT_CALL(*curlApi, curl_easy_init()).WillOnce(Return(static_cast<CURL*>(0)));
 
-    std::auto_ptr<Curl> curl;
-    ASSERT_THROW(curl.reset(new Curl(curlApi)), Instagram::Exception);
+    CurlPtr curl;
+    ASSERT_THROW(curl.reset(new CurlImpl(curlApi)), Instagram::Exception);
 }
 
 class CurlTest : public Test
@@ -51,7 +51,7 @@ protected:
 
         EXPECT_CALL(*curlApi, curl_easy_init()).WillOnce(Return(handle));
 
-        curl.reset(new Curl(curlApi));
+        curl.reset(new CurlImpl(curlApi));
     }
 
     virtual void TearDown()
@@ -66,7 +66,7 @@ protected:
     CURL* handle = reinterpret_cast<CURL*>(123);
 
     std::shared_ptr<MockCurlApi> curlApi;
-    std::auto_ptr<Curl> curl;
+    CurlPtr curl;
 };
 
 ACTION_P4(InvokeWriteCallback, callback, response, data, result)
@@ -111,7 +111,7 @@ protected:
         curlApi.reset(new NiceMock<MockCurlApi>);
 
         EXPECT_CALL(*curlApi, curl_easy_init()).WillOnce(Return(reinterpret_cast<CURL*>(1)));
-        curl.reset(new Curl(curlApi));
+        curl.reset(new CurlImpl(curlApi));
     }
 
     virtual void TearDown()
@@ -120,7 +120,7 @@ protected:
     }
 
     std::shared_ptr<MockCurlApi> curlApi;
-    std::auto_ptr<Curl> curl;
+    CurlPtr curl;
 };
 
 TEST_F(CurlErrorsTest, ThrowsIfSetUrlFails)

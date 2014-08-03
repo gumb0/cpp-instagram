@@ -3,6 +3,7 @@
 
 #include "User.h"
 
+#include <memory>
 #include <string>
 
 namespace Instagram
@@ -10,17 +11,14 @@ namespace Instagram
     class Client
     {
     public:
-        // TODO move to impl
-        void init(const std::string& clienId)
-        {
+        virtual ~Client() {}
 
-        }
-
-        User findUserById(const std::string& id) const
-        {
-            return User();
-        }
+        virtual UserPtr findUserById(const std::string& id) const = 0;
     };
+
+    typedef std::shared_ptr<Client> ClientPtr;
+
+    ClientPtr CreateClient(const std::string& clienId, const std::string& clientId);
 }
 
 #endif

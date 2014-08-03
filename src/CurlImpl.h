@@ -1,19 +1,18 @@
-#ifndef CPP_INSTAGRAM_IMPL_CURL_H
-#define CPP_INSTAGRAM_IMPL_CURL_H
+#ifndef CPP_INSTAGRAM_IMPL_CURL_IMPL_H
+#define CPP_INSTAGRAM_IMPL_CURL_IMPL_H
 
+#include "Curl.h"
 #include "CurlApi.h"
-
-#include <string>
 
 namespace Instagram
 {
-    class Curl
+    class CurlImpl : public Curl
     {
     public:
-        Curl(CurlApiPtr curlApi);
-        ~Curl();
+        CurlImpl(CurlApiPtr curlApi);
+        virtual ~CurlImpl();
 
-        std::string get(const std::string& url);
+        virtual std::string get(const std::string& url);
 
     private:
         static size_t onDataReceived(char* buffer, size_t size, size_t nmemb, void* context);
@@ -29,8 +28,6 @@ namespace Instagram
         CurlApiPtr mCurlApi;
         CURL* mHandle;
     };
-
-    typedef std::shared_ptr<Curl> CurlPtr;
 
 }
 

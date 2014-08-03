@@ -9,24 +9,16 @@ namespace Instagram
     class ClientImpl : public Client
     {
     public:
-        ClientImpl(CurlPtr curl) : mCurl(curl)
-        {
-        }
+        ClientImpl(CurlPtr curl, const std::string& clientId);
 
-        // TODO move to impl
-        void init(const std::string& clienId)
-        {
+        UserPtr findUserById(const std::string& id) const;
 
-        }
-
-        User findUserById(const std::string& id) const
-        {
-            std::string userJson = mCurl->get(std::string("http://instagram.com/users/") + id);
-            return User(userJson);
-        }
+    private:
+        std::string constuctGetUserRequestUrl(const std::string& id) const;
 
     private:
         CurlPtr mCurl;
+        const std::string mClientId;
     };
 }
 

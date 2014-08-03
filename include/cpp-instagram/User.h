@@ -1,6 +1,7 @@
 #ifndef CPP_INSTAGRAM_USER_H
 #define CPP_INSTAGRAM_USER_H
 
+#include <memory>
 #include <string>
 
 namespace Instagram
@@ -8,12 +9,12 @@ namespace Instagram
     class User
     {
     public:
-        // TODO move to impl
-        std::string getId() const
-        {
-            return std::string();
-        }
+        virtual ~User() {}
+
+        virtual std::string getId() const = 0;
     };
+
+    typedef std::shared_ptr<User> UserPtr;
 }
 
 #endif

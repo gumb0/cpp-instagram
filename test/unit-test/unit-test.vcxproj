@@ -15,6 +15,7 @@
     <ClCompile Include="CurlTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MockCurl.h" />
     <ClInclude Include="MockCurlApi.h" />
   </ItemGroup>
   <ItemGroup>
@@ -54,12 +55,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(LIBCURL_HOME)\include;$(GMOCK_HOME)\include;$(GMOCK_HOME)\gtest\include;..\..\include\cpp-instagram;..\..\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(GMOCK_HOME)\msvc\2010\Debug;$(LIBCURL_HOME)\lib\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(GMOCK_HOME)\msvc\2010\Debug;$(LIBCURL_HOME)\lib\Debug;$(JSONCPP_HOME)\build\vs71\debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(LIBCURL_HOME)\include;$(GMOCK_HOME)\include;$(GMOCK_HOME)\gtest\include;..\..\include\cpp-instagram;..\..\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(GMOCK_HOME)\msvc\2010\Release;$(LIBCURL_HOME)\lib\Release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(GMOCK_HOME)\msvc\2010\Release;$(LIBCURL_HOME)\lib\Release;$(JSONCPP_HOME)\build\vs71\release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -72,7 +73,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>gmock.lib;gmock_main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gmock.lib;gmock_main.lib;lib_json/json_vc71_libmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -90,7 +91,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>gmock.lib;gmock_main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gmock.lib;gmock_main.lib;lib_json/json_vc71_libmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -16,6 +16,12 @@ namespace Instagram
         CURL_SETTING_WRITE_FUNCTION_FAILED,
         CURL_SETTING_WRITE_DATA_FAILED,
         CURL_PERFORM_FAILED,
+        RESPONSE_JSON_PARSE_FAILED,
+        RESPONSE_JSON_DOESNT_HAVE_META,
+        RESPONSE_JSON_DOESNT_HAVE_CODE,
+        RESPONSE_CONTAINS_SERVER_ERROR,
+        USER_JSON_DOESNT_HAVE_DATA,
+        USER_JSON_DOESNT_HAVE_ID
     };
 
     //////////////////////////////////////////////////////////////////////////

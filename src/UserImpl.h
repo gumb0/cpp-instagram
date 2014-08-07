@@ -8,7 +8,7 @@ namespace Instagram
     class UserImpl : public User
     {
     public:
-        UserImpl(const std::string& jsonData);
+        explicit UserImpl(const std::string& jsonData);
 
         std::string getId() const;
 

@@ -7,12 +7,12 @@
 
 namespace Instagram
 {
-    std::string GetErrorMessage(ErrorCode error);
+    std::string GetErrorMessage(ErrorCode error, const std::string& additionalMessage);
     std::string GetCurlErrorMessage(ErrorCode error, CURLcode curlError);
 
-    inline void Throw(ErrorCode error)
+    inline void Throw(ErrorCode error, const std::string& additionalMessage = std::string())
     {
-        throw Exception(error, GetErrorMessage(error));
+        throw Exception(error, GetErrorMessage(error, additionalMessage));
     }
 
     inline void ThrowCurl(ErrorCode error, CURLcode curlError)

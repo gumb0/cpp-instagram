@@ -26,7 +26,7 @@ TEST(CurlInitializerTest, ThrowsIfInitFails)
 
     EXPECT_CALL(*curlApi, curl_global_init(_)).WillOnce(Return(CURLE_BAD_FUNCTION_ARGUMENT));
 
-    std::auto_ptr<CurlInitializer> curlInitializer;
+    std::unique_ptr<CurlInitializer> curlInitializer;
     ASSERT_THROW(curlInitializer.reset(new CurlInitializer(curlApi)), Instagram::Exception);
 }
 

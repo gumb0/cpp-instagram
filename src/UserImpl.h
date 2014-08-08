@@ -10,10 +10,12 @@ namespace Instagram
     public:
         explicit UserImpl(const std::string& jsonData);
 
-        std::string getId() const;
+        virtual std::string getId() const;
+        virtual std::string getUsername() const;
 
     private:
         std::string mId;
+        std::string mUsername;
     };
 }
 

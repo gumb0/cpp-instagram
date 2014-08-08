@@ -21,7 +21,8 @@ namespace Instagram
         RESPONSE_JSON_DOESNT_HAVE_CODE,
         RESPONSE_CONTAINS_SERVER_ERROR,
         USER_JSON_DOESNT_HAVE_DATA,
-        USER_JSON_DOESNT_HAVE_ID
+        USER_JSON_DOESNT_HAVE_ID,
+        USER_JSON_DOESNT_HAVE_USERNAME
     };
 
     //////////////////////////////////////////////////////////////////////////

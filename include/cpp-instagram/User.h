@@ -12,6 +12,7 @@ namespace Instagram
         virtual ~User() {}
 
         virtual std::string getId() const = 0;
+        virtual std::string getUsername() const = 0;
     };
 
     typedef std::shared_ptr<User> UserPtr;

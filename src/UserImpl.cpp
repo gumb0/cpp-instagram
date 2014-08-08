@@ -11,6 +11,7 @@ namespace
     const char* JSON_KEY_CODE = "code";
     const char* JSON_KEY_DATA = "data";
     const char* JSON_KEY_ID = "id";
+    const char* JSON_KEY_USERNAME = "username";
 
     const Json::Int RESPONSE_CODE_OK = 200;
 }
@@ -43,9 +44,20 @@ UserImpl::UserImpl(const std::string& jsonData)
         Throw(USER_JSON_DOESNT_HAVE_ID);
 
     mId = id.asString();
+
+    const Json::Value username = data[JSON_KEY_USERNAME];
+    if (username.isNull())
+        Throw(USER_JSON_DOESNT_HAVE_USERNAME);
+
+    mUsername = username.asString();
 }
 
 std::string UserImpl::getId() const
 {
     return mId;
+}
+
+std::string UserImpl::getUsername() const
+{
+    return mUsername;
 }

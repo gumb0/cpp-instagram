@@ -68,47 +68,19 @@ ServerResponse::ServerResponse(const std::string& response) : mData(getData(resp
 UserInfo ServerResponse::parseUser() const
 {
     UserInfo userInfo;
-    userInfo.mId = getId();
-    userInfo.mUsername = getUsername();
-    userInfo.mFullName = getFullName();
-    userInfo.mProfilePicture = getProfilePicture();
+    userInfo.mId = getStringValue(JSON_KEY_ID);
+    userInfo.mUsername = getStringValue(JSON_KEY_USERNAME);
+    userInfo.mFullName = getStringValue(JSON_KEY_FULL_NAME);
+    userInfo.mProfilePicture = getStringValue(JSON_KEY_PROFILE_PICTURE);
 
     return userInfo;
 }
 
-std::string ServerResponse::getId() const
+std::string ServerResponse::getStringValue(const char* key) const
 {
-    const Json::Value id = mData[JSON_KEY_ID];
-    if (id.isNull())
-        Throw(USER_JSON_DOESNT_HAVE_ID);
+    const Json::Value value = mData[key];
+    if (value.isNull())
+        Throw(USER_JSON_KEY_NOT_FOUND, key);
 
-    return id.asString();
-}
-
-std::string ServerResponse::getUsername() const
-{
-    const Json::Value username = mData[JSON_KEY_USERNAME];
-    if (username.isNull())
-        Throw(USER_JSON_DOESNT_HAVE_USERNAME);
-
-    return username.asString();
-}
-
-std::string ServerResponse::getFullName() const
-{
-    const Json::Value fullName = mData[JSON_KEY_FULL_NAME];
-    if (fullName.isNull())
-        Throw(USER_JSON_DOESNT_HAVE_FULL_NAME);
-
-    return fullName.asString();
-}
-
-// TODO dry
-std::string ServerResponse::getProfilePicture() const
-{
-    const Json::Value profilePicture = mData[JSON_KEY_PROFILE_PICTURE];
-    if (profilePicture.isNull())
-        Throw(USER_JSON_DOESNT_HAVE_FULL_NAME);
-
-    return profilePicture.asString();
+    return value.asString();
 }

@@ -20,10 +20,7 @@ namespace
         { RESPONSE_JSON_DOESNT_HAVE_CODE, "JSON doesn't contain response code." },
         { RESPONSE_CONTAINS_SERVER_ERROR, "Server returned error: " },
         { USER_JSON_DOESNT_HAVE_DATA, "JSON doesn't contain data for a user." },
-        { USER_JSON_DOESNT_HAVE_ID, "JSON doesn't contain user ID." },
-        { USER_JSON_DOESNT_HAVE_USERNAME, "JSON doesn't contain username." },
-        { USER_JSON_DOESNT_HAVE_FULL_NAME, "JSON doesn't contain full name." },
-        { USER_JSON_DOESNT_HAVE_PROFILE_PICTURE, "JSON doesn't contain profile picture." },
+        { USER_JSON_KEY_NOT_FOUND, "Key not found in JSON data: " },
     };
 
     const int CODE_MESSAGE_PAIRS_SIZE = sizeof(CODE_MESSAGE_PAIRS) / sizeof(CODE_MESSAGE_PAIRS[0]);

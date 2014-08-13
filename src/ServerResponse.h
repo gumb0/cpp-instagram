@@ -15,10 +15,7 @@ namespace Instagram
         UserInfo parseUser() const;
 
     private:
-        std::string ServerResponse::getId() const;
-        std::string ServerResponse::getUsername() const;
-        std::string ServerResponse::getFullName() const;
-        std::string ServerResponse::getProfilePicture() const;
+        std::string getStringValue(const char* key) const;
 
     private:
         const Json::Value mData;

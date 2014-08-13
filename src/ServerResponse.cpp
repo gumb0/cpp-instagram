@@ -1,8 +1,6 @@
 #include "ExceptionHelpers.h"
 #include "ServerResponse.h"
 
-#include <json/json.h>
-
 using namespace Instagram;
 
 namespace
@@ -61,59 +59,56 @@ namespace
 
         return getDataFromJsonRoot(jsonRoot);
     }
-
-    std::string getId(const Json::Value& data)
-    {
-        const Json::Value id = data[JSON_KEY_ID];
-        if (id.isNull())
-            Throw(USER_JSON_DOESNT_HAVE_ID);
-
-        return id.asString();
-    }
-
-    std::string getUsername(const Json::Value& data)
-    {
-        const Json::Value username = data[JSON_KEY_USERNAME];
-        if (username.isNull())
-            Throw(USER_JSON_DOESNT_HAVE_USERNAME);
-        
-        return username.asString();
-    }
-
-    std::string getFullName(const Json::Value& data)
-    {
-        const Json::Value fullName = data[JSON_KEY_FULL_NAME];
-        if (fullName.isNull())
-            Throw(USER_JSON_DOESNT_HAVE_FULL_NAME);
-
-        return fullName.asString();
-    }
-
-    // TODO dry
-    std::string getProfilePicture(const Json::Value& data)
-    {
-        const Json::Value profilePicture = data[JSON_KEY_PROFILE_PICTURE];
-        if (profilePicture.isNull())
-            Throw(USER_JSON_DOESNT_HAVE_FULL_NAME);
-
-        return profilePicture.asString();
-    }
-
-    UserInfo parseUserInfo(const Json::Value& data)
-    {
-        UserInfo userInfo;
-        userInfo.mId = getId(data);
-        userInfo.mUsername = getUsername(data);
-        userInfo.mFullName = getFullName(data);
-        userInfo.mProfilePicture = getProfilePicture(data);
-
-        return userInfo;
-    }
 }
 
-UserInfo ServerResponse::parseUser(const std::string& jsonData)
+ServerResponse::ServerResponse(const std::string& response) : mData(getData(response))
 {
-    const Json::Value data = getData(jsonData);
+}
 
-    return parseUserInfo(data);
+UserInfo ServerResponse::parseUser() const
+{
+    UserInfo userInfo;
+    userInfo.mId = getId();
+    userInfo.mUsername = getUsername();
+    userInfo.mFullName = getFullName();
+    userInfo.mProfilePicture = getProfilePicture();
+
+    return userInfo;
+}
+
+std::string ServerResponse::getId() const
+{
+    const Json::Value id = mData[JSON_KEY_ID];
+    if (id.isNull())
+        Throw(USER_JSON_DOESNT_HAVE_ID);
+
+    return id.asString();
+}
+
+std::string ServerResponse::getUsername() const
+{
+    const Json::Value username = mData[JSON_KEY_USERNAME];
+    if (username.isNull())
+        Throw(USER_JSON_DOESNT_HAVE_USERNAME);
+
+    return username.asString();
+}
+
+std::string ServerResponse::getFullName() const
+{
+    const Json::Value fullName = mData[JSON_KEY_FULL_NAME];
+    if (fullName.isNull())
+        Throw(USER_JSON_DOESNT_HAVE_FULL_NAME);
+
+    return fullName.asString();
+}
+
+// TODO dry
+std::string ServerResponse::getProfilePicture() const
+{
+    const Json::Value profilePicture = mData[JSON_KEY_PROFILE_PICTURE];
+    if (profilePicture.isNull())
+        Throw(USER_JSON_DOESNT_HAVE_FULL_NAME);
+
+    return profilePicture.asString();
 }

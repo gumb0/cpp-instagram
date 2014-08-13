@@ -3,12 +3,25 @@
 
 #include "UserInfo.h"
 
+#include <json/json.h>
+
 namespace Instagram
 {
     class ServerResponse
     {
     public:
-        UserInfo parseUser(const std::string& jsonData);
+        explicit ServerResponse(const std::string& response);
+
+        UserInfo parseUser() const;
+
+    private:
+        std::string ServerResponse::getId() const;
+        std::string ServerResponse::getUsername() const;
+        std::string ServerResponse::getFullName() const;
+        std::string ServerResponse::getProfilePicture() const;
+
+    private:
+        const Json::Value mData;
     };
 }
 

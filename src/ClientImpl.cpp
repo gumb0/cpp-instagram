@@ -21,8 +21,8 @@ ClientImpl::ClientImpl(CurlPtr curl, const std::string& clientId) :
 UserPtr ClientImpl::findUserById(const std::string& id) const
 {
     const std::string responseString = mCurl->get(constuctGetUserRequestUrl(id));
-    ServerResponse response;
-    return UserPtr(new UserImpl(response.parseUser(responseString)));
+    ServerResponse response(responseString);
+    return UserPtr(new UserImpl(response.parseUser()));
 }
 
 std::string ClientImpl::constuctGetUserRequestUrl(const std::string& id) const

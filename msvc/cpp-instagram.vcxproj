@@ -15,6 +15,7 @@
     <ClCompile Include="..\src\CurlImpl.cpp" />
     <ClCompile Include="..\src\CurlInitializer.cpp" />
     <ClCompile Include="..\src\ExceptionHelpers.cpp" />
+    <ClCompile Include="..\src\ServerResponse.cpp" />
     <ClCompile Include="..\src\UserImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -28,7 +29,9 @@
     <ClInclude Include="..\src\CurlImpl.h" />
     <ClInclude Include="..\src\CurlInitializer.h" />
     <ClInclude Include="..\src\ExceptionHelpers.h" />
+    <ClInclude Include="..\src\ServerResponse.h" />
     <ClInclude Include="..\src\UserImpl.h" />
+    <ClInclude Include="..\src\UserInfo.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9EAC0142-2C53-41E7-B4C1-6D2DA3129C55}</ProjectGuid>

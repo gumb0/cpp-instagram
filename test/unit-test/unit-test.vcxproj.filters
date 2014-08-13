@@ -4,6 +4,7 @@
     <ClCompile Include="ClientTest.cpp" />
     <ClCompile Include="CurlTest.cpp" />
     <ClCompile Include="UserTest.cpp" />
+    <ClCompile Include="ServerResponseTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockCurlApi.h" />

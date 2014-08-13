@@ -1,5 +1,6 @@
 #include "ClientImpl.h"
 #include "ExceptionHelpers.h"
+#include "ServerResponse.h"
 #include "UserImpl.h"
 
 #include <boost/format.hpp>
@@ -19,8 +20,9 @@ ClientImpl::ClientImpl(CurlPtr curl, const std::string& clientId) :
 
 UserPtr ClientImpl::findUserById(const std::string& id) const
 {
-    const std::string response = mCurl->get(constuctGetUserRequestUrl(id));
-    return UserPtr(new UserImpl(response));
+    const std::string responseString = mCurl->get(constuctGetUserRequestUrl(id));
+    ServerResponse response;
+    return UserPtr(new UserImpl(response.parseUser(responseString)));
 }
 
 std::string ClientImpl::constuctGetUserRequestUrl(const std::string& id) const

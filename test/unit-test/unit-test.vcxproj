@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="ClientTest.cpp" />
     <ClCompile Include="CurlTest.cpp" />
+    <ClCompile Include="ServerResponseTest.cpp" />
     <ClCompile Include="UserTest.cpp" />
   </ItemGroup>
   <ItemGroup>

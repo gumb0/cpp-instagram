@@ -16,6 +16,9 @@
     <ClCompile Include="..\src\UserImpl.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ServerResponse.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\cpp-instagram\Client.h">
@@ -49,6 +52,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\UserImpl.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UserInfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ServerResponse.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

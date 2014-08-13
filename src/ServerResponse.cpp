@@ -12,6 +12,7 @@ namespace
     const char* JSON_KEY_USERNAME = "username";
     const char* JSON_KEY_FULL_NAME = "full_name";
     const char* JSON_KEY_PROFILE_PICTURE = "profile_picture";
+    const char* JSON_KEY_BIO = "bio";
 
     const Json::Int RESPONSE_CODE_OK = 200;
 }
@@ -72,6 +73,7 @@ UserInfo ServerResponse::parseUser() const
     userInfo.mUsername = getStringValue(JSON_KEY_USERNAME);
     userInfo.mFullName = getStringValue(JSON_KEY_FULL_NAME);
     userInfo.mProfilePicture = getStringValue(JSON_KEY_PROFILE_PICTURE);
+    userInfo.mBio = getStringValue(JSON_KEY_BIO);
 
     return userInfo;
 }

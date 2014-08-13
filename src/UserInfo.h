@@ -11,6 +11,7 @@ namespace Instagram
         std::string mUsername;
         std::string mFullName;
         std::string mProfilePicture;
+        std::string mBio;
     };
 }
 

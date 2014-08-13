@@ -64,6 +64,11 @@ TEST_F(ParsingUserResponseTest, ParsesProfilePicture)
     ASSERT_THAT(userInfo.mProfilePicture, StrEq("http://images.ak.instagram.com/profiles/profile_1574083_75sq_1381898834.jpg"));
 }
 
+TEST_F(ParsingUserResponseTest, ParsesBio)
+{
+    ASSERT_THAT(userInfo.mBio, StrEq("I smoked out the whitehouse !"));
+}
+
 TEST(ParsingIncorrectUserResponseTest, ThrowsIfJsonHasNoId)
 {
     ServerResponse response(R"({"meta":{"code":200},"data":{"username":"snoopdogg"}})");

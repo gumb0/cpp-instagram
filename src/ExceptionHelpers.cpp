@@ -1,6 +1,6 @@
 #include "ExceptionHelpers.h"
 
-#include <map>
+#include <unordered_map>
 
 using namespace Instagram;
 
@@ -25,13 +25,13 @@ namespace
     };
 
     const int CODE_MESSAGE_PAIRS_SIZE = sizeof(CODE_MESSAGE_PAIRS) / sizeof(CODE_MESSAGE_PAIRS[0]);
-    const std::map<ErrorCode, const char*> ERROR_MESSAGE_MAP(CODE_MESSAGE_PAIRS, CODE_MESSAGE_PAIRS + CODE_MESSAGE_PAIRS_SIZE);
+    const std::unordered_map<ErrorCode, const char*> ERROR_MESSAGE_MAP(CODE_MESSAGE_PAIRS, CODE_MESSAGE_PAIRS + CODE_MESSAGE_PAIRS_SIZE);
 
     const char* CURL_ERROR_CODE = " CURL error code: ";
 
     std::string GetMessageFromMap(ErrorCode error)
     {
-        std::map<ErrorCode, const char*>::const_iterator it = ERROR_MESSAGE_MAP.find(error);
+        std::unordered_map<ErrorCode, const char*>::const_iterator it = ERROR_MESSAGE_MAP.find(error);
         return (it != ERROR_MESSAGE_MAP.end() ? it->second : std::string());
     }
 }

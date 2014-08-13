@@ -5,17 +5,6 @@
 
 using namespace Instagram;
 
-namespace
-{
-    const char* JSON_KEY_META = "meta";
-    const char* JSON_KEY_CODE = "code";
-    const char* JSON_KEY_DATA = "data";
-    const char* JSON_KEY_ID = "id";
-    const char* JSON_KEY_USERNAME = "username";
-
-    const Json::Int RESPONSE_CODE_OK = 200;
-}
-
 UserImpl::UserImpl(const UserInfo& userInfo) : mUserInfo(userInfo)
 {
 }
@@ -28,4 +17,14 @@ std::string UserImpl::getId() const
 std::string UserImpl::getUsername() const
 {
     return mUserInfo.mUsername;
+}
+
+std::string UserImpl::getFullName() const
+{
+    return mUserInfo.mFullName;
+}
+
+std::string UserImpl::getProfilePicture() const
+{
+    return mUserInfo.mProfilePicture;
 }

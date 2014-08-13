@@ -13,6 +13,8 @@ namespace Instagram
 
         virtual std::string getId() const;
         virtual std::string getUsername() const;
+        virtual std::string getFullName() const;
+        virtual std::string getProfilePicture() const;
 
     private:
         const UserInfo mUserInfo;

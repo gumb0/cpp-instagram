@@ -9,6 +9,8 @@ namespace Instagram
     {
         std::string mId;
         std::string mUsername;
+        std::string mFullName;
+        std::string mProfilePicture;
     };
 }
 

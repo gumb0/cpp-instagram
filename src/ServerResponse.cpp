@@ -12,6 +12,8 @@ namespace
     const char* JSON_KEY_DATA = "data";
     const char* JSON_KEY_ID = "id";
     const char* JSON_KEY_USERNAME = "username";
+    const char* JSON_KEY_FULL_NAME = "full_name";
+    const char* JSON_KEY_PROFILE_PICTURE = "profile_picture";
 
     const Json::Int RESPONSE_CODE_OK = 200;
 }
@@ -77,12 +79,33 @@ namespace
         
         return username.asString();
     }
-        
+
+    std::string getFullName(const Json::Value& data)
+    {
+        const Json::Value fullName = data[JSON_KEY_FULL_NAME];
+        if (fullName.isNull())
+            Throw(USER_JSON_DOESNT_HAVE_FULL_NAME);
+
+        return fullName.asString();
+    }
+
+    // TODO dry
+    std::string getProfilePicture(const Json::Value& data)
+    {
+        const Json::Value profilePicture = data[JSON_KEY_PROFILE_PICTURE];
+        if (profilePicture.isNull())
+            Throw(USER_JSON_DOESNT_HAVE_FULL_NAME);
+
+        return profilePicture.asString();
+    }
+
     UserInfo parseUserInfo(const Json::Value& data)
     {
         UserInfo userInfo;
         userInfo.mId = getId(data);
         userInfo.mUsername = getUsername(data);
+        userInfo.mFullName = getFullName(data);
+        userInfo.mProfilePicture = getProfilePicture(data);
 
         return userInfo;
     }

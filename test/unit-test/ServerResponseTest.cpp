@@ -69,30 +69,9 @@ TEST_F(ParsingUserResponseTest, ParsesBio)
     ASSERT_THAT(userInfo.mBio, StrEq("I smoked out the whitehouse !"));
 }
 
-TEST(ParsingIncorrectUserResponseTest, ThrowsIfJsonHasNoId)
+TEST(ParsingIncorrectUserResponseTest, ThrowsIfJsonHasNoData)
 {
     ServerResponse response(R"({"meta":{"code":200},"data":{"username":"snoopdogg"}})");
-
-    ASSERT_THROW(response.parseUser(), Instagram::Exception);
-}
-
-TEST(ParsingIncorrectUserResponseTest, ThrowsIfJsonHasNoUsername)
-{
-    ServerResponse response(R"({"meta":{"code": 200},"data":{"id": "1574083"}})");
-
-    ASSERT_THROW(response.parseUser(), Instagram::Exception);
-}
-
-TEST(ParsingIncorrectUserResponseTest, ThrowsIfJsonHasNoFullName)
-{
-    ServerResponse response(R"({"meta":{"code": 200},"data":{"id": "1574083", "username":"snoopdogg"}})");
-
-    ASSERT_THROW(response.parseUser(), Instagram::Exception);
-}
-
-TEST(ParsingIncorrectUserResponseTest, ThrowsIfJsonHasNoProfilePicture)
-{
-    ServerResponse response(R"({"meta":{"code": 200},"data":{"id": "1574083", "username":"snoopdogg", "full_name": "snoopdogg"}})");
 
     ASSERT_THROW(response.parseUser(), Instagram::Exception);
 }

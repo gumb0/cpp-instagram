@@ -16,10 +16,7 @@ namespace
         { CURL_SETTING_WRITE_DATA_FAILED, "Setting data paramter for write function callback failed." },
         { CURL_PERFORM_FAILED, "Perform call of curl failed." },
         { RESPONSE_JSON_PARSE_FAILED, "Invalid JSON data for user." },
-        { RESPONSE_JSON_DOESNT_HAVE_META, "JSON doesn't contain meta part." },
-        { RESPONSE_JSON_DOESNT_HAVE_CODE, "JSON doesn't contain response code." },
         { RESPONSE_CONTAINS_SERVER_ERROR, "Server returned error: " },
-        { USER_JSON_DOESNT_HAVE_DATA, "JSON doesn't contain data for a user." },
         { USER_JSON_KEY_NOT_FOUND, "Key not found in JSON data: " },
     };
 

@@ -69,6 +69,26 @@ TEST_F(ParsingUserResponseTest, ParsesBio)
     ASSERT_THAT(userInfo.mBio, StrEq("I smoked out the whitehouse !"));
 }
 
+TEST_F(ParsingUserResponseTest, ParsesWebsite)
+{
+    ASSERT_THAT(userInfo.mWebsite, StrEq("http://bit.ly/1onGzhG"));
+}
+
+TEST_F(ParsingUserResponseTest, ParsesCountsMedia)
+{
+    ASSERT_THAT(userInfo.mCounts, Field(&UserCounts::media, 7453));
+}
+
+TEST_F(ParsingUserResponseTest, ParsesCountsFollows)
+{
+    ASSERT_THAT(userInfo.mCounts, Field(&UserCounts::follows, 698));
+}
+
+TEST_F(ParsingUserResponseTest, ParsesCountsFollowedBy)
+{
+    ASSERT_THAT(userInfo.mCounts, Field(&UserCounts::followedBy, 3370805));
+}
+
 TEST(ParsingIncorrectUserResponseTest, ThrowsIfJsonHasNoData)
 {
     ServerResponse response(R"({"meta":{"code":200},"data":{"username":"snoopdogg"}})");

@@ -6,6 +6,13 @@
 
 namespace Instagram
 {
+    struct UserCounts
+    {
+        unsigned int media;
+        unsigned int follows;
+        unsigned int followedBy;
+    };
+
     class User
     {
     public:

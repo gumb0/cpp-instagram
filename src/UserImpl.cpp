@@ -28,3 +28,28 @@ std::string UserImpl::getProfilePicture() const
 {
     return mUserInfo.mProfilePicture;
 }
+
+std::string UserImpl::getBio() const
+{
+    return mUserInfo.mBio;
+}
+
+std::string UserImpl::getWebsite() const
+{
+    return mUserInfo.mWebsite;
+}
+
+unsigned int UserImpl::getMediaCount() const
+{
+    return mUserInfo.mCounts.media;
+}
+
+unsigned int UserImpl::getFollowsCount() const
+{
+    return mUserInfo.mCounts.follows;
+}
+
+unsigned int UserImpl::getFollowedByCount() const
+{
+    return mUserInfo.mCounts.followedBy;
+}

@@ -11,7 +11,7 @@ class UserTest : public Test
 {
     virtual void SetUp()
     {
-        userInfo = { "id", "userName", "full name", "profile pic" };
+        userInfo = { "id", "userName", "full name", "profile pic", "bio", "website", { 1, 2, 3 } };
         user.reset(new UserImpl(userInfo));
     }
 
@@ -38,4 +38,29 @@ TEST_F(UserTest, getsFullName)
 TEST_F(UserTest, getsProfilePicture)
 {
     ASSERT_THAT(user->getProfilePicture(), StrEq(userInfo.mProfilePicture));
+}
+
+TEST_F(UserTest, getsBio)
+{
+    ASSERT_THAT(user->getBio(), StrEq(userInfo.mBio));
+}
+
+TEST_F(UserTest, getsWebsite)
+{
+    ASSERT_THAT(user->getWebsite(), StrEq(userInfo.mWebsite));
+}
+
+TEST_F(UserTest, getMediaCount)
+{
+    ASSERT_THAT(user->getMediaCount(), Eq(userInfo.mCounts.media));
+}
+
+TEST_F(UserTest, getFollowsCount)
+{
+    ASSERT_THAT(user->getFollowsCount(), Eq(userInfo.mCounts.follows));
+}
+
+TEST_F(UserTest, getFollowedByCount)
+{
+    ASSERT_THAT(user->getFollowedByCount(), Eq(userInfo.mCounts.followedBy));
 }

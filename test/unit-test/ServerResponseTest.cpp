@@ -89,7 +89,7 @@ TEST_F(ParsingUserResponseTest, ParsesCountsFollowedBy)
     ASSERT_THAT(userInfo.mCounts, Field(&UserCounts::followedBy, 3370805));
 }
 
-TEST(ParsingIncorrectUserResponseTest, ThrowsIfJsonHasNoData)
+TEST(ParsingIncorrectUserResponseTest, ThrowsIfJsonHasNoId)
 {
     ServerResponse response(R"({"meta":{"code":200},"data":{"username":"snoopdogg"}})");
 

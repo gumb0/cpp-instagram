@@ -52,15 +52,15 @@ TEST_F(UserTest, getsWebsite)
 
 TEST_F(UserTest, getMediaCount)
 {
-    ASSERT_THAT(user->getMediaCount(), Eq(userInfo.mCounts.media));
+    ASSERT_THAT(user->getMediaCount(), Eq(userInfo.mCounts.mMedia));
 }
 
 TEST_F(UserTest, getFollowsCount)
 {
-    ASSERT_THAT(user->getFollowsCount(), Eq(userInfo.mCounts.follows));
+    ASSERT_THAT(user->getFollowsCount(), Eq(userInfo.mCounts.mFollows));
 }
 
 TEST_F(UserTest, getFollowedByCount)
 {
-    ASSERT_THAT(user->getFollowedByCount(), Eq(userInfo.mCounts.followedBy));
+    ASSERT_THAT(user->getFollowedByCount(), Eq(userInfo.mCounts.mFollowedBy));
 }

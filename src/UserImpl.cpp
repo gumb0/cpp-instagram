@@ -41,15 +41,15 @@ std::string UserImpl::getWebsite() const
 
 unsigned int UserImpl::getMediaCount() const
 {
-    return mUserInfo.mCounts.media;
+    return mUserInfo.mCounts.mMedia;
 }
 
 unsigned int UserImpl::getFollowsCount() const
 {
-    return mUserInfo.mCounts.follows;
+    return mUserInfo.mCounts.mFollows;
 }
 
 unsigned int UserImpl::getFollowedByCount() const
 {
-    return mUserInfo.mCounts.followedBy;
+    return mUserInfo.mCounts.mFollowedBy;
 }

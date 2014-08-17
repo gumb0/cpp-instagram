@@ -100,9 +100,9 @@ UserCounts ServerResponse::parseCounts() const
     const Json::Value counts = getValue(JSON_KEY_COUNTS);
 
     UserCounts res;
-    res.media = getSubvalue(counts, JSON_KEY_MEDIA).asUInt();
-    res.follows = getSubvalue(counts, JSON_KEY_FOLLOWS).asUInt();
-    res.followedBy = getSubvalue(counts, JSON_KEY_FOLLOWED_BY).asUInt();
+    res.mMedia = getSubvalue(counts, JSON_KEY_MEDIA).asUInt();
+    res.mFollows = getSubvalue(counts, JSON_KEY_FOLLOWS).asUInt();
+    res.mFollowedBy = getSubvalue(counts, JSON_KEY_FOLLOWED_BY).asUInt();
 
     return res;
 }

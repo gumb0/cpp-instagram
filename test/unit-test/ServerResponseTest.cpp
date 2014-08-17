@@ -76,17 +76,17 @@ TEST_F(ParsingUserResponseTest, ParsesWebsite)
 
 TEST_F(ParsingUserResponseTest, ParsesCountsMedia)
 {
-    ASSERT_THAT(userInfo.mCounts, Field(&UserCounts::media, 7453));
+    ASSERT_THAT(userInfo.mCounts, Field(&UserCounts::mMedia, 7453));
 }
 
 TEST_F(ParsingUserResponseTest, ParsesCountsFollows)
 {
-    ASSERT_THAT(userInfo.mCounts, Field(&UserCounts::follows, 698));
+    ASSERT_THAT(userInfo.mCounts, Field(&UserCounts::mFollows, 698));
 }
 
 TEST_F(ParsingUserResponseTest, ParsesCountsFollowedBy)
 {
-    ASSERT_THAT(userInfo.mCounts, Field(&UserCounts::followedBy, 3370805));
+    ASSERT_THAT(userInfo.mCounts, Field(&UserCounts::mFollowedBy, 3370805));
 }
 
 TEST(ParsingIncorrectUserResponseTest, ThrowsIfJsonHasNoId)

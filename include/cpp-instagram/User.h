@@ -6,14 +6,6 @@
 
 namespace Instagram
 {
-    // TODO move to impl
-    struct UserCounts
-    {
-        unsigned int media;
-        unsigned int follows;
-        unsigned int followedBy;
-    };
-
     class User
     {
     public:

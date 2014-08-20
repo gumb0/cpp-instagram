@@ -1,4 +1,6 @@
 #include "ClientImpl.h"
+#include "CurlApiImpl.h"
+#include "CurlImpl.h"
 #include "ExceptionHelpers.h"
 #include "ServerResponse.h"
 #include "UserImpl.h"
@@ -29,3 +31,11 @@ std::string ClientImpl::constuctGetUserRequestUrl(const std::string& id) const
 {
     return boost::str(boost::format(GET_USER_INFO_TEMPLATE) % id % mClientId);
 }
+
+ClientPtr Instagram::CreateClient(const std::string& clientId)
+{
+    CurlApiPtr curlApi(new CurlApiImpl);
+    CurlPtr curl(new CurlImpl(curlApi));
+    return ClientPtr(new ClientImpl(curl, clientId));
+}
+

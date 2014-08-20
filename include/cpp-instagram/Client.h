@@ -18,7 +18,7 @@ namespace Instagram
 
     typedef std::shared_ptr<Client> ClientPtr;
 
-    ClientPtr CreateClient(const std::string& clienId, const std::string& clientId);
+    ClientPtr CreateClient(const std::string& clientId);
 }
 
 #endif

@@ -7,6 +7,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "unit-test", "..\test\unit-t
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpp-instagram", "cpp-instagram.vcxproj", "{9EAC0142-2C53-41E7-B4C1-6D2DA3129C55}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "integration-test", "..\test\integration-test\integration-test.vcxproj", "{F9ECD415-DAF9-4F74-AE5C-86D4F81480F4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9EAC0142-2C53-41E7-B4C1-6D2DA3129C55} = {9EAC0142-2C53-41E7-B4C1-6D2DA3129C55}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,6 +26,10 @@ Global
 		{9EAC0142-2C53-41E7-B4C1-6D2DA3129C55}.Debug|Win32.Build.0 = Debug|Win32
 		{9EAC0142-2C53-41E7-B4C1-6D2DA3129C55}.Release|Win32.ActiveCfg = Release|Win32
 		{9EAC0142-2C53-41E7-B4C1-6D2DA3129C55}.Release|Win32.Build.0 = Release|Win32
+		{F9ECD415-DAF9-4F74-AE5C-86D4F81480F4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F9ECD415-DAF9-4F74-AE5C-86D4F81480F4}.Debug|Win32.Build.0 = Debug|Win32
+		{F9ECD415-DAF9-4F74-AE5C-86D4F81480F4}.Release|Win32.ActiveCfg = Release|Win32
+		{F9ECD415-DAF9-4F74-AE5C-86D4F81480F4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

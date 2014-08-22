@@ -17,9 +17,9 @@ namespace Instagram
         virtual std::string getProfilePicture() const;
         virtual std::string getBio() const;
         virtual std::string getWebsite() const;
-        virtual unsigned int getMediaCount() const;
-        virtual unsigned int getFollowsCount() const;
-        virtual unsigned int getFollowedByCount() const;
+        virtual int getMediaCount() const;
+        virtual int getFollowsCount() const;
+        virtual int getFollowedByCount() const;
 
     private:
         const UserInfo mUserInfo;

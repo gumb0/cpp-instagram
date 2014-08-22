@@ -7,9 +7,9 @@ namespace Instagram
 {
     struct UserCounts
     {
-        unsigned int mMedia;
-        unsigned int mFollows;
-        unsigned int mFollowedBy;
+        int mMedia;
+        int mFollows;
+        int mFollowedBy;
     };
 
     struct UserInfo

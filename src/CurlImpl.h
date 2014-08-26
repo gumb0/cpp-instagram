@@ -19,6 +19,7 @@ namespace Instagram
 
         void setUrl(const std::string& url);
         void setGetMethod();
+        void setSslCertificatePath();
 
         void setReceiveCallback(std::string& outResult);
 

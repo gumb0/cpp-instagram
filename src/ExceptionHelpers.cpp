@@ -12,6 +12,7 @@ namespace
         { CURL_EASY_INIT_FAILED, "curl_easy_init() failed." },
         { CURL_SETTING_URL_FAILED, "Setting URL to curl failed." },
         { CURL_SETTING_GET_METHOD_FAILED, "Setting GET method to curl failed." },
+        { CURL_SETTING_SSL_CERTIFICATE_PATH_FAILED, "Setting path to SSL certificate bundle failed." },
         { CURL_SETTING_WRITE_FUNCTION_FAILED, "Setting write function callback to curl failed." },
         { CURL_SETTING_WRITE_DATA_FAILED, "Setting data paramter for write function callback failed." },
         { CURL_PERFORM_FAILED, "Perform call of curl failed." },

@@ -80,6 +80,7 @@ TEST_F(CurlTest, PerformsGetRequest)
     std::string url = "http://example.com";
     EXPECT_CALL(*curlApi, curl_easy_setopt_string(handle, CURLOPT_URL, StrEq(url)));
     EXPECT_CALL(*curlApi, curl_easy_setopt_long(handle, CURLOPT_HTTPGET, 1));
+    EXPECT_CALL(*curlApi, curl_easy_setopt_string(handle, CURLOPT_CAINFO, StrEq("ca-bundle.crt")));
 
     WriteCallback callback = 0;
     EXPECT_CALL(*curlApi, curl_easy_setopt_func(handle, CURLOPT_WRITEFUNCTION, _))
@@ -133,6 +134,14 @@ TEST_F(CurlErrorsTest, ThrowsIfSetUrlFails)
 TEST_F(CurlErrorsTest, ThrowsIfSetGetMethodFails)
 {
     EXPECT_CALL(*curlApi, curl_easy_setopt_long(_, CURLOPT_HTTPGET, _)).WillOnce(Return(CURLE_OUT_OF_MEMORY));
+
+    ASSERT_THROW(curl->get(""), Instagram::Exception);
+}
+
+TEST_F(CurlErrorsTest, ThrowsIfSetSslCertificatePathFails)
+{
+    EXPECT_CALL(*curlApi, curl_easy_setopt_string(_, CURLOPT_URL, _));
+    EXPECT_CALL(*curlApi, curl_easy_setopt_string(_, CURLOPT_CAINFO, _)).WillOnce(Return(CURLE_OUT_OF_MEMORY));
 
     ASSERT_THROW(curl->get(""), Instagram::Exception);
 }

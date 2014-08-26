@@ -3,6 +3,11 @@
 
 using namespace Instagram;
 
+namespace
+{
+    const char* SSL_CERTIFICATE_PATH = "ca-bundle.crt";
+}
+
 CurlImpl::CurlImpl(CurlApiPtr curlApi) : 
     mCurlApi(curlApi),
     mHandle(mCurlApi->curl_easy_init())
@@ -20,6 +25,7 @@ std::string CurlImpl::get(const std::string& url)
 {
     setUrl(url);
     setGetMethod();
+    setSslCertificatePath();
 
     std::string result;
     setReceiveCallback(result);
@@ -39,6 +45,12 @@ void CurlImpl::setGetMethod()
 {
     if (CURLcode result = mCurlApi->curl_easy_setopt_long(mHandle, CURLOPT_HTTPGET, 1))
         ThrowCurl(CURL_SETTING_GET_METHOD_FAILED, result);
+}
+
+void CurlImpl::setSslCertificatePath()
+{
+    if (CURLcode result = mCurlApi->curl_easy_setopt_string(mHandle, CURLOPT_CAINFO, SSL_CERTIFICATE_PATH))
+        ThrowCurl(CURL_SETTING_SSL_CERTIFICATE_PATH_FAILED, result);
 }
 
 void CurlImpl::setReceiveCallback(std::string& outResult)

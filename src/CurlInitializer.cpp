@@ -1,7 +1,14 @@
+#include "CurlApiImpl.h"
 #include "CurlInitializer.h"
 #include "ExceptionHelpers.h"
 
 using namespace Instagram;
+
+namespace
+{
+    // Initializing will be called during global variables initialization
+    CurlInitializer curlInitializer(CurlApiPtr(new CurlApiImpl));
+}
 
 CurlInitializer::CurlInitializer(CurlApiPtr curlApi) : mCurlApi(curlApi)
 {

@@ -47,7 +47,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(GMOCK_HOME)\include;$(GMOCK_HOME)\gtest\include;..\..\include\cpp-instagram;$(IncludePath)</IncludePath>
-    <LibraryPath>$(GMOCK_HOME)\msvc\2010\Release;$(LIBCURL_HOME)\lib;$(JSONCPP_HOME)\build\vs71\release</LibraryPath>
+    <LibraryPath>$(GMOCK_HOME)\msvc\2010\Release;$(LIBCURL_HOME)\lib;$(JSONCPP_HOME)\build\vs71\release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

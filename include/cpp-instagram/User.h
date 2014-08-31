@@ -1,16 +1,16 @@
 #ifndef CPP_INSTAGRAM_USER_H
 #define CPP_INSTAGRAM_USER_H
 
+#include "NonCopyable.h"
+
 #include <memory>
 #include <string>
 
 namespace Instagram
 {
-    class User
+    class User : NonCopyable
     {
     public:
-        virtual ~User() {}
-
         virtual std::string getId() const = 0;
         virtual std::string getUsername() const = 0;
         virtual std::string getFullName() const = 0;

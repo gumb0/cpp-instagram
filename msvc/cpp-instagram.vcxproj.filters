@@ -60,6 +60,9 @@
     <ClInclude Include="..\src\ServerResponse.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cpp-instagram\NonCopyable.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">

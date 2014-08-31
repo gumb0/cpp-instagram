@@ -1,6 +1,7 @@
 #ifndef CPP_INSTAGRAM_CLIENT_H
 #define CPP_INSTAGRAM_CLIENT_H
 
+#include "NonCopyable.h"
 #include "User.h"
 
 #include <memory>
@@ -8,11 +9,9 @@
 
 namespace Instagram
 {
-    class Client
+    class Client : NonCopyable
     {
     public:
-        virtual ~Client() {}
-
         virtual UserPtr findUserById(const std::string& id) const = 0;
     };
 

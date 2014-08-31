@@ -1,16 +1,16 @@
 #ifndef CPP_INSTAGRAM_IMPL_CURL_H
 #define CPP_INSTAGRAM_IMPL_CURL_H
 
+#include "NonCopyable.h"
+
 #include <memory>
 #include <string>
 
 namespace Instagram
 {
-    class Curl
+    class Curl : NonCopyable
     {
     public:
-        virtual ~Curl() {}
-
         virtual std::string get(const std::string& url) = 0;
     };
 

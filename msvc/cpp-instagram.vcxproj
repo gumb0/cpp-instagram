@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\cpp-instagram\Client.h" />
     <ClInclude Include="..\include\cpp-instagram\Exception.h" />
+    <ClInclude Include="..\include\cpp-instagram\NonCopyable.h" />
     <ClInclude Include="..\include\cpp-instagram\User.h" />
     <ClInclude Include="..\src\ClientImpl.h" />
     <ClInclude Include="..\src\Curl.h" />

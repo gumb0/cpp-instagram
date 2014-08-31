@@ -1,13 +1,14 @@
 #ifndef CPP_INSTAGRAM_IMPL_SERVER_RESPONSE_H
 #define CPP_INSTAGRAM_IMPL_SERVER_RESPONSE_H
 
+#include "NonCopyable.h"
 #include "UserInfo.h"
 
 #include <json/json.h>
 
 namespace Instagram
 {
-    class ServerResponse
+    class ServerResponse : NonCopyable
     {
     public:
         explicit ServerResponse(const std::string& response);

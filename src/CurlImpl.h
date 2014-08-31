@@ -9,7 +9,7 @@ namespace Instagram
     class CurlImpl : public Curl
     {
     public:
-        CurlImpl(CurlApiPtr curlApi);
+        explicit CurlImpl(CurlApiPtr curlApi);
         virtual ~CurlImpl();
 
         virtual std::string get(const std::string& url);

@@ -8,7 +8,7 @@ namespace Instagram
     class CurlInitializer
     {
     public:
-        CurlInitializer(CurlApiPtr curlApi);
+        explicit CurlInitializer(CurlApiPtr curlApi);
         ~CurlInitializer();
 
     private:

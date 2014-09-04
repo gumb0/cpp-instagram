@@ -1,6 +1,7 @@
 #ifndef CPP_INSTAGRAM_IMPL_SERVER_RESPONSE_H
 #define CPP_INSTAGRAM_IMPL_SERVER_RESPONSE_H
 
+#include "AuthenticatedClient.h" // for Feed
 #include "NonCopyable.h"
 #include "UserInfo.h"
 
@@ -14,8 +15,11 @@ namespace Instagram
         explicit ServerResponse(const std::string& response);
 
         UserInfo parseUser() const;
+        Feed parseFeed() const;
 
     private:
+        static MediaPtr parseMedia(const Json::Value& value);
+            
         std::string getStringValue(const char* key) const;
         Json::Value getValue(const char* key) const;
         UserCounts parseCounts() const;

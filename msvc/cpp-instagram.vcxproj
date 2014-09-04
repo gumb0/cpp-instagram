@@ -11,18 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\AuthenticatedClientImpl.cpp" />
     <ClCompile Include="..\src\ClientImpl.cpp" />
     <ClCompile Include="..\src\CurlImpl.cpp" />
     <ClCompile Include="..\src\CurlInitializer.cpp" />
     <ClCompile Include="..\src\ExceptionHelpers.cpp" />
+    <ClCompile Include="..\src\MediaImpl.cpp" />
     <ClCompile Include="..\src\ServerResponse.cpp" />
     <ClCompile Include="..\src\UserImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\cpp-instagram\AuthenticatedClient.h" />
     <ClInclude Include="..\include\cpp-instagram\Client.h" />
     <ClInclude Include="..\include\cpp-instagram\Exception.h" />
+    <ClInclude Include="..\include\cpp-instagram\Media.h" />
     <ClInclude Include="..\include\cpp-instagram\NonCopyable.h" />
     <ClInclude Include="..\include\cpp-instagram\User.h" />
+    <ClInclude Include="..\src\AuthenticatedClientImpl.h" />
     <ClInclude Include="..\src\ClientImpl.h" />
     <ClInclude Include="..\src\Curl.h" />
     <ClInclude Include="..\src\CurlApi.h" />
@@ -30,6 +35,7 @@
     <ClInclude Include="..\src\CurlImpl.h" />
     <ClInclude Include="..\src\CurlInitializer.h" />
     <ClInclude Include="..\src\ExceptionHelpers.h" />
+    <ClInclude Include="..\src\MediaImpl.h" />
     <ClInclude Include="..\src\ServerResponse.h" />
     <ClInclude Include="..\src\UserImpl.h" />
     <ClInclude Include="..\src\UserInfo.h" />

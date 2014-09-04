@@ -1,5 +1,8 @@
 #include "ExceptionHelpers.h"
+#include "MediaImpl.h"
 #include "ServerResponse.h"
+
+#include <algorithm>
 
 using namespace Instagram;
 
@@ -18,6 +21,7 @@ namespace
     const char* JSON_KEY_MEDIA = "media";
     const char* JSON_KEY_FOLLOWS = "follows";
     const char* JSON_KEY_FOLLOWED_BY = "followed_by";
+    const char* JSON_KEY_LINK = "link";
 
     const Json::Int RESPONSE_CODE_OK = 200;
 }
@@ -105,4 +109,18 @@ UserCounts ServerResponse::parseCounts() const
     res.mFollowedBy = getSubvalue(counts, JSON_KEY_FOLLOWED_BY).asUInt();
 
     return res;
+}
+
+Feed ServerResponse::parseFeed() const
+{
+    Feed feed;
+    std::transform(mData.begin(), mData.end(), std::back_inserter(feed), parseMedia);
+    return feed;
+}
+
+MediaPtr ServerResponse::parseMedia(const Json::Value& value)
+{
+    const std::string link = getSubvalue(value, JSON_KEY_LINK).asString();
+
+    return MediaPtr(new MediaImpl(link));
 }

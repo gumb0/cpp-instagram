@@ -22,12 +22,12 @@ ClientImpl::ClientImpl(CurlPtr curl, const std::string& clientId) :
 
 UserPtr ClientImpl::findUserById(const std::string& id) const
 {
-    const std::string responseString = mCurl->get(constuctGetUserRequestUrl(id));
+    const std::string responseString = mCurl->get(constructGetUserRequestUrl(id));
     ServerResponse response(responseString);
     return UserPtr(new UserImpl(response.parseUser()));
 }
 
-std::string ClientImpl::constuctGetUserRequestUrl(const std::string& id) const
+std::string ClientImpl::constructGetUserRequestUrl(const std::string& id) const
 {
     return boost::str(boost::format(GET_USER_INFO_TEMPLATE) % id % mClientId);
 }

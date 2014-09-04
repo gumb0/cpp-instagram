@@ -11,10 +11,10 @@ namespace Instagram
     public:
         ClientImpl(CurlPtr curl, const std::string& clientId);
 
-        UserPtr findUserById(const std::string& id) const;
+        virtual UserPtr findUserById(const std::string& id) const;
 
     private:
-        std::string constuctGetUserRequestUrl(const std::string& id) const;
+        std::string constructGetUserRequestUrl(const std::string& id) const;
 
     private:
         CurlPtr mCurl;

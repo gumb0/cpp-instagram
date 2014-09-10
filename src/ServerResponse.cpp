@@ -22,12 +22,15 @@ namespace
     const char* JSON_KEY_FOLLOWS = "follows";
     const char* JSON_KEY_FOLLOWED_BY = "followed_by";
     const char* JSON_KEY_LINK = "link";
+    const char* JSON_KEY_CAPTION = "caption";
+    const char* JSON_KEY_TEXT = "text";
 
     const Json::Int RESPONSE_CODE_OK = 200;
 }
 
 namespace
 {
+    // TODO return const references
     Json::Value getRoot(const std::string& jsonData)
     {
         Json::Reader jsonReader;
@@ -45,6 +48,11 @@ namespace
             Throw(USER_JSON_KEY_NOT_FOUND, key);
 
         return subvalue;
+    }
+
+    Json::Value getOptionalSubvalue(const Json::Value& value, const char* key)
+    {
+        return value[key];
     }
 
     void checkResponseCode(const Json::Value& root)
@@ -121,6 +129,9 @@ Feed ServerResponse::parseFeed() const
 MediaPtr ServerResponse::parseMedia(const Json::Value& value)
 {
     const std::string link = getSubvalue(value, JSON_KEY_LINK).asString();
+    
+    const Json::Value captionValue = getOptionalSubvalue(value, JSON_KEY_CAPTION);
+    const std::string caption = captionValue.empty() ? std::string() : getSubvalue(captionValue, JSON_KEY_TEXT).asString();
 
-    return MediaPtr(new MediaImpl(link));
+    return MediaPtr(new MediaImpl(link, caption));
 }

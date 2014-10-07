@@ -28,7 +28,7 @@ namespace Instagram
         const std::string mAccessParamValue;
     };
 
-    typedef std::unique_ptr<ApiUrls> ApiUrlsPtr;
+    typedef std::shared_ptr<ApiUrls> ApiUrlsPtr;
 
     ApiUrlsPtr CreateNonauthenticatedApiUrls(const std::string& clientId);
     ApiUrlsPtr CreateAuthenticatedApiUrls(const std::string& accessToken);

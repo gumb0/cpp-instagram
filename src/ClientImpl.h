@@ -1,6 +1,7 @@
 #ifndef CPP_INSTAGRAM_IMPL_CLIENT_IMPL_H
 #define CPP_INSTAGRAM_IMPL_CLIENT_IMPL_H
 
+#include "ApiUrls.h"
 #include "Client.h"
 #include "Curl.h"
 
@@ -9,7 +10,7 @@ namespace Instagram
     class ClientImpl : public Client
     {
     public:
-        ClientImpl(CurlPtr curl, const std::string& clientId);
+        ClientImpl(CurlPtr curl, ApiUrlsPtr apiUrls);
 
         virtual UserPtr findUserById(const std::string& id) const;
 
@@ -18,7 +19,7 @@ namespace Instagram
 
     private:
         CurlPtr mCurl;
-        const std::string mClientId;
+        const ApiUrlsPtr mApiUrls;
     };
 }
 

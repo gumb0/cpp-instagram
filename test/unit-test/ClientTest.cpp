@@ -15,7 +15,7 @@ protected:
     {
         curl.reset(new MockCurl);
 
-        client.reset(new ClientImpl(curl, clientId));
+        client.reset(new ClientImpl(curl, CreateNonauthenticatedApiUrls(clientId)));
     }
 
     std::shared_ptr<MockCurl> curl;

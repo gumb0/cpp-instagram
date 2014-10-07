@@ -11,7 +11,7 @@ class NonAuthenticatedApiUrlsTest : public Test
 {
 protected:
     std::string clientId{ "clientid" };
-    std::unique_ptr<ApiUrls> apiUrls{ CreateNonauthenticatedApiUrls(clientId) };
+    ApiUrlsPtr apiUrls{ CreateNonauthenticatedApiUrls(clientId) };
 };
 
 TEST_F(NonAuthenticatedApiUrlsTest, ConstructsUserByIdUrl)
@@ -24,7 +24,7 @@ class AuthenticatedApiUrlsTest : public Test
 {
 protected:
     std::string token{ "token" };
-    std::unique_ptr<ApiUrls> apiUrls{ CreateAuthenticatedApiUrls(token) };
+    ApiUrlsPtr apiUrls{ CreateAuthenticatedApiUrls(token) };
 };
 
 TEST_F(AuthenticatedApiUrlsTest, ConstructsUserByIdUrl)

@@ -2,9 +2,10 @@
 
 using namespace Instagram;
 
-MediaImpl::MediaImpl(const std::string& link, const std::string& caption) :
+MediaImpl::MediaImpl(const std::string& link, const std::string& caption, const std::string& createdTime) :
     mLink(link), 
-    mCaption(caption)
+    mCaption(caption),
+    mCreatedTime(createdTime)
 {
 }
 
@@ -16,4 +17,9 @@ std::string MediaImpl::getLink() const
 std::string MediaImpl::getCaption() const
 {
     return mCaption;
+}
+
+std::string MediaImpl::getCreatedTime() const
+{
+    return mCreatedTime;
 }

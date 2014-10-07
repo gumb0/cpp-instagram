@@ -255,3 +255,10 @@ TEST_F(ParsingFeedResponseTest, ReturnsEmptyCaptionIfNotReturned)
 {
     ASSERT_THAT(feed[1]->getCaption(), StrEq(""));
 }
+
+TEST_F(ParsingFeedResponseTest, ParsesCreatedTime)
+{
+    ASSERT_THAT(feed[0]->getCreatedTime(), StrEq("1296748524"));
+}
+
+// TODO type, filter, tags, id, images/video, location, user

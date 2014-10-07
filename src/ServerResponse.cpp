@@ -24,6 +24,7 @@ namespace
     const char* JSON_KEY_LINK = "link";
     const char* JSON_KEY_CAPTION = "caption";
     const char* JSON_KEY_TEXT = "text";
+    const char* JSON_KEY_CREATED_TIME = "created_time";
 
     const Json::Int RESPONSE_CODE_OK = 200;
 }
@@ -132,6 +133,8 @@ MediaPtr ServerResponse::parseMedia(const Json::Value& value)
     
     const Json::Value captionValue = getOptionalSubvalue(value, JSON_KEY_CAPTION);
     const std::string caption = captionValue.empty() ? std::string() : getSubvalue(captionValue, JSON_KEY_TEXT).asString();
+    
+    const std::string createdTime = getSubvalue(value, JSON_KEY_CREATED_TIME).asString();
 
-    return MediaPtr(new MediaImpl(link, caption));
+    return MediaPtr(new MediaImpl(link, caption, createdTime));
 }

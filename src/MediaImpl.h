@@ -8,14 +8,16 @@ namespace Instagram
     class MediaImpl : public Media
     {
     public:
-        MediaImpl(const std::string& link, const std::string& caption);
+        MediaImpl(const std::string& link, const std::string& caption, const std::string& createdTime);
 
         virtual std::string getLink() const;
         virtual std::string getCaption() const;
+        virtual std::string getCreatedTime() const;
 
     private:
         const std::string mLink;
         const std::string mCaption;
+        const std::string mCreatedTime;
     };
 }
 

@@ -18,6 +18,7 @@ namespace Instagram
         Feed parseFeed() const;
 
     private:
+        // TODO return MediaInfo struct instead of MediaPtr
         static MediaPtr parseMedia(const Json::Value& value);
             
         std::string getStringValue(const char* key) const;

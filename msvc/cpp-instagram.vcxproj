@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\ApiUrls.cpp" />
     <ClCompile Include="..\src\AuthenticatedClientImpl.cpp" />
     <ClCompile Include="..\src\ClientImpl.cpp" />
     <ClCompile Include="..\src\CurlImpl.cpp" />
@@ -18,6 +19,7 @@
     <ClCompile Include="..\src\ExceptionHelpers.cpp" />
     <ClCompile Include="..\src\MediaImpl.cpp" />
     <ClCompile Include="..\src\ServerResponse.cpp" />
+    <ClCompile Include="..\src\UrlBuilder.cpp" />
     <ClCompile Include="..\src\UserImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -27,6 +29,7 @@
     <ClInclude Include="..\include\cpp-instagram\Media.h" />
     <ClInclude Include="..\include\cpp-instagram\NonCopyable.h" />
     <ClInclude Include="..\include\cpp-instagram\User.h" />
+    <ClInclude Include="..\src\ApiUrls.h" />
     <ClInclude Include="..\src\AuthenticatedClientImpl.h" />
     <ClInclude Include="..\src\ClientImpl.h" />
     <ClInclude Include="..\src\Curl.h" />
@@ -37,6 +40,7 @@
     <ClInclude Include="..\src\ExceptionHelpers.h" />
     <ClInclude Include="..\src\MediaImpl.h" />
     <ClInclude Include="..\src\ServerResponse.h" />
+    <ClInclude Include="..\src\UrlBuilder.h" />
     <ClInclude Include="..\src\UserImpl.h" />
     <ClInclude Include="..\src\UserInfo.h" />
   </ItemGroup>

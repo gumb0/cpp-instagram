@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApiUrlsTest.cpp" />
-    <ClCompile Include="AuthenticatedClientTest.cpp" />
     <ClCompile Include="ClientTest.cpp" />
     <ClCompile Include="CurlTest.cpp" />
     <ClCompile Include="ServerResponseTest.cpp" />

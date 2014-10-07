@@ -19,9 +19,6 @@
     <ClCompile Include="..\src\ServerResponse.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\AuthenticatedClientImpl.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\MediaImpl.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -74,9 +71,6 @@
     </ClInclude>
     <ClInclude Include="..\include\cpp-instagram\NonCopyable.h">
       <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\AuthenticatedClientImpl.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cpp-instagram\AuthenticatedClient.h">
       <Filter>include</Filter>

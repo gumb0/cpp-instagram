@@ -2,20 +2,29 @@
 #define CPP_INSTAGRAM_IMPL_CLIENT_IMPL_H
 
 #include "ApiUrls.h"
-#include "Client.h"
+#include "AuthenticatedClient.h"
 #include "Curl.h"
 
 namespace Instagram
 {
-    class ClientImpl : public Client
+    class ServerResponse;
+
+    // Both Client and AuthenticatedClient interfaces are implemented by ClientImpl, 
+    // since the only difference is in using either client_id or access_token in API URLs
+    // (this difference is encapsulated in ApiUrls class)
+    class ClientImpl : public AuthenticatedClient
     {
     public:
         ClientImpl(CurlPtr curl, ApiUrlsPtr apiUrls);
 
+        // Client methods
         virtual UserPtr findUserById(const std::string& id) const;
 
+        // AuthenticatedClient methods
+        virtual Feed getFeed(int count, int minId, int maxId) const;
+
     private:
-        std::string constructGetUserRequestUrl(const std::string& id) const;
+        ServerResponse getFromUrl(const std::string& url) const;
 
     private:
         CurlPtr mCurl;

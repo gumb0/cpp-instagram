@@ -7,6 +7,14 @@
 
 using namespace Instagram;
 
+namespace
+{
+    CurlPtr CreateCurl()
+    {
+        CurlApiPtr curlApi(new CurlApiImpl);
+        return CurlPtr(new CurlImpl(curlApi));
+    }
+}
 
 ClientImpl::ClientImpl(CurlPtr curl, ApiUrlsPtr apiUrls) :
     mCurl(curl),
@@ -16,15 +24,28 @@ ClientImpl::ClientImpl(CurlPtr curl, ApiUrlsPtr apiUrls) :
 
 UserPtr ClientImpl::findUserById(const std::string& id) const
 {
-    const std::string responseString = mCurl->get(mApiUrls->getUserById(id));
-    ServerResponse response(responseString);
+    ServerResponse response(getFromUrl(mApiUrls->getUserById(id)));
     return UserPtr(new UserImpl(response.parseUser()));
+}
+
+ServerResponse ClientImpl::getFromUrl(const std::string& url) const
+{
+    return ServerResponse(mCurl->get(url));
+}
+
+Feed ClientImpl::getFeed(int count, int minId, int maxId) const
+{
+    ServerResponse response(getFromUrl(mApiUrls->getFeed(count, minId, maxId)));
+    return response.parseFeed();
 }
 
 ClientPtr Instagram::CreateClient(const std::string& clientId)
 {
-    CurlApiPtr curlApi(new CurlApiImpl);
-    CurlPtr curl(new CurlImpl(curlApi));
-    return ClientPtr(new ClientImpl(curl, CreateNonauthenticatedApiUrls(clientId)));
+    return ClientPtr(new ClientImpl(CreateCurl(), CreateNonauthenticatedApiUrls(clientId)));
+}
+
+AuthenticatedClientPtr Instagram::CreateAuthenticatedClient(const std::string& accessToken)
+{
+    return AuthenticatedClientPtr(new ClientImpl(CreateCurl(), CreateAuthenticatedApiUrls(accessToken)));
 }
 

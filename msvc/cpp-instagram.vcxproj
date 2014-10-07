@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ApiUrls.cpp" />
-    <ClCompile Include="..\src\AuthenticatedClientImpl.cpp" />
     <ClCompile Include="..\src\ClientImpl.cpp" />
     <ClCompile Include="..\src\CurlImpl.cpp" />
     <ClCompile Include="..\src\CurlInitializer.cpp" />
@@ -30,7 +29,6 @@
     <ClInclude Include="..\include\cpp-instagram\NonCopyable.h" />
     <ClInclude Include="..\include\cpp-instagram\User.h" />
     <ClInclude Include="..\src\ApiUrls.h" />
-    <ClInclude Include="..\src\AuthenticatedClientImpl.h" />
     <ClInclude Include="..\src\ClientImpl.h" />
     <ClInclude Include="..\src\Curl.h" />
     <ClInclude Include="..\src\CurlApi.h" />

@@ -9,7 +9,7 @@
 
 namespace Instagram
 {
-    class AuthenticatedClient : Client
+    class AuthenticatedClient : public Client
     {
     public:
         // TODO somehow make params optional

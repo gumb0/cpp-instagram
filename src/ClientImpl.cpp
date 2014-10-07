@@ -33,7 +33,7 @@ ServerResponse ClientImpl::getFromUrl(const std::string& url) const
     return ServerResponse(mCurl->get(url));
 }
 
-Feed ClientImpl::getFeed(int count, int minId, int maxId) const
+Feed ClientImpl::getFeed(int count /* = 0 */, int minId /* = 0 */, int maxId /* = 0 */) const
 {
     ServerResponse response(getFromUrl(mApiUrls->getFeed(count, minId, maxId)));
     return response.parseFeed();

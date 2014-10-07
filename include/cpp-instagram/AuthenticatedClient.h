@@ -12,8 +12,8 @@ namespace Instagram
     class AuthenticatedClient : public Client
     {
     public:
-        // TODO somehow make params optional
-        virtual Feed getFeed(int count, int minId, int maxId) const = 0;
+        // 0 passed to any argument will make it ignored
+        virtual Feed getFeed(int count = 0, int minId = 0, int maxId = 0) const = 0;
     };
 
     typedef std::shared_ptr<AuthenticatedClient> AuthenticatedClientPtr;

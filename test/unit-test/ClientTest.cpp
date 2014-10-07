@@ -53,7 +53,7 @@ protected:
 TEST_F(AuthenticatedClientTest, GetsFeed)
 {
     const int count = 10;
-    const int minId = 0;
+    const int minId = 1;
     const int maxId = 10;
     const std::string request = std::string("https://api.instagram.com/v1/users/self/feed?") +
         "access_token=" + token +

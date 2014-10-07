@@ -43,3 +43,28 @@ TEST_F(AuthenticatedApiUrlsTest, ConstructsUserFeedUrl)
         % token % count % minId % maxId);
     ASSERT_THAT(apiUrls->getFeed(count, minId, maxId), StrEq(getFeedUrl));
 }
+
+TEST_F(AuthenticatedApiUrlsTest, ConstructsUserFeedWithoutCount)
+{
+    const int minId = 20;
+    const int maxId = 30;
+
+    const std::string getFeedUrl = boost::str(boost::format("https://api.instagram.com/v1/users/self/feed?access_token=%1%&min_id=%2%&max_id=%3%")
+        % token % minId % maxId);
+    ASSERT_THAT(apiUrls->getFeed(0, minId, maxId), StrEq(getFeedUrl));
+}
+
+TEST_F(AuthenticatedApiUrlsTest, ConstructsUserFeedWithoutCountAndMinId)
+{
+    const int maxId = 30;
+
+    const std::string getFeedUrl = boost::str(boost::format("https://api.instagram.com/v1/users/self/feed?access_token=%1%&max_id=%2%")
+        % token % maxId);
+    ASSERT_THAT(apiUrls->getFeed(0, 0, maxId), StrEq(getFeedUrl));
+}
+
+TEST_F(AuthenticatedApiUrlsTest, ConstructsUserFeedWithoutParams)
+{
+    const std::string getFeedUrl = boost::str(boost::format("https://api.instagram.com/v1/users/self/feed?access_token=%1%") % token);
+    ASSERT_THAT(apiUrls->getFeed(0, 0, 0), StrEq(getFeedUrl));
+}

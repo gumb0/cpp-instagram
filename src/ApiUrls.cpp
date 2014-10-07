@@ -44,9 +44,12 @@ std::string ApiUrls::getFeed(int count, int minId, int maxId) const
 {
     UrlBuilder urlBuilder(getPathWithAccessParam(GET_FEED));
     
-    urlBuilder.addParam(COUNT_PARAM, count);
-    urlBuilder.addParam(MIN_ID_PARAM, minId);
-    urlBuilder.addParam(MAX_ID_PARAM, maxId);
+    if (count)
+        urlBuilder.addParam(COUNT_PARAM, count);
+    if (minId)
+        urlBuilder.addParam(MIN_ID_PARAM, minId);
+    if (maxId)
+        urlBuilder.addParam(MAX_ID_PARAM, maxId);
 
     return urlBuilder.getResult();
 }

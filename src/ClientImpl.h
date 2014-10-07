@@ -21,7 +21,9 @@ namespace Instagram
         virtual UserPtr findUserById(const std::string& id) const;
 
         // AuthenticatedClient methods
-        virtual Feed getFeed(int count, int minId, int maxId) const;
+
+        // 0 passed to any argument will make it ignored
+        virtual Feed getFeed(int count = 0, int minId = 0, int maxId = 0) const;
 
     private:
         ServerResponse getFromUrl(const std::string& url) const;

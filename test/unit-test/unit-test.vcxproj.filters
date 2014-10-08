@@ -7,6 +7,7 @@
     <ClCompile Include="ServerResponseTest.cpp" />
     <ClCompile Include="ApiUrlsTest.cpp" />
     <ClCompile Include="UrlBuilderTest.cpp" />
+    <ClCompile Include="MediaTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockCurlApi.h" />

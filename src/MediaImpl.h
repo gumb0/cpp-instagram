@@ -2,23 +2,24 @@
 #define CPP_INSTAGRAM_IMPL_MEDIA_IMPL_H
 
 #include "Media.h"
+#include "MediaInfo.h"
 
 namespace Instagram
 {
     class MediaImpl : public Media
     {
     public:
-        MediaImpl(const std::string& link, const std::string& caption, const std::string& createdTime);
+        explicit MediaImpl(const MediaInfo& mediaInfo);
 
         virtual std::string getLink() const;
         virtual std::string getCaption() const;
         virtual std::string getCreatedTime() const;
 
     private:
-        const std::string mLink;
-        const std::string mCaption;
-        const std::string mCreatedTime;
+        const MediaInfo mInfo;
     };
+
+    MediaPtr CreateMedia(const MediaInfo& mediaInfo);
 }
 
 #endif

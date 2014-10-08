@@ -87,6 +87,9 @@
     <ClInclude Include="..\src\UrlBuilder.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\MediaInfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">

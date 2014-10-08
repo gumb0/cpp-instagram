@@ -37,6 +37,7 @@
     <ClInclude Include="..\src\CurlInitializer.h" />
     <ClInclude Include="..\src\ExceptionHelpers.h" />
     <ClInclude Include="..\src\MediaImpl.h" />
+    <ClInclude Include="..\src\MediaInfo.h" />
     <ClInclude Include="..\src\ServerResponse.h" />
     <ClInclude Include="..\src\UrlBuilder.h" />
     <ClInclude Include="..\src\UserImpl.h" />

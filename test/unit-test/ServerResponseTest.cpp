@@ -229,36 +229,36 @@ class ParsingFeedResponseTest : public Test
 
         ServerResponse response(json);
 
-        feed = response.parseFeed();
+        medias = response.parseFeed();
     }
 
 protected:
-    Feed feed;
+    std::vector<MediaInfo> medias;
 };
 
 TEST_F(ParsingFeedResponseTest, ParsesAllItems)
 {
-    ASSERT_THAT(feed, SizeIs(2));
+    ASSERT_THAT(medias, SizeIs(2));
 }
 
 TEST_F(ParsingFeedResponseTest, ParsesLink)
 {
-    ASSERT_THAT(feed[0]->getLink(), StrEq("http://instagr.am/p/BXsFz/"));
+    ASSERT_THAT(medias[0].mLink, StrEq("http://instagr.am/p/BXsFz/"));
 }
 
 TEST_F(ParsingFeedResponseTest, ParsesCaption)
 {
-    ASSERT_THAT(feed[0]->getCaption(), StrEq("escalera"));
+    ASSERT_THAT(medias[0].mCaption, StrEq("escalera"));
 }
 
 TEST_F(ParsingFeedResponseTest, ReturnsEmptyCaptionIfNotReturned)
 {
-    ASSERT_THAT(feed[1]->getCaption(), StrEq(""));
+    ASSERT_THAT(medias[1].mCaption, StrEq(""));
 }
 
 TEST_F(ParsingFeedResponseTest, ParsesCreatedTime)
 {
-    ASSERT_THAT(feed[0]->getCreatedTime(), StrEq("1296748524"));
+    ASSERT_THAT(medias[0].mCreatedTime, StrEq("1296748524"));
 }
 
 // TODO type, filter, tags, id, images/video, location, user

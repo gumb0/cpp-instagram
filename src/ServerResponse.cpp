@@ -120,21 +120,23 @@ UserCounts ServerResponse::parseCounts() const
     return res;
 }
 
-Feed ServerResponse::parseFeed() const
+std::vector<MediaInfo> ServerResponse::parseFeed() const
 {
-    Feed feed;
+    std::vector<MediaInfo> feed;
     std::transform(mData.begin(), mData.end(), std::back_inserter(feed), parseMedia);
     return feed;
 }
 
-MediaPtr ServerResponse::parseMedia(const Json::Value& value)
+MediaInfo ServerResponse::parseMedia(const Json::Value& value)
 {
-    const std::string link = getSubvalue(value, JSON_KEY_LINK).asString();
+    MediaInfo mediaInfo;
+
+    mediaInfo.mLink = getSubvalue(value, JSON_KEY_LINK).asString();
     
     const Json::Value captionValue = getOptionalSubvalue(value, JSON_KEY_CAPTION);
-    const std::string caption = captionValue.empty() ? std::string() : getSubvalue(captionValue, JSON_KEY_TEXT).asString();
+    mediaInfo.mCaption = captionValue.empty() ? std::string() : getSubvalue(captionValue, JSON_KEY_TEXT).asString();
     
-    const std::string createdTime = getSubvalue(value, JSON_KEY_CREATED_TIME).asString();
+    mediaInfo.mCreatedTime = getSubvalue(value, JSON_KEY_CREATED_TIME).asString();
 
-    return MediaPtr(new MediaImpl(link, caption, createdTime));
+    return mediaInfo;
 }

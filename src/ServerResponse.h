@@ -3,6 +3,7 @@
 
 #include "AuthenticatedClient.h" // for Feed
 #include "NonCopyable.h"
+#include "MediaInfo.h"
 #include "UserInfo.h"
 
 #include <json/json.h>
@@ -15,11 +16,10 @@ namespace Instagram
         explicit ServerResponse(const std::string& response);
 
         UserInfo parseUser() const;
-        Feed parseFeed() const;
+        std::vector<MediaInfo> parseFeed() const;
 
     private:
-        // TODO return MediaInfo struct instead of MediaPtr
-        static MediaPtr parseMedia(const Json::Value& value);
+        static MediaInfo parseMedia(const Json::Value& value);
             
         std::string getStringValue(const char* key) const;
         Json::Value getValue(const char* key) const;

@@ -2,8 +2,11 @@
 #include "CurlApiImpl.h"
 #include "CurlImpl.h"
 #include "ExceptionHelpers.h"
+#include "MediaImpl.h"
 #include "ServerResponse.h"
 #include "UserImpl.h"
+
+#include <algorithm>
 
 using namespace Instagram;
 
@@ -36,7 +39,12 @@ ServerResponse ClientImpl::getFromUrl(const std::string& url) const
 Feed ClientImpl::getFeed(int count /* = 0 */, int minId /* = 0 */, int maxId /* = 0 */) const
 {
     ServerResponse response(getFromUrl(mApiUrls->getFeed(count, minId, maxId)));
-    return response.parseFeed();
+    std::vector<MediaInfo> medias = response.parseFeed();
+
+    Feed feed;
+    std::transform(medias.begin(), medias.end(), std::back_inserter(feed), CreateMedia);
+
+    return feed;
 }
 
 ClientPtr Instagram::CreateClient(const std::string& clientId)

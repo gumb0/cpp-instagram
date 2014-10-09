@@ -19,6 +19,7 @@ namespace
         { RESPONSE_JSON_PARSE_FAILED, "Invalid JSON data for user." },
         { RESPONSE_CONTAINS_SERVER_ERROR, "Server returned error: " },
         { USER_JSON_KEY_NOT_FOUND, "Key not found in JSON data: " },
+        { UNKNOWN_MEDIA_TYPE, "Unknown media type." },
     };
 
     const int CODE_MESSAGE_PAIRS_SIZE = sizeof(CODE_MESSAGE_PAIRS) / sizeof(CODE_MESSAGE_PAIRS[0]);

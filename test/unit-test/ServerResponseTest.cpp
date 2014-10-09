@@ -261,4 +261,35 @@ TEST_F(ParsingFeedResponseTest, ParsesCreatedTime)
     ASSERT_THAT(medias[0].mCreatedTime, StrEq("1296748524"));
 }
 
+TEST_F(ParsingFeedResponseTest, ParsesImageType)
+{
+    ASSERT_THAT(medias[0].mType, Eq(MediaType::Image));
+}
+
+TEST_F(ParsingFeedResponseTest, ParsesVideoType)
+{
+    ASSERT_THAT(medias[1].mType, Eq(MediaType::Video));
+}
+
 // TODO type, filter, tags, id, images/video, location, user
+
+TEST(ParsingIncorrectFeedResponseTest, ThrowsIfJsonHasNoId)
+{
+    ServerResponse response(R"({ "meta":{"code": 200 }, 
+            "data":[
+            { 
+                "link" : "http://instagr.am/p/BXsFz/",
+                "likes" : { "count": 0, "data" : [] }, 
+                "created_time": "1296748524", 
+                "type": "unknown", 
+                "id" : "22987123", 
+                "user" : { 
+                    "username": "kevin",
+                    "full_name" : "Kevin S", 
+                    "profile_picture" : "http://distillery.s3.amazonaws.com/profiles/profile_3_75sq_1295574122.jpg",
+                    "id" : "3"
+                 } 
+            }]})");
+
+    ASSERT_THROW(response.parseFeed(), Instagram::Exception);
+}

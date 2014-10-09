@@ -25,6 +25,10 @@ namespace
     const char* JSON_KEY_CAPTION = "caption";
     const char* JSON_KEY_TEXT = "text";
     const char* JSON_KEY_CREATED_TIME = "created_time";
+    const char* JSON_KEY_TYPE = "type";
+
+    const char* MEDIA_TYPE_IMAGE = "image";
+    const char* MEDIA_TYPE_VIDEO = "video";
 
     const Json::Int RESPONSE_CODE_OK = 200;
 }
@@ -76,6 +80,31 @@ namespace
         checkResponseCode(jsonRoot);
 
         return getDataFromJsonRoot(jsonRoot);
+    }
+
+    std::string getCaptionSubvalue(const Json::Value& value)
+    {
+        const Json::Value& captionValue = getOptionalSubvalue(value, JSON_KEY_CAPTION);
+        return captionValue.empty() ? std::string() : getSubvalue(captionValue, JSON_KEY_TEXT).asString();
+    }
+
+    MediaType stringToMediaType(const std::string& type)
+    {
+        MediaType mediaType;
+        if (type == MEDIA_TYPE_IMAGE)
+            mediaType = MediaType::Image;
+        else if (type == MEDIA_TYPE_VIDEO)
+            mediaType = MediaType::Video;
+        else
+            Throw(UNKNOWN_MEDIA_TYPE);
+    
+        return mediaType;
+    }
+
+    MediaType getMediaTypeSubvalue(const Json::Value& value)
+    {
+        const std::string type = getSubvalue(value, JSON_KEY_TYPE).asString();
+        return stringToMediaType(type);
     }
 }
 
@@ -129,13 +158,10 @@ std::vector<MediaInfo> ServerResponse::parseFeed() const
 MediaInfo ServerResponse::parseMedia(const Json::Value& value)
 {
     MediaInfo mediaInfo;
-
     mediaInfo.mLink = getSubvalue(value, JSON_KEY_LINK).asString();
-    
-    const Json::Value& captionValue = getOptionalSubvalue(value, JSON_KEY_CAPTION);
-    mediaInfo.mCaption = captionValue.empty() ? std::string() : getSubvalue(captionValue, JSON_KEY_TEXT).asString();
-    
+    mediaInfo.mCaption = getCaptionSubvalue(value);
     mediaInfo.mCreatedTime = getSubvalue(value, JSON_KEY_CREATED_TIME).asString();
+    mediaInfo.mType = getMediaTypeSubvalue(value);
 
     return mediaInfo;
 }

@@ -19,7 +19,8 @@ namespace Instagram
         CURL_PERFORM_FAILED,
         RESPONSE_JSON_PARSE_FAILED,
         RESPONSE_CONTAINS_SERVER_ERROR,
-        USER_JSON_KEY_NOT_FOUND
+        USER_JSON_KEY_NOT_FOUND,
+        UNKNOWN_MEDIA_TYPE
     };
 
     //////////////////////////////////////////////////////////////////////////

@@ -9,6 +9,11 @@
 
 namespace Instagram
 {
+    enum class MediaType
+    {
+        Image,
+        Video
+    };
 
     class Media : NonCopyable
     {

@@ -28,7 +28,5 @@ TEST(FeedTest, getsFeed)
     AuthenticatedClientPtr client = CreateAuthenticatedClient("1479058533.d7b1086.6abab8dee8e140afa8ee6b8b7f7318c5");
 
     Feed feed = client->getFeed(10);
-    EXPECT_THAT(feed, SizeIs(10));
-    // TODO test minId, maxId params
+    ASSERT_THAT(feed, SizeIs(10));
 }
-

@@ -159,6 +159,7 @@ std::vector<MediaInfo> ServerResponse::parseFeed() const
 MediaInfo ServerResponse::parseMedia(const Json::Value& value)
 {
     MediaInfo mediaInfo;
+    mediaInfo.mId = getSubvalue(value, JSON_KEY_ID).asString();
     mediaInfo.mLink = getSubvalue(value, JSON_KEY_LINK).asString();
     mediaInfo.mCaption = getCaptionSubvalue(value);
     mediaInfo.mCreatedTime = getSubvalue(value, JSON_KEY_CREATED_TIME).asString();

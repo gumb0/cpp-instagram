@@ -276,7 +276,13 @@ TEST_F(ParsingFeedResponseTest, ParsesFilter)
     ASSERT_THAT(medias[0].mFilter, StrEq("Earlybird"));
 }
 
-// TODO tags, id, images/video, location, user
+TEST_F(ParsingFeedResponseTest, ParsesId)
+{
+    ASSERT_THAT(medias[0].mId, StrEq("22987123"));
+}
+
+
+// TODO images/video, location, user
 
 TEST(ParsingIncorrectFeedResponseTest, ThrowsIfJsonHasNoId)
 {

@@ -9,6 +9,7 @@ namespace Instagram
 {
     struct MediaInfo
     {
+        std::string mId;
         std::string mLink;
         std::string mCaption;
         std::string mCreatedTime;

@@ -26,6 +26,11 @@ MediaType MediaImpl::getType() const
     return mInfo.mType;
 }
 
+std::string MediaImpl::getFilter() const
+{
+    return mInfo.mFilter;
+}
+
 MediaPtr Instagram::CreateMedia(const MediaInfo& mediaInfo)
 {
     return MediaPtr(new MediaImpl(mediaInfo));

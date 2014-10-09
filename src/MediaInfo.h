@@ -4,6 +4,7 @@
 #include "Media.h"
 
 #include <string>
+#include <vector>
 
 namespace Instagram
 {
@@ -15,6 +16,7 @@ namespace Instagram
         std::string mCreatedTime;
         MediaType mType;
         std::string mFilter;
+        std::vector<std::string> mTags;
     };
 }
 

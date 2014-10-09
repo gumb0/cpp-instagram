@@ -137,7 +137,7 @@ class ParsingFeedResponseTest : public Test
                 "type": "image", 
                 "users_in_photo" : [], 
                 "filter" : "Earlybird", 
-                "tags" : [], 
+                "tags" : ["duxton","vsco","tree","singapore"], 
                 "id" : "22987123", 
                 "user" : { 
                     "username": "kevin",
@@ -281,6 +281,10 @@ TEST_F(ParsingFeedResponseTest, ParsesId)
     ASSERT_THAT(medias[0].mId, StrEq("22987123"));
 }
 
+TEST_F(ParsingFeedResponseTest, ParsesTags)
+{
+    ASSERT_THAT(medias[0].mTags, ElementsAre(StrEq("duxton"), StrEq("vsco"), StrEq("tree"), StrEq("singapore")));
+}
 
 // TODO images/video, location, user
 

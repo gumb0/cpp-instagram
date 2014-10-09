@@ -3,6 +3,7 @@
 #include "ServerResponse.h"
 
 #include <algorithm>
+#include <functional>
 
 using namespace Instagram;
 
@@ -27,6 +28,7 @@ namespace
     const char* JSON_KEY_CREATED_TIME = "created_time";
     const char* JSON_KEY_TYPE = "type";
     const char* JSON_KEY_FILTER = "filter";
+    const char* JSON_KEY_TAGS = "tags";
 
     const char* MEDIA_TYPE_IMAGE = "image";
     const char* MEDIA_TYPE_VIDEO = "video";
@@ -107,6 +109,15 @@ namespace
         const std::string type = getSubvalue(value, JSON_KEY_TYPE).asString();
         return stringToMediaType(type);
     }
+
+    std::vector<std::string> getTagsSubvalue(const Json::Value& value)
+    {
+        const Json::Value& tagsValue = getSubvalue(value, JSON_KEY_TAGS);
+
+        std::vector<std::string> tags;
+        std::transform(tagsValue.begin(), tagsValue.end(), std::back_inserter(tags), std::mem_fun_ref(&Json::Value::asString));
+        return tags;
+    }
 }
 
 ServerResponse::ServerResponse(const std::string& response) : mData(getData(response))
@@ -165,6 +176,7 @@ MediaInfo ServerResponse::parseMedia(const Json::Value& value)
     mediaInfo.mCreatedTime = getSubvalue(value, JSON_KEY_CREATED_TIME).asString();
     mediaInfo.mType = getMediaTypeSubvalue(value);
     mediaInfo.mFilter = getSubvalue(value, JSON_KEY_FILTER).asString();
+    mediaInfo.mTags = getTagsSubvalue(value);
 
     return mediaInfo;
 }

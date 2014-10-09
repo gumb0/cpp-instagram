@@ -36,6 +36,11 @@ std::string MediaImpl::getFilter() const
     return mInfo.mFilter;
 }
 
+std::vector<std::string> MediaImpl::getTags() const
+{
+    return mInfo.mTags;
+}
+
 MediaPtr Instagram::CreateMedia(const MediaInfo& mediaInfo)
 {
     return MediaPtr(new MediaImpl(mediaInfo));

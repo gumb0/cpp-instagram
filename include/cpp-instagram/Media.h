@@ -24,6 +24,7 @@ namespace Instagram
         virtual std::string getCreatedTime() const = 0;
         virtual MediaType getType() const = 0;
         virtual std::string getFilter() const = 0;
+        virtual std::vector<std::string> getTags() const = 0;
     };
 
     typedef std::shared_ptr<Media> MediaPtr;

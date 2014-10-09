@@ -11,6 +11,7 @@ class MediaTest : public Test
     virtual void SetUp()
     {
         mediaInfo = { "id", "link", "caption", "creation time", MediaType::Image, "filter" };
+        mediaInfo.mTags = std::vector<std::string>{ "tag1", "tag2" };
         media = CreateMedia(mediaInfo);
     }
 
@@ -47,4 +48,9 @@ TEST_F(MediaTest, getsFilter)
 TEST_F(MediaTest, getsId)
 {
     ASSERT_THAT(media->getId(), StrEq(mediaInfo.mId));
+}
+
+TEST_F(MediaTest, getsTags)
+{
+    ASSERT_THAT(media->getTags(), ElementsAreArray(mediaInfo.mTags));
 }

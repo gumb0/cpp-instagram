@@ -1,4 +1,4 @@
-#include "Client.h"
+#include "AuthenticatedClient.h"
 
 #include <gmock/gmock.h>
 #include <memory>
@@ -19,7 +19,16 @@ TEST(UserTest, findsUserById)
     EXPECT_THAT(user->getBio(), StrEq("I'm bearded."));
     EXPECT_THAT(user->getWebsite(), StrEq("http://en.wikipedia.org/wiki/Beard"));
     EXPECT_THAT(user->getMediaCount(), 2);
-    EXPECT_THAT(user->getFollowsCount(), 2);
-    EXPECT_THAT(user->getFollowedByCount(), 1);
+    EXPECT_THAT(user->getFollowsCount(), 20);
+    EXPECT_THAT(user->getFollowedByCount(), 10);
+}
+
+TEST(FeedTest, getsFeed)
+{
+    AuthenticatedClientPtr client = CreateAuthenticatedClient("1479058533.d7b1086.6abab8dee8e140afa8ee6b8b7f7318c5");
+
+    Feed feed = client->getFeed(10);
+    EXPECT_THAT(feed, SizeIs(10));
+    // TODO test minId, maxId params
 }
 

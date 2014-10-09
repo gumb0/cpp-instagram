@@ -6,6 +6,11 @@ MediaImpl::MediaImpl(const MediaInfo& mediaInfo) : mInfo(mediaInfo)
 {
 }
 
+std::string MediaImpl::getId() const
+{
+    return mInfo.mId;
+}
+
 std::string MediaImpl::getLink() const
 {
     return mInfo.mLink;

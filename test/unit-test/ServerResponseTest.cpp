@@ -271,7 +271,12 @@ TEST_F(ParsingFeedResponseTest, ParsesVideoType)
     ASSERT_THAT(medias[1].mType, Eq(MediaType::Video));
 }
 
-// TODO type, filter, tags, id, images/video, location, user
+TEST_F(ParsingFeedResponseTest, ParsesFilter)
+{
+    ASSERT_THAT(medias[0].mFilter, StrEq("Earlybird"));
+}
+
+// TODO tags, id, images/video, location, user
 
 TEST(ParsingIncorrectFeedResponseTest, ThrowsIfJsonHasNoId)
 {

@@ -22,7 +22,7 @@ namespace Instagram
         static MediaInfo parseMedia(const Json::Value& value);
             
         std::string getStringValue(const char* key) const;
-        Json::Value getValue(const char* key) const;
+        const Json::Value& getValue(const char* key) const;
         UserCounts parseCounts() const;
 
     private:

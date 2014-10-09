@@ -31,7 +31,6 @@ namespace
 
 namespace
 {
-    // TODO return const references
     Json::Value getRoot(const std::string& jsonData)
     {
         Json::Reader jsonReader;
@@ -42,31 +41,31 @@ namespace
         return root;
     }
 
-    Json::Value getSubvalue(const Json::Value& value, const char* key)
+    const Json::Value& getSubvalue(const Json::Value& value, const char* key)
     {
-        const Json::Value subvalue = value[key];
+        const Json::Value& subvalue = value[key];
         if (subvalue.isNull())
             Throw(USER_JSON_KEY_NOT_FOUND, key);
 
         return subvalue;
     }
 
-    Json::Value getOptionalSubvalue(const Json::Value& value, const char* key)
+    const Json::Value& getOptionalSubvalue(const Json::Value& value, const char* key)
     {
         return value[key];
     }
 
     void checkResponseCode(const Json::Value& root)
     {
-        const Json::Value meta = getSubvalue(root, JSON_KEY_META);
+        const Json::Value& meta = getSubvalue(root, JSON_KEY_META);
 
-        const Json::Value code = getSubvalue(meta, JSON_KEY_CODE);
+        const Json::Value& code = getSubvalue(meta, JSON_KEY_CODE);
 
         if (code.asInt() != RESPONSE_CODE_OK)
             Throw(RESPONSE_CONTAINS_SERVER_ERROR, meta.toStyledString());
     }
 
-    Json::Value getDataFromJsonRoot(const Json::Value& root)
+    const Json::Value& getDataFromJsonRoot(const Json::Value& root)
     {
         return getSubvalue(root, JSON_KEY_DATA);
     }
@@ -103,14 +102,14 @@ std::string ServerResponse::getStringValue(const char* key) const
     return getValue(key).asString();
 }
 
-Json::Value ServerResponse::getValue(const char* key) const
+const Json::Value& ServerResponse::getValue(const char* key) const
 {
     return getSubvalue(mData, key);
 }
 
 UserCounts ServerResponse::parseCounts() const
 {
-    const Json::Value counts = getValue(JSON_KEY_COUNTS);
+    const Json::Value& counts = getValue(JSON_KEY_COUNTS);
 
     UserCounts res;
     res.mMedia = getSubvalue(counts, JSON_KEY_MEDIA).asUInt();
@@ -133,7 +132,7 @@ MediaInfo ServerResponse::parseMedia(const Json::Value& value)
 
     mediaInfo.mLink = getSubvalue(value, JSON_KEY_LINK).asString();
     
-    const Json::Value captionValue = getOptionalSubvalue(value, JSON_KEY_CAPTION);
+    const Json::Value& captionValue = getOptionalSubvalue(value, JSON_KEY_CAPTION);
     mediaInfo.mCaption = captionValue.empty() ? std::string() : getSubvalue(captionValue, JSON_KEY_TEXT).asString();
     
     mediaInfo.mCreatedTime = getSubvalue(value, JSON_KEY_CREATED_TIME).asString();

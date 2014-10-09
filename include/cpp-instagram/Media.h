@@ -18,6 +18,7 @@ namespace Instagram
     class Media : NonCopyable
     {
     public:
+        virtual std::string getId() const = 0;
         virtual std::string getLink() const = 0;
         virtual std::string getCaption() const = 0;
         virtual std::string getCreatedTime() const = 0;

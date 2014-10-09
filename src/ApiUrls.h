@@ -18,7 +18,9 @@ namespace Instagram
 
         std::string getUserById(const std::string& id) const;
         
-        std::string getFeed(int count, int minId, int maxId) const;
+        // 0 passed to count makes it ignored
+        // empty string passed to minId/maxId makes them ignored
+        std::string getFeed(int count, const std::string& minId, const std::string& maxId) const;
 
     private:
         UrlBuilder getPathWithAccessParam(const std::string& path) const;

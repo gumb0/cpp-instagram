@@ -12,8 +12,9 @@ namespace Instagram
     class AuthenticatedClient : public Client
     {
     public:
-        // 0 passed to any argument will make it ignored
-        virtual Feed getFeed(int count = 0, int minId = 0, int maxId = 0) const = 0;
+        // 0 passed to cout will make it ignored
+        // empty string passed to minId/maxId makes them ignored
+        virtual Feed getFeed(int count = 0, const std::string& minId = std::string(), const std::string& maxId = std::string()) const = 0;
     };
 
     typedef std::shared_ptr<AuthenticatedClient> AuthenticatedClientPtr;

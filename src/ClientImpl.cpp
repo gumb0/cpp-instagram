@@ -36,7 +36,7 @@ ServerResponse ClientImpl::getFromUrl(const std::string& url) const
     return ServerResponse(mCurl->get(url));
 }
 
-Feed ClientImpl::getFeed(int count /* = 0 */, int minId /* = 0 */, int maxId /* = 0 */) const
+Feed ClientImpl::getFeed(int count /* = 0 */, const std::string& minId /* = std::string() */, const std::string& maxId /* = std::string() */) const
 {
     ServerResponse response(getFromUrl(mApiUrls->getFeed(count, minId, maxId)));
     std::vector<MediaInfo> medias = response.parseFeed();

@@ -40,15 +40,15 @@ UrlBuilder ApiUrls::getPathWithAccessParam(const std::string& path) const
     return urlBuilder;
 }
 
-std::string ApiUrls::getFeed(int count, int minId, int maxId) const
+std::string ApiUrls::getFeed(int count, const std::string& minId, const std::string& maxId) const
 {
     UrlBuilder urlBuilder(getPathWithAccessParam(GET_FEED));
     
     if (count)
         urlBuilder.addParam(COUNT_PARAM, count);
-    if (minId)
+    if (!minId.empty())
         urlBuilder.addParam(MIN_ID_PARAM, minId);
-    if (maxId)
+    if (!maxId.empty())
         urlBuilder.addParam(MAX_ID_PARAM, maxId);
 
     return urlBuilder.getResult();

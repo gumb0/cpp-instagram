@@ -53,11 +53,11 @@ protected:
 TEST_F(AuthenticatedClientTest, GetsFeed)
 {
     const int count = 10;
-    const int minId = 1;
-    const int maxId = 10;
+    const std::string minId = "1";
+    const std::string maxId = "10";
     const std::string request = std::string("https://api.instagram.com/v1/users/self/feed?") +
         "access_token=" + token +
-        "&count=" + std::to_string(count) + "&min_id=" + std::to_string(minId) + "&max_id=" + std::to_string(maxId);
+        "&count=" + std::to_string(count) + "&min_id=" + minId + "&max_id=" + maxId;
 
     const std::string response = R"({ "meta":{"code": 200}, "data":[{ "location": { "id": "833", "latitude" : 37.77956816727314, "longitude" : -122.41387367248539,
         "name" : "Civic Center BART" }, "comments": { "count": 0, "data" : [] }, "caption" : null, "link" : "http://instagr.am/p/BXsFz/",

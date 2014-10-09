@@ -13,6 +13,7 @@ namespace Instagram
         std::string mCaption;
         std::string mCreatedTime;
         MediaType mType;
+        std::string mFilter;
     };
 }
 

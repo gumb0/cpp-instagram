@@ -26,6 +26,7 @@ namespace
     const char* JSON_KEY_TEXT = "text";
     const char* JSON_KEY_CREATED_TIME = "created_time";
     const char* JSON_KEY_TYPE = "type";
+    const char* JSON_KEY_FILTER = "filter";
 
     const char* MEDIA_TYPE_IMAGE = "image";
     const char* MEDIA_TYPE_VIDEO = "video";
@@ -162,6 +163,7 @@ MediaInfo ServerResponse::parseMedia(const Json::Value& value)
     mediaInfo.mCaption = getCaptionSubvalue(value);
     mediaInfo.mCreatedTime = getSubvalue(value, JSON_KEY_CREATED_TIME).asString();
     mediaInfo.mType = getMediaTypeSubvalue(value);
+    mediaInfo.mFilter = getSubvalue(value, JSON_KEY_FILTER).asString();
 
     return mediaInfo;
 }

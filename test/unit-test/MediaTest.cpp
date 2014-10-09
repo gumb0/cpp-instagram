@@ -10,7 +10,7 @@ class MediaTest : public Test
 {
     virtual void SetUp()
     {
-        mediaInfo = { "link", "caption", "creation time" };
+        mediaInfo = { "link", "caption", "creation time", MediaType::Image };
         media = CreateMedia(mediaInfo);
     }
 
@@ -32,4 +32,9 @@ TEST_F(MediaTest, getsCaption)
 TEST_F(MediaTest, getsCreationTime)
 {
     ASSERT_THAT(media->getCreatedTime(), StrEq(mediaInfo.mCreatedTime));
+}
+
+TEST_F(MediaTest, getsType)
+{
+    ASSERT_THAT(media->getType(), Eq(MediaType::Image));
 }

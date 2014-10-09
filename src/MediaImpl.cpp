@@ -21,6 +21,11 @@ std::string MediaImpl::getCreatedTime() const
     return mInfo.mCreatedTime;
 }
 
+MediaType MediaImpl::getType() const
+{
+    return mInfo.mType;
+}
+
 MediaPtr Instagram::CreateMedia(const MediaInfo& mediaInfo)
 {
     return MediaPtr(new MediaImpl(mediaInfo));

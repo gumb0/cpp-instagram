@@ -29,6 +29,13 @@ namespace
     const char* JSON_KEY_TYPE = "type";
     const char* JSON_KEY_FILTER = "filter";
     const char* JSON_KEY_TAGS = "tags";
+    const char* JSON_KEY_IMAGES = "images";
+    const char* JSON_KEY_LOW_RESOLUTION = "low_resolution";
+    const char* JSON_KEY_STANDARD_RESOLUTION = "standard_resolution";
+    const char* JSON_KEY_THUMBNAIL = "thumbnail";
+    const char* JSON_KEY_WIDTH = "width";
+    const char* JSON_KEY_HEIGHT = "height";
+    const char* JSON_KEY_URL = "url";
 
     const char* MEDIA_TYPE_IMAGE = "image";
     const char* MEDIA_TYPE_VIDEO = "video";
@@ -118,6 +125,24 @@ namespace
         std::transform(tagsValue.begin(), tagsValue.end(), std::back_inserter(tags), std::mem_fun_ref(&Json::Value::asString));
         return tags;
     }
+
+    ImageInfoPtr getImageSubvalue(const Json::Value& value)
+    {
+        ImageInfoPtr imageInfo(new ImageInfo);
+        imageInfo->mWidth = getSubvalue(value, JSON_KEY_WIDTH).asInt();
+        imageInfo->mHeight = getSubvalue(value, JSON_KEY_HEIGHT).asInt();
+        imageInfo->mUrl = getSubvalue(value, JSON_KEY_URL).asString();
+        return imageInfo;
+    }
+
+    ImageInfosPtr getImagesSubvalue(const Json::Value& value)
+    {
+        ImageInfosPtr imageInfos(new ImageInfos);
+        imageInfos->mLowResolution = getImageSubvalue(getSubvalue(value, JSON_KEY_LOW_RESOLUTION));
+        imageInfos->mStandardResolution = getImageSubvalue(getSubvalue(value, JSON_KEY_STANDARD_RESOLUTION));
+        imageInfos->mThumbnail = getImageSubvalue(getSubvalue(value, JSON_KEY_THUMBNAIL));
+        return imageInfos;
+    }
 }
 
 ServerResponse::ServerResponse(const std::string& response) : mData(getData(response))
@@ -177,6 +202,11 @@ MediaInfo ServerResponse::parseMedia(const Json::Value& value)
     mediaInfo.mType = getMediaTypeSubvalue(value);
     mediaInfo.mFilter = getSubvalue(value, JSON_KEY_FILTER).asString();
     mediaInfo.mTags = getTagsSubvalue(value);
+
+    if (mediaInfo.mType == MediaType::Image)
+    {
+        mediaInfo.mImageInfos = getImagesSubvalue(getSubvalue(value, JSON_KEY_IMAGES));
+    }
 
     return mediaInfo;
 }

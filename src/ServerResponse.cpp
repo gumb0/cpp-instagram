@@ -92,10 +92,9 @@ namespace
         return getDataFromJsonRoot(jsonRoot);
     }
 
-    std::string getCaptionSubvalue(const Json::Value& value)
+    std::string parseCaption(const Json::Value& value)
     {
-        const Json::Value& captionValue = getOptionalSubvalue(value, JSON_KEY_CAPTION);
-        return captionValue.empty() ? std::string() : getSubvalue(captionValue, JSON_KEY_TEXT).asString();
+        return value.empty() ? std::string() : getSubvalue(value, JSON_KEY_TEXT).asString();
     }
 
     MediaType stringToMediaType(const std::string& type)
@@ -111,22 +110,19 @@ namespace
         return mediaType;
     }
 
-    MediaType getMediaTypeSubvalue(const Json::Value& value)
+    MediaType parseMediaType(const Json::Value& value)
     {
-        const std::string type = getSubvalue(value, JSON_KEY_TYPE).asString();
-        return stringToMediaType(type);
+        return stringToMediaType(value.asString());
     }
 
-    std::vector<std::string> getTagsSubvalue(const Json::Value& value)
+    std::vector<std::string> parseTags(const Json::Value& value)
     {
-        const Json::Value& tagsValue = getSubvalue(value, JSON_KEY_TAGS);
-
         std::vector<std::string> tags;
-        std::transform(tagsValue.begin(), tagsValue.end(), std::back_inserter(tags), std::mem_fun_ref(&Json::Value::asString));
+        std::transform(value.begin(), value.end(), std::back_inserter(tags), std::mem_fun_ref(&Json::Value::asString));
         return tags;
     }
 
-    ImageInfoPtr getImageSubvalue(const Json::Value& value)
+    ImageInfoPtr parseImage(const Json::Value& value)
     {
         ImageInfoPtr imageInfo(new ImageInfo);
         imageInfo->mWidth = getSubvalue(value, JSON_KEY_WIDTH).asInt();
@@ -135,12 +131,12 @@ namespace
         return imageInfo;
     }
 
-    ImageInfosPtr getImagesSubvalue(const Json::Value& value)
+    ImageInfosPtr parseImages(const Json::Value& value)
     {
         ImageInfosPtr imageInfos(new ImageInfos);
-        imageInfos->mLowResolution = getImageSubvalue(getSubvalue(value, JSON_KEY_LOW_RESOLUTION));
-        imageInfos->mStandardResolution = getImageSubvalue(getSubvalue(value, JSON_KEY_STANDARD_RESOLUTION));
-        imageInfos->mThumbnail = getImageSubvalue(getSubvalue(value, JSON_KEY_THUMBNAIL));
+        imageInfos->mLowResolution = parseImage(getSubvalue(value, JSON_KEY_LOW_RESOLUTION));
+        imageInfos->mStandardResolution = parseImage(getSubvalue(value, JSON_KEY_STANDARD_RESOLUTION));
+        imageInfos->mThumbnail = parseImage(getSubvalue(value, JSON_KEY_THUMBNAIL));
         return imageInfos;
     }
 }
@@ -158,7 +154,7 @@ UserInfo ServerResponse::parseUser() const
     userInfo.mProfilePicture = getStringValue(JSON_KEY_PROFILE_PICTURE);
     userInfo.mBio = getStringValue(JSON_KEY_BIO);
     userInfo.mWebsite = getStringValue(JSON_KEY_WEBSITE);
-    userInfo.mCounts = parseCounts();
+    userInfo.mCounts = parseCounts(getValue(JSON_KEY_COUNTS));
 
     return userInfo;
 }
@@ -173,14 +169,12 @@ const Json::Value& ServerResponse::getValue(const char* key) const
     return getSubvalue(mData, key);
 }
 
-UserCounts ServerResponse::parseCounts() const
+UserCounts ServerResponse::parseCounts(const Json::Value& value) const
 {
-    const Json::Value& counts = getValue(JSON_KEY_COUNTS);
-
     UserCounts res;
-    res.mMedia = getSubvalue(counts, JSON_KEY_MEDIA).asUInt();
-    res.mFollows = getSubvalue(counts, JSON_KEY_FOLLOWS).asUInt();
-    res.mFollowedBy = getSubvalue(counts, JSON_KEY_FOLLOWED_BY).asUInt();
+    res.mMedia = getSubvalue(value, JSON_KEY_MEDIA).asUInt();
+    res.mFollows = getSubvalue(value, JSON_KEY_FOLLOWS).asUInt();
+    res.mFollowedBy = getSubvalue(value, JSON_KEY_FOLLOWED_BY).asUInt();
 
     return res;
 }
@@ -197,15 +191,15 @@ MediaInfo ServerResponse::parseMedia(const Json::Value& value)
     MediaInfo mediaInfo;
     mediaInfo.mId = getSubvalue(value, JSON_KEY_ID).asString();
     mediaInfo.mLink = getSubvalue(value, JSON_KEY_LINK).asString();
-    mediaInfo.mCaption = getCaptionSubvalue(value);
+    mediaInfo.mCaption = parseCaption(getOptionalSubvalue(value, JSON_KEY_CAPTION));
     mediaInfo.mCreatedTime = getSubvalue(value, JSON_KEY_CREATED_TIME).asString();
-    mediaInfo.mType = getMediaTypeSubvalue(value);
+    mediaInfo.mType = parseMediaType(getSubvalue(value, JSON_KEY_TYPE));
     mediaInfo.mFilter = getSubvalue(value, JSON_KEY_FILTER).asString();
-    mediaInfo.mTags = getTagsSubvalue(value);
+    mediaInfo.mTags = parseTags(getSubvalue(value, JSON_KEY_TAGS));
 
     if (mediaInfo.mType == MediaType::Image)
     {
-        mediaInfo.mImageInfos = getImagesSubvalue(getSubvalue(value, JSON_KEY_IMAGES));
+        mediaInfo.mImageInfos = parseImages(getSubvalue(value, JSON_KEY_IMAGES));
     }
 
     return mediaInfo;

@@ -23,7 +23,7 @@ namespace Instagram
             
         std::string getStringValue(const char* key) const;
         const Json::Value& getValue(const char* key) const;
-        UserCounts parseCounts() const;
+        UserCounts parseCounts(const Json::Value& value) const;
 
     private:
         const Json::Value mData;

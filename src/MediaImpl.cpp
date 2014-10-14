@@ -7,7 +7,7 @@ using namespace Instagram;
 
 MediaImpl::MediaImpl(const MediaInfo& mediaInfo) : 
     mInfo(mediaInfo), 
-    mImages(new ImagesImpl(*mediaInfo.mImageInfo)),
+    mImages(CreateImagesImpl(mediaInfo.mImageInfo)),
     mVideos(mediaInfo.mType == MediaType::Video ? new VideosImpl(*mediaInfo.mVideoInfo) : nullptr)
 {
 }

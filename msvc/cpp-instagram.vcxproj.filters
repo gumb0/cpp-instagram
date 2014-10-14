@@ -34,6 +34,9 @@
     <ClCompile Include="..\src\VideosImpl.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\MediaDataImpl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\cpp-instagram\Client.h">
@@ -106,6 +109,12 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\src\VideosImpl.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cpp-instagram\MediaData.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MediaDataImpl.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

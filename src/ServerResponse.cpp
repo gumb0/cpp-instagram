@@ -122,9 +122,9 @@ namespace
         return tags;
     }
 
-    MediaDataPtr parseMediaData(const Json::Value& value)
+    MediaDataInfoPtr parseMediaData(const Json::Value& value)
     {
-        MediaDataPtr mediaData(new MediaData);
+        MediaDataInfoPtr mediaData(new MediaDataInfo);
         mediaData->mWidth = getSubvalue(value, JSON_KEY_WIDTH).asInt();
         mediaData->mHeight = getSubvalue(value, JSON_KEY_HEIGHT).asInt();
         mediaData->mUrl = getSubvalue(value, JSON_KEY_URL).asString();

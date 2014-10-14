@@ -17,6 +17,7 @@
     <ClCompile Include="..\src\CurlInitializer.cpp" />
     <ClCompile Include="..\src\ExceptionHelpers.cpp" />
     <ClCompile Include="..\src\ImagesImpl.cpp" />
+    <ClCompile Include="..\src\MediaDataImpl.cpp" />
     <ClCompile Include="..\src\MediaImpl.cpp" />
     <ClCompile Include="..\src\ServerResponse.cpp" />
     <ClCompile Include="..\src\UrlBuilder.cpp" />
@@ -29,6 +30,7 @@
     <ClInclude Include="..\include\cpp-instagram\Exception.h" />
     <ClInclude Include="..\include\cpp-instagram\Images.h" />
     <ClInclude Include="..\include\cpp-instagram\Media.h" />
+    <ClInclude Include="..\include\cpp-instagram\MediaData.h" />
     <ClInclude Include="..\include\cpp-instagram\NonCopyable.h" />
     <ClInclude Include="..\include\cpp-instagram\User.h" />
     <ClInclude Include="..\include\cpp-instagram\Videos.h" />
@@ -41,6 +43,7 @@
     <ClInclude Include="..\src\CurlInitializer.h" />
     <ClInclude Include="..\src\ExceptionHelpers.h" />
     <ClInclude Include="..\src\ImagesImpl.h" />
+    <ClInclude Include="..\src\MediaDataImpl.h" />
     <ClInclude Include="..\src\MediaImpl.h" />
     <ClInclude Include="..\src\MediaInfo.h" />
     <ClInclude Include="..\src\ServerResponse.h" />

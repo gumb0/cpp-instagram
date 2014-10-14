@@ -9,12 +9,20 @@ namespace Instagram
     class ImagesImpl : public Images
     {
     public:
-        explicit ImagesImpl(const ImageInfo& imageInfos);
+        explicit ImagesImpl(const ImageInfo& imageInfo);
 
+        virtual MediaDataPtr getLowResolution() const;
+        virtual MediaDataPtr getStandardResolution() const;
+        virtual MediaDataPtr getThumbnail() const;
 
     private:
         const ImageInfo mImageInfo;
+        const MediaDataPtr mLowResolution;
+        const MediaDataPtr mStandardResolution;
+        const MediaDataPtr mThumbnail;
     };
+
+    ImagesPtr CreateImagesImpl(ImageInfoPtr imageInfo);
 }
 
 #endif

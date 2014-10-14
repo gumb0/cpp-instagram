@@ -27,7 +27,7 @@ namespace Instagram
         const VideosPtr mVideos;
     };
 
-    MediaPtr CreateMedia(const MediaInfo& mediaInfo);
+    MediaPtr CreateMediaImpl(const MediaInfo& mediaInfo);
 }
 
 #endif

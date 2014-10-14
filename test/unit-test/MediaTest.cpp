@@ -1,5 +1,6 @@
 #include "Exception.h"
 #include "ImagesImpl.h"
+#include "MediaDataImpl.h"
 #include "MediaImpl.h"
 
 #include <gmock/gmock.h>
@@ -29,7 +30,7 @@ class MediaTest : public Test
         mediaInfo.mTags = std::vector<std::string>{ "tag1", "tag2" };
         mediaInfo.mImageInfo = CreateImageInfo();
 
-        media = CreateMedia(mediaInfo);
+        media = CreateMediaImpl(mediaInfo);
     }
 
 protected:
@@ -80,7 +81,7 @@ class ImageMediaTest : public Test
         mediaInfo.mType = MediaType::Image;
         mediaInfo.mImageInfo = CreateImageInfo();
 
-        media = CreateMedia(mediaInfo);
+        media = CreateMediaImpl(mediaInfo);
     }
 
 protected:
@@ -124,7 +125,39 @@ TEST_F(ImagesTest, getsThumbnail)
     ASSERT_THAT(images->getThumbnail(), NotNull());
 }
 
-// TODO test MediaData
+
+class MediaDataTest : public Test
+{
+    virtual void SetUp()
+    {
+        info.reset(new MediaDataInfo);
+        info->mWidth = 640;
+        info->mHeight = 480;
+        info->mUrl = "url";
+        
+        mediaData = CreateMediaDataImpl(info);
+    }
+
+protected:
+    MediaDataInfoPtr info;
+    MediaDataPtr mediaData;
+};
+
+TEST_F(MediaDataTest, getsWidth)
+{
+    ASSERT_THAT(mediaData->getWidth(), Eq(info->mWidth));
+}
+
+TEST_F(MediaDataTest, getsHeight)
+{
+    ASSERT_THAT(mediaData->getHeight(), Eq(info->mHeight));
+}
+
+TEST_F(MediaDataTest, getsUrl)
+{
+    ASSERT_THAT(mediaData->getUrl(), StrEq(info->mUrl));
+}
+
 
 class VideoMediaTest : public Test
 {
@@ -135,7 +168,7 @@ class VideoMediaTest : public Test
         mediaInfo.mImageInfo = CreateImageInfo();
         mediaInfo.mVideoInfo.reset(new VideoInfo);
 
-        media = CreateMedia(mediaInfo);
+        media = CreateMediaImpl(mediaInfo);
     }
 
 protected:

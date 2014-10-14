@@ -42,7 +42,7 @@ Feed ClientImpl::getFeed(int count /* = 0 */, const std::string& minId /* = std:
     std::vector<MediaInfo> medias = response.parseFeed();
 
     Feed feed;
-    std::transform(medias.begin(), medias.end(), std::back_inserter(feed), CreateMedia);
+    std::transform(medias.begin(), medias.end(), std::back_inserter(feed), CreateMediaImpl);
 
     return feed;
 }

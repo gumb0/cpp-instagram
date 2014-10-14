@@ -60,7 +60,7 @@ VideosPtr MediaImpl::getVideos() const
     return mVideos;
 }
 
-MediaPtr Instagram::CreateMedia(const MediaInfo& mediaInfo)
+MediaPtr Instagram::CreateMediaImpl(const MediaInfo& mediaInfo)
 {
     return MediaPtr(new MediaImpl(mediaInfo));
 }

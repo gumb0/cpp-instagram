@@ -18,6 +18,8 @@ namespace Instagram
     private:
         const MediaDataInfo mInfo;
     };
+
+    MediaDataPtr CreateMediaDataImpl(MediaDataInfoPtr info);
 }
 
 #endif

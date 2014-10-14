@@ -2,6 +2,7 @@
 #include "ImagesImpl.h"
 #include "MediaDataImpl.h"
 #include "MediaImpl.h"
+#include "VideosImpl.h"
 
 #include <gmock/gmock.h>
 #include <memory>
@@ -19,6 +20,16 @@ namespace
         imageInfo->mThumbnail.reset(new MediaDataInfo);
         
         return imageInfo;
+    }
+
+    VideoInfoPtr CreateVideoInfo()
+    {
+        VideoInfoPtr videoInfo(new VideoInfo);
+        videoInfo->mLowResolution.reset(new MediaDataInfo);
+        videoInfo->mStandardResolution.reset(new MediaDataInfo);
+        videoInfo->mLowBandwidth.reset(new MediaDataInfo);
+
+        return videoInfo;
     }
 }
 
@@ -166,7 +177,7 @@ class VideoMediaTest : public Test
         MediaInfo mediaInfo;
         mediaInfo.mType = MediaType::Video;
         mediaInfo.mImageInfo = CreateImageInfo();
-        mediaInfo.mVideoInfo.reset(new VideoInfo);
+        mediaInfo.mVideoInfo = CreateVideoInfo();;
 
         media = CreateMediaImpl(mediaInfo);
     }
@@ -185,4 +196,28 @@ TEST_F(VideoMediaTest, getsVideos)
     ASSERT_THAT(media->getVideos(), NotNull());
 }
 
-// TODO VideosTest
+class VideosTest : public Test
+{
+    virtual void SetUp()
+    {
+        videos = CreateVideosImpl(CreateVideoInfo());
+    }
+
+protected:
+    VideosPtr videos;
+};
+
+TEST_F(VideosTest, getsLowBandwidthideo)
+{
+    ASSERT_THAT(videos->getLowBandwidth(), NotNull());
+}
+
+TEST_F(VideosTest, getsLowResolutionVideo)
+{
+    ASSERT_THAT(videos->getLowResolution(), NotNull());
+}
+
+TEST_F(VideosTest, getsStandardResolutionVideo)
+{
+    ASSERT_THAT(videos->getStandardResolution(), NotNull());
+}

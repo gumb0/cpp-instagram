@@ -11,10 +11,18 @@ namespace Instagram
     public:
         explicit VideosImpl(const VideoInfo& videoInfos);
 
+        virtual MediaDataPtr getLowBandwidth() const;
+        virtual MediaDataPtr getLowResolution() const;
+        virtual MediaDataPtr getStandardResolution() const;
 
     private:
         const VideoInfo mVideoInfo;
+        const MediaDataPtr mLowBandwidth;
+        const MediaDataPtr mLowResolution;
+        const MediaDataPtr mStandardResolution;
     };
+
+    VideosPtr CreateVideosImpl(VideoInfoPtr videoInfo);
 }
 
 #endif

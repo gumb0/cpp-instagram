@@ -7,9 +7,9 @@ using namespace Instagram;
 
 ImagesImpl::ImagesImpl(const ImageInfo& imageInfo) : 
     mImageInfo(imageInfo), 
-    mLowResolution(new MediaDataImpl(*imageInfo.mLowResolution)),
-    mStandardResolution(new MediaDataImpl(*imageInfo.mStandardResolution)),
-    mThumbnail(new MediaDataImpl(*imageInfo.mThumbnail))
+    mLowResolution(CreateMediaDataImpl(imageInfo.mLowResolution)),
+    mStandardResolution(CreateMediaDataImpl(imageInfo.mStandardResolution)),
+    mThumbnail(CreateMediaDataImpl(imageInfo.mThumbnail))
 {
 }
 

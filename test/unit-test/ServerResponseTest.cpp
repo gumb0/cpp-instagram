@@ -288,37 +288,37 @@ TEST_F(ParsingFeedResponseTest, ParsesTags)
 
 TEST_F(ParsingFeedResponseTest, ParsesImages)
 {
-    ASSERT_THAT(medias[0].mImageInfos, NotNull());
+    ASSERT_THAT(medias[0].mImageInfo, NotNull());
 }
 
 TEST_F(ParsingFeedResponseTest, ParsesLowResolutionImage)
 {
-    ASSERT_THAT(medias[0].mImageInfos->mLowResolution, NotNull());
+    ASSERT_THAT(medias[0].mImageInfo->mLowResolution, NotNull());
 }
 
 TEST_F(ParsingFeedResponseTest, ParsesLowResolutionImageWidth)
 {
-    ASSERT_THAT(medias[0].mImageInfos->mLowResolution->mWidth, Eq(306));
+    ASSERT_THAT(medias[0].mImageInfo->mLowResolution->mWidth, Eq(306));
 }
 
 TEST_F(ParsingFeedResponseTest, ParsesLowResolutionImageHeight)
 {
-    ASSERT_THAT(medias[0].mImageInfos->mLowResolution->mHeight, Eq(306));
+    ASSERT_THAT(medias[0].mImageInfo->mLowResolution->mHeight, Eq(306));
 }
 
 TEST_F(ParsingFeedResponseTest, ParsesLowResolutionImageUrl)
 {
-    ASSERT_THAT(medias[0].mImageInfos->mLowResolution->mUrl, StrEq("http://distillery.s3.amazonaws.com/media/2011/02/03/efc502667a554329b52d9a6bab35b24a_6.jpg"));
+    ASSERT_THAT(medias[0].mImageInfo->mLowResolution->mUrl, StrEq("http://distillery.s3.amazonaws.com/media/2011/02/03/efc502667a554329b52d9a6bab35b24a_6.jpg"));
 }
 
 TEST_F(ParsingFeedResponseTest, ParsesStandardResolutionImage)
 {
-    ASSERT_THAT(medias[0].mImageInfos->mStandardResolution, NotNull());
+    ASSERT_THAT(medias[0].mImageInfo->mStandardResolution, NotNull());
 }
 
 TEST_F(ParsingFeedResponseTest, ParsesThumbnail)
 {
-    ASSERT_THAT(medias[0].mImageInfos->mThumbnail, NotNull());
+    ASSERT_THAT(medias[0].mImageInfo->mThumbnail, NotNull());
 }
 
 // TODO images/video, location, user

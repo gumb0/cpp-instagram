@@ -20,7 +20,8 @@ namespace Instagram
         RESPONSE_JSON_PARSE_FAILED,
         RESPONSE_CONTAINS_SERVER_ERROR,
         USER_JSON_KEY_NOT_FOUND,
-        UNKNOWN_MEDIA_TYPE
+        UNKNOWN_MEDIA_TYPE,
+        GET_VIDEOS_FROM_NOT_VIDEO_MEDIA,
     };
 
     //////////////////////////////////////////////////////////////////////////

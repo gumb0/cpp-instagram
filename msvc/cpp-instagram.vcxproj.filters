@@ -28,6 +28,12 @@
     <ClCompile Include="..\src\UrlBuilder.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ImagesImpl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\VideosImpl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\cpp-instagram\Client.h">
@@ -88,6 +94,18 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\MediaInfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cpp-instagram\Images.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ImagesImpl.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cpp-instagram\Videos.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\VideosImpl.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

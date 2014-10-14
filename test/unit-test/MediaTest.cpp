@@ -1,3 +1,4 @@
+#include "Exception.h"
 #include "MediaImpl.h"
 
 #include <gmock/gmock.h>
@@ -12,6 +13,7 @@ class MediaTest : public Test
     {
         mediaInfo = { "id", "link", "caption", "creation time", MediaType::Image, "filter" };
         mediaInfo.mTags = std::vector<std::string>{ "tag1", "tag2" };
+        mediaInfo.mImageInfo.reset(new ImageInfo);
         media = CreateMedia(mediaInfo);
     }
 
@@ -53,4 +55,53 @@ TEST_F(MediaTest, getsId)
 TEST_F(MediaTest, getsTags)
 {
     ASSERT_THAT(media->getTags(), ElementsAreArray(mediaInfo.mTags));
+}
+
+class ImageMediaTest : public Test
+{
+    virtual void SetUp()
+    {
+        MediaInfo mediaInfo;
+        mediaInfo.mType = MediaType::Image;
+        mediaInfo.mImageInfo.reset(new ImageInfo);
+        media = CreateMedia(mediaInfo);
+    }
+
+protected:
+    MediaPtr media;
+};
+
+TEST_F(ImageMediaTest, getsImages)
+{
+    ASSERT_THAT(media->getImages(), NotNull());
+}
+
+TEST_F(ImageMediaTest, GettingVideosThrows)
+{
+    ASSERT_THROW(media->getVideos(), Instagram::Exception);
+}
+
+class VideoMediaTest : public Test
+{
+    virtual void SetUp()
+    {
+        MediaInfo mediaInfo;
+        mediaInfo.mType = MediaType::Video;
+        mediaInfo.mImageInfo.reset(new ImageInfo);
+        mediaInfo.mVideoInfo.reset(new VideoInfo);
+        media = CreateMedia(mediaInfo);
+    }
+
+protected:
+    MediaPtr media;
+};
+
+TEST_F(VideoMediaTest, getsImages)
+{
+    ASSERT_THAT(media->getImages(), NotNull());
+}
+
+TEST_F(VideoMediaTest, getsVideos)
+{
+    ASSERT_THAT(media->getVideos(), NotNull());
 }

@@ -8,23 +8,32 @@
 
 namespace Instagram
 {
-    struct ImageInfo
+    struct MediaData
     {
         int mWidth;
         int mHeight;
         std::string mUrl;
     };
 
-    typedef std::shared_ptr<ImageInfo> ImageInfoPtr;
+    typedef std::shared_ptr<MediaData> MediaDataPtr;
 
-    struct ImageInfos
+    struct ImageInfo
     {
-        ImageInfoPtr mLowResolution;
-        ImageInfoPtr mStandardResolution;
-        ImageInfoPtr mThumbnail;
+        MediaDataPtr mLowResolution;
+        MediaDataPtr mStandardResolution;
+        MediaDataPtr mThumbnail;
     };
 
-    typedef std::shared_ptr<ImageInfos> ImageInfosPtr;
+    typedef std::shared_ptr<ImageInfo> ImageInfoPtr;
+
+    struct VideoInfo
+    {
+        MediaDataPtr mLowBandwidth;
+        MediaDataPtr mLowResolution;
+        MediaDataPtr mStandardResolution;
+    };
+
+    typedef std::shared_ptr<VideoInfo> VideoInfoPtr;
 
     struct MediaInfo
     {
@@ -35,7 +44,8 @@ namespace Instagram
         MediaType mType;
         std::string mFilter;
         std::vector<std::string> mTags;
-        ImageInfosPtr mImageInfos;
+        ImageInfoPtr mImageInfo;
+        VideoInfoPtr mVideoInfo;
     };
 }
 

@@ -18,9 +18,13 @@ namespace Instagram
         virtual MediaType getType() const;
         virtual std::string getFilter() const;
         virtual std::vector<std::string> getTags() const;
+        virtual ImagesPtr getImages() const;
+        virtual VideosPtr getVideos() const;
 
     private:
         const MediaInfo mInfo;
+        const ImagesPtr mImages;
+        const VideosPtr mVideos;
     };
 
     MediaPtr CreateMedia(const MediaInfo& mediaInfo);

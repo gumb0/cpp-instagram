@@ -16,18 +16,22 @@
     <ClCompile Include="..\src\CurlImpl.cpp" />
     <ClCompile Include="..\src\CurlInitializer.cpp" />
     <ClCompile Include="..\src\ExceptionHelpers.cpp" />
+    <ClCompile Include="..\src\ImagesImpl.cpp" />
     <ClCompile Include="..\src\MediaImpl.cpp" />
     <ClCompile Include="..\src\ServerResponse.cpp" />
     <ClCompile Include="..\src\UrlBuilder.cpp" />
     <ClCompile Include="..\src\UserImpl.cpp" />
+    <ClCompile Include="..\src\VideosImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\cpp-instagram\AuthenticatedClient.h" />
     <ClInclude Include="..\include\cpp-instagram\Client.h" />
     <ClInclude Include="..\include\cpp-instagram\Exception.h" />
+    <ClInclude Include="..\include\cpp-instagram\Images.h" />
     <ClInclude Include="..\include\cpp-instagram\Media.h" />
     <ClInclude Include="..\include\cpp-instagram\NonCopyable.h" />
     <ClInclude Include="..\include\cpp-instagram\User.h" />
+    <ClInclude Include="..\include\cpp-instagram\Videos.h" />
     <ClInclude Include="..\src\ApiUrls.h" />
     <ClInclude Include="..\src\ClientImpl.h" />
     <ClInclude Include="..\src\Curl.h" />
@@ -36,12 +40,14 @@
     <ClInclude Include="..\src\CurlImpl.h" />
     <ClInclude Include="..\src\CurlInitializer.h" />
     <ClInclude Include="..\src\ExceptionHelpers.h" />
+    <ClInclude Include="..\src\ImagesImpl.h" />
     <ClInclude Include="..\src\MediaImpl.h" />
     <ClInclude Include="..\src\MediaInfo.h" />
     <ClInclude Include="..\src\ServerResponse.h" />
     <ClInclude Include="..\src\UrlBuilder.h" />
     <ClInclude Include="..\src\UserImpl.h" />
     <ClInclude Include="..\src\UserInfo.h" />
+    <ClInclude Include="..\src\VideosImpl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9EAC0142-2C53-41E7-B4C1-6D2DA3129C55}</ProjectGuid>

@@ -122,21 +122,21 @@ namespace
         return tags;
     }
 
-    ImageInfoPtr parseImage(const Json::Value& value)
+    MediaDataPtr parseMediaData(const Json::Value& value)
     {
-        ImageInfoPtr imageInfo(new ImageInfo);
-        imageInfo->mWidth = getSubvalue(value, JSON_KEY_WIDTH).asInt();
-        imageInfo->mHeight = getSubvalue(value, JSON_KEY_HEIGHT).asInt();
-        imageInfo->mUrl = getSubvalue(value, JSON_KEY_URL).asString();
-        return imageInfo;
+        MediaDataPtr mediaData(new MediaData);
+        mediaData->mWidth = getSubvalue(value, JSON_KEY_WIDTH).asInt();
+        mediaData->mHeight = getSubvalue(value, JSON_KEY_HEIGHT).asInt();
+        mediaData->mUrl = getSubvalue(value, JSON_KEY_URL).asString();
+        return mediaData;
     }
 
-    ImageInfosPtr parseImages(const Json::Value& value)
+    ImageInfoPtr parseImages(const Json::Value& value)
     {
-        ImageInfosPtr imageInfos(new ImageInfos);
-        imageInfos->mLowResolution = parseImage(getSubvalue(value, JSON_KEY_LOW_RESOLUTION));
-        imageInfos->mStandardResolution = parseImage(getSubvalue(value, JSON_KEY_STANDARD_RESOLUTION));
-        imageInfos->mThumbnail = parseImage(getSubvalue(value, JSON_KEY_THUMBNAIL));
+        ImageInfoPtr imageInfos(new ImageInfo);
+        imageInfos->mLowResolution = parseMediaData(getSubvalue(value, JSON_KEY_LOW_RESOLUTION));
+        imageInfos->mStandardResolution = parseMediaData(getSubvalue(value, JSON_KEY_STANDARD_RESOLUTION));
+        imageInfos->mThumbnail = parseMediaData(getSubvalue(value, JSON_KEY_THUMBNAIL));
         return imageInfos;
     }
 }
@@ -199,7 +199,7 @@ MediaInfo ServerResponse::parseMedia(const Json::Value& value)
 
     if (mediaInfo.mType == MediaType::Image)
     {
-        mediaInfo.mImageInfos = parseImages(getSubvalue(value, JSON_KEY_IMAGES));
+        mediaInfo.mImageInfo = parseImages(getSubvalue(value, JSON_KEY_IMAGES));
     }
 
     return mediaInfo;

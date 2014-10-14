@@ -7,7 +7,7 @@ using namespace Instagram;
 namespace
 {
     const std::pair<ErrorCode, const char*> CODE_MESSAGE_PAIRS[] = 
-    { 
+    {
         { CURL_GLOBAL_INIT_FAILED, "curl_global_init() failed." },
         { CURL_EASY_INIT_FAILED, "curl_easy_init() failed." },
         { CURL_SETTING_URL_FAILED, "Setting URL to curl failed." },
@@ -20,6 +20,7 @@ namespace
         { RESPONSE_CONTAINS_SERVER_ERROR, "Server returned error: " },
         { USER_JSON_KEY_NOT_FOUND, "Key not found in JSON data: " },
         { UNKNOWN_MEDIA_TYPE, "Unknown media type." },
+        { GET_VIDEOS_FROM_NOT_VIDEO_MEDIA, "Getting videos from media not of video type." }
     };
 
     const int CODE_MESSAGE_PAIRS_SIZE = sizeof(CODE_MESSAGE_PAIRS) / sizeof(CODE_MESSAGE_PAIRS[0]);

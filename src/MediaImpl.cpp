@@ -1,8 +1,14 @@
+#include "ExceptionHelpers.h"
+#include "ImagesImpl.h"
 #include "MediaImpl.h"
+#include "VideosImpl.h"
 
 using namespace Instagram;
 
-MediaImpl::MediaImpl(const MediaInfo& mediaInfo) : mInfo(mediaInfo)
+MediaImpl::MediaImpl(const MediaInfo& mediaInfo) : 
+    mInfo(mediaInfo), 
+    mImages(new ImagesImpl(*mediaInfo.mImageInfo)),
+    mVideos(mediaInfo.mType == MediaType::Video ? new VideosImpl(*mediaInfo.mVideoInfo) : nullptr)
 {
 }
 
@@ -39,6 +45,19 @@ std::string MediaImpl::getFilter() const
 std::vector<std::string> MediaImpl::getTags() const
 {
     return mInfo.mTags;
+}
+
+ImagesPtr MediaImpl::getImages() const
+{
+    return mImages;
+}
+
+VideosPtr MediaImpl::getVideos() const
+{
+    if (mInfo.mType != MediaType::Video)
+        Throw(GET_VIDEOS_FROM_NOT_VIDEO_MEDIA);
+
+    return mVideos;
 }
 
 MediaPtr Instagram::CreateMedia(const MediaInfo& mediaInfo)

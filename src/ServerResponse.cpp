@@ -30,8 +30,10 @@ namespace
     const char* JSON_KEY_FILTER = "filter";
     const char* JSON_KEY_TAGS = "tags";
     const char* JSON_KEY_IMAGES = "images";
+    const char* JSON_KEY_VIDEOS = "videos";
     const char* JSON_KEY_LOW_RESOLUTION = "low_resolution";
     const char* JSON_KEY_STANDARD_RESOLUTION = "standard_resolution";
+    const char* JSON_KEY_LOW_BANDWIDTH = "low_bandwidth";
     const char* JSON_KEY_THUMBNAIL = "thumbnail";
     const char* JSON_KEY_WIDTH = "width";
     const char* JSON_KEY_HEIGHT = "height";
@@ -106,7 +108,7 @@ namespace
             mediaType = MediaType::Video;
         else
             Throw(UNKNOWN_MEDIA_TYPE);
-    
+
         return mediaType;
     }
 
@@ -131,13 +133,27 @@ namespace
         return mediaData;
     }
 
+    MediaDataInfoPtr parseMediaDataSubvalue(const Json::Value& value, const char* key)
+    {
+        return parseMediaData(getSubvalue(value, key));
+    }
+
     ImageInfoPtr parseImages(const Json::Value& value)
     {
         ImageInfoPtr imageInfos(new ImageInfo);
-        imageInfos->mLowResolution = parseMediaData(getSubvalue(value, JSON_KEY_LOW_RESOLUTION));
-        imageInfos->mStandardResolution = parseMediaData(getSubvalue(value, JSON_KEY_STANDARD_RESOLUTION));
-        imageInfos->mThumbnail = parseMediaData(getSubvalue(value, JSON_KEY_THUMBNAIL));
+        imageInfos->mLowResolution = parseMediaDataSubvalue(value, JSON_KEY_LOW_RESOLUTION);
+        imageInfos->mStandardResolution = parseMediaDataSubvalue(value, JSON_KEY_STANDARD_RESOLUTION);
+        imageInfos->mThumbnail = parseMediaDataSubvalue(value, JSON_KEY_THUMBNAIL);
         return imageInfos;
+    }
+
+    VideoInfoPtr parseVideos(const Json::Value& value)
+    {
+        VideoInfoPtr videoInfo(new VideoInfo);
+        videoInfo->mLowBandwidth = parseMediaDataSubvalue(value, JSON_KEY_LOW_BANDWIDTH);
+        videoInfo->mLowResolution = parseMediaDataSubvalue(value, JSON_KEY_LOW_RESOLUTION);
+        videoInfo->mStandardResolution = parseMediaDataSubvalue(value, JSON_KEY_STANDARD_RESOLUTION);
+        return videoInfo;
     }
 }
 
@@ -196,11 +212,9 @@ MediaInfo ServerResponse::parseMedia(const Json::Value& value)
     mediaInfo.mType = parseMediaType(getSubvalue(value, JSON_KEY_TYPE));
     mediaInfo.mFilter = getSubvalue(value, JSON_KEY_FILTER).asString();
     mediaInfo.mTags = parseTags(getSubvalue(value, JSON_KEY_TAGS));
-
-    if (mediaInfo.mType == MediaType::Image)
-    {
-        mediaInfo.mImageInfo = parseImages(getSubvalue(value, JSON_KEY_IMAGES));
-    }
+    mediaInfo.mImageInfo = parseImages(getSubvalue(value, JSON_KEY_IMAGES));
+    if (mediaInfo.mType == MediaType::Video)
+        mediaInfo.mVideoInfo = parseVideos(getSubvalue(value, JSON_KEY_VIDEOS));
 
     return mediaInfo;
 }

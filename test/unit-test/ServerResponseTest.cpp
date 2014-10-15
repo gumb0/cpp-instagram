@@ -148,6 +148,11 @@ class ParsingFeedResponseTest : public Test
             },
             {
                 "videos": {
+                    "low_bandwidth": {
+                        "url": "http://distilleryvesper9-13.ak.instagram.com/090d06dad9cd11e2aa0912313817975d_103.mp4",
+                        "width": 480,
+                        "height": 480
+                    },
                     "low_resolution": {
                         "url": "http://distilleryvesper9-13.ak.instagram.com/090d06dad9cd11e2aa0912313817975d_102.mp4",
                         "width": 480,
@@ -321,7 +326,27 @@ TEST_F(ParsingFeedResponseTest, ParsesThumbnail)
     ASSERT_THAT(medias[0].mImageInfo->mThumbnail, NotNull());
 }
 
-// TODO images/video, location, user
+TEST_F(ParsingFeedResponseTest, ParsesVideos)
+{
+    ASSERT_THAT(medias[1].mVideoInfo, NotNull());
+}
+
+TEST_F(ParsingFeedResponseTest, ParsesLowBandwidthVideo)
+{
+    ASSERT_THAT(medias[1].mVideoInfo->mLowBandwidth, NotNull());
+}
+
+TEST_F(ParsingFeedResponseTest, ParsesLowResolutionVideo)
+{
+    ASSERT_THAT(medias[1].mVideoInfo->mLowResolution, NotNull());
+}
+
+TEST_F(ParsingFeedResponseTest, ParsesStandardResolutionVideo)
+{
+    ASSERT_THAT(medias[1].mVideoInfo->mStandardResolution, NotNull());
+}
+
+// TODO location, user
 
 TEST(ParsingIncorrectFeedResponseTest, ThrowsIfJsonHasNoId)
 {

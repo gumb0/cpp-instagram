@@ -1,8 +1,8 @@
 #ifndef CPP_INSTAGRAM_IMPL_IMAGES_IMPL_H
 #define CPP_INSTAGRAM_IMPL_IMAGES_IMPL_H
 
+#include "ImageInfo.h"
 #include "Images.h"
-#include "MediaInfo.h"
 
 namespace Instagram
 {

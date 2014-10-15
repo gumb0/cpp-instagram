@@ -1,8 +1,8 @@
 #ifndef CPP_INSTAGRAM_IMPL_VIDEOS_IMPL_H
 #define CPP_INSTAGRAM_IMPL_VIDEOS_IMPL_H
 
-#include "Images.h"
-#include "MediaInfo.h"
+#include "VideoInfo.h"
+#include "Videos.h"
 
 namespace Instagram
 {

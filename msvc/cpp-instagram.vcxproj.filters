@@ -117,6 +117,15 @@
     <ClInclude Include="..\src\MediaDataImpl.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\ImageInfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MediaDataInfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\VideoInfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">

@@ -42,14 +42,17 @@
     <ClInclude Include="..\src\CurlImpl.h" />
     <ClInclude Include="..\src\CurlInitializer.h" />
     <ClInclude Include="..\src\ExceptionHelpers.h" />
+    <ClInclude Include="..\src\ImageInfo.h" />
     <ClInclude Include="..\src\ImagesImpl.h" />
     <ClInclude Include="..\src\MediaDataImpl.h" />
+    <ClInclude Include="..\src\MediaDataInfo.h" />
     <ClInclude Include="..\src\MediaImpl.h" />
     <ClInclude Include="..\src\MediaInfo.h" />
     <ClInclude Include="..\src\ServerResponse.h" />
     <ClInclude Include="..\src\UrlBuilder.h" />
     <ClInclude Include="..\src\UserImpl.h" />
     <ClInclude Include="..\src\UserInfo.h" />
+    <ClInclude Include="..\src\VideoInfo.h" />
     <ClInclude Include="..\src\VideosImpl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

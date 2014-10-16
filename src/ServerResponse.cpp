@@ -42,6 +42,7 @@ namespace
     const char* JSON_KEY_LATITUDE = "latitude";
     const char* JSON_KEY_LONGITUDE = "longitude";
     const char* JSON_KEY_NAME = "name";
+    const char* JSON_KEY_USER = "user";
 
     const char* MEDIA_TYPE_IMAGE = "image";
     const char* MEDIA_TYPE_VIDEO = "video";
@@ -179,6 +180,11 @@ namespace
         locationInfo->mName = parseOptionalStringSubvalue(value, JSON_KEY_NAME);
         return locationInfo;
     }
+
+    std::string parseMediaUser(const Json::Value& value)
+    {
+        return getSubvalue(value, JSON_KEY_ID).asString();
+    }
 }
 
 ServerResponse::ServerResponse(const std::string& response) : mData(getData(response))
@@ -240,6 +246,7 @@ MediaInfo ServerResponse::parseMedia(const Json::Value& value)
     if (mediaInfo.mType == MediaType::Video)
         mediaInfo.mVideoInfo = parseVideos(getSubvalue(value, JSON_KEY_VIDEOS));
     mediaInfo.mLocationInfo = parseLocation(getOptionalSubvalue(value, JSON_KEY_LOCATION));
+    mediaInfo.mUserId = parseMediaUser(getSubvalue(value, JSON_KEY_USER));
 
     return mediaInfo;
 }

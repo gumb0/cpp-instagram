@@ -405,7 +405,10 @@ TEST_F(ParsingFeedResponseTest, ReturnsEmptyNameIfNotReturned)
     ASSERT_THAT(medias[2].mLocationInfo->mName, StrEq(""));
 }
 
-// TODO user
+TEST_F(ParsingFeedResponseTest, ParsesUserId)
+{
+    ASSERT_THAT(medias[0].mUserId, StrEq("3"));
+}
 
 TEST(ParsingIncorrectFeedResponseTest, ThrowsIfJsonHasNoId)
 {

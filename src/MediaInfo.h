@@ -17,6 +17,7 @@ namespace Instagram
         std::string mCreatedTime;
         MediaType mType;
         std::string mFilter;
+        std::string mUserId;
         std::vector<std::string> mTags;
         ImageInfoPtr mImageInfo;
         VideoInfoPtr mVideoInfo;

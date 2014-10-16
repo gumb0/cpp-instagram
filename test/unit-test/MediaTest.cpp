@@ -46,7 +46,7 @@ class MediaTest : public Test
 {
     virtual void SetUp()
     {
-        mediaInfo = { "id", "link", "caption", "creation time", MediaType::Image, "filter" };
+        mediaInfo = { "id", "link", "caption", "creation time", MediaType::Image, "filter", "user_id" };
         mediaInfo.mTags = std::vector<std::string>{ "tag1", "tag2" };
         mediaInfo.mImageInfo = CreateImageInfo();
         mediaInfo.mLocationInfo = CreateLocationInfo();
@@ -87,6 +87,11 @@ TEST_F(MediaTest, getsFilter)
 TEST_F(MediaTest, getsId)
 {
     ASSERT_THAT(media->getId(), StrEq(mediaInfo.mId));
+}
+
+TEST_F(MediaTest, getsUserId)
+{
+    ASSERT_THAT(media->getUserId(), StrEq(mediaInfo.mUserId));
 }
 
 TEST_F(MediaTest, getsTags)

@@ -17,6 +17,7 @@ namespace Instagram
         virtual std::string getCreatedTime() const;
         virtual MediaType getType() const;
         virtual std::string getFilter() const;
+        virtual std::string getUserId() const;
         virtual std::vector<std::string> getTags() const;
         virtual ImagesPtr getImages() const;
         virtual VideosPtr getVideos() const;

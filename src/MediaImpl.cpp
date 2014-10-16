@@ -44,6 +44,11 @@ std::string MediaImpl::getFilter() const
     return mInfo.mFilter;
 }
 
+std::string MediaImpl::getUserId() const
+{
+    return mInfo.mUserId;
+}
+
 std::vector<std::string> MediaImpl::getTags() const
 {
     return mInfo.mTags;

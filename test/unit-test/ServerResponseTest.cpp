@@ -375,7 +375,7 @@ TEST_F(ParsingFeedResponseTest, ReturnsNullIfNoLocation)
     ASSERT_THAT(medias[1].mLocationInfo, IsNull());
 }
 
-TEST_F(ParsingFeedResponseTest, ReturnsLocationId)
+TEST_F(ParsingFeedResponseTest, ParsesLocationId)
 {
     ASSERT_THAT(medias[0].mLocationInfo->mId, StrEq("833"));
 }
@@ -385,17 +385,17 @@ TEST_F(ParsingFeedResponseTest, ReturnsEmptyLocationIdIfNotReturned)
     ASSERT_THAT(medias[2].mLocationInfo->mId, StrEq(""));
 }
 
-TEST_F(ParsingFeedResponseTest, ReturnsLocationLat)
+TEST_F(ParsingFeedResponseTest, ParsesLocationLat)
 {
     ASSERT_THAT(medias[0].mLocationInfo->mLatitude, DoubleEq(37.77956816727314));
 }
 
-TEST_F(ParsingFeedResponseTest, ReturnsLocationLon)
+TEST_F(ParsingFeedResponseTest, ParsesLocationLon)
 {
     ASSERT_THAT(medias[0].mLocationInfo->mLongitude, DoubleEq(-122.41387367248539));
 }
 
-TEST_F(ParsingFeedResponseTest, ReturnsLocationName)
+TEST_F(ParsingFeedResponseTest, ParsesLocationName)
 {
     ASSERT_THAT(medias[0].mLocationInfo->mName, StrEq("Civic Center BART"));
 }

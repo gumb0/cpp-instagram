@@ -20,7 +20,7 @@ namespace Instagram
         std::vector<std::string> mTags;
         ImageInfoPtr mImageInfo;
         VideoInfoPtr mVideoInfo;
-        LocationInfoPtr mLocation;
+        LocationInfoPtr mLocationInfo;
     };
 }
 

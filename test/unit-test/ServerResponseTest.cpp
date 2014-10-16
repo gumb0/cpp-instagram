@@ -348,32 +348,32 @@ TEST_F(ParsingFeedResponseTest, ParsesStandardResolutionVideo)
 
 TEST_F(ParsingFeedResponseTest, ParsesLocation)
 {
-    ASSERT_THAT(medias[0].mLocation, NotNull());
+    ASSERT_THAT(medias[0].mLocationInfo, NotNull());
 }
 
 TEST_F(ParsingFeedResponseTest, ReturnsNullIfNoLocation)
 {
-    ASSERT_THAT(medias[1].mLocation, IsNull());
+    ASSERT_THAT(medias[1].mLocationInfo, IsNull());
 }
 
 TEST_F(ParsingFeedResponseTest, ReturnsLocationId)
 {
-    ASSERT_THAT(medias[0].mLocation->mId, StrEq("833"));
+    ASSERT_THAT(medias[0].mLocationInfo->mId, StrEq("833"));
 }
 
 TEST_F(ParsingFeedResponseTest, ReturnsLocationLat)
 {
-    ASSERT_THAT(medias[0].mLocation->mLatitude, DoubleEq(37.77956816727314));
+    ASSERT_THAT(medias[0].mLocationInfo->mLatitude, DoubleEq(37.77956816727314));
 }
 
 TEST_F(ParsingFeedResponseTest, ReturnsLocationLon)
 {
-    ASSERT_THAT(medias[0].mLocation->mLongitude, DoubleEq(-122.41387367248539));
+    ASSERT_THAT(medias[0].mLocationInfo->mLongitude, DoubleEq(-122.41387367248539));
 }
 
 TEST_F(ParsingFeedResponseTest, ReturnsLocationName)
 {
-    ASSERT_THAT(medias[0].mLocation->mName, StrEq("Civic Center BART"));
+    ASSERT_THAT(medias[0].mLocationInfo->mName, StrEq("Civic Center BART"));
 }
 
 // TODO user

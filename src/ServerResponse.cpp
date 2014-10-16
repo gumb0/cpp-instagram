@@ -232,7 +232,7 @@ MediaInfo ServerResponse::parseMedia(const Json::Value& value)
     mediaInfo.mImageInfo = parseImages(getSubvalue(value, JSON_KEY_IMAGES));
     if (mediaInfo.mType == MediaType::Video)
         mediaInfo.mVideoInfo = parseVideos(getSubvalue(value, JSON_KEY_VIDEOS));
-    mediaInfo.mLocation = parseLocation(getOptionalSubvalue(value, JSON_KEY_LOCATION));
+    mediaInfo.mLocationInfo = parseLocation(getOptionalSubvalue(value, JSON_KEY_LOCATION));
 
     return mediaInfo;
 }

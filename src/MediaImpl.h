@@ -20,11 +20,13 @@ namespace Instagram
         virtual std::vector<std::string> getTags() const;
         virtual ImagesPtr getImages() const;
         virtual VideosPtr getVideos() const;
+        virtual LocationPtr getLocation() const;
 
     private:
         const MediaInfo mInfo;
         const ImagesPtr mImages;
         const VideosPtr mVideos;
+        const LocationPtr mLocation;
     };
 
     MediaPtr CreateMediaImpl(const MediaInfo& mediaInfo);

@@ -1,5 +1,6 @@
 #include "Exception.h"
 #include "ImagesImpl.h"
+#include "LocationImpl.h"
 #include "MediaDataImpl.h"
 #include "MediaImpl.h"
 #include "VideosImpl.h"
@@ -18,7 +19,6 @@ namespace
         imageInfo->mLowResolution.reset(new MediaDataInfo);
         imageInfo->mStandardResolution.reset(new MediaDataInfo);
         imageInfo->mThumbnail.reset(new MediaDataInfo);
-        
         return imageInfo;
     }
 
@@ -28,8 +28,17 @@ namespace
         videoInfo->mLowResolution.reset(new MediaDataInfo);
         videoInfo->mStandardResolution.reset(new MediaDataInfo);
         videoInfo->mLowBandwidth.reset(new MediaDataInfo);
-
         return videoInfo;
+    }
+
+    LocationInfoPtr CreateLocationInfo()
+    {
+        LocationInfoPtr locationInfo(new LocationInfo);
+        locationInfo->mId = "loc_id";
+        locationInfo->mLatitude = -37;
+        locationInfo->mLongitude = 120;
+        locationInfo->mName = "loc_name";
+        return locationInfo;
     }
 }
 
@@ -40,6 +49,7 @@ class MediaTest : public Test
         mediaInfo = { "id", "link", "caption", "creation time", MediaType::Image, "filter" };
         mediaInfo.mTags = std::vector<std::string>{ "tag1", "tag2" };
         mediaInfo.mImageInfo = CreateImageInfo();
+        mediaInfo.mLocationInfo = CreateLocationInfo();
 
         media = CreateMediaImpl(mediaInfo);
     }
@@ -82,6 +92,11 @@ TEST_F(MediaTest, getsId)
 TEST_F(MediaTest, getsTags)
 {
     ASSERT_THAT(media->getTags(), ElementsAreArray(mediaInfo.mTags));
+}
+
+TEST_F(MediaTest, getsLocation)
+{
+    ASSERT_THAT(media->getLocation(), NotNull());
 }
 
 class ImageMediaTest : public Test
@@ -220,4 +235,38 @@ TEST_F(VideosTest, getsLowResolutionVideo)
 TEST_F(VideosTest, getsStandardResolutionVideo)
 {
     ASSERT_THAT(videos->getStandardResolution(), NotNull());
+}
+
+
+class LocationTest : public Test
+{
+    virtual void SetUp()
+    {
+        info = CreateLocationInfo();
+        location = CreateLocationImpl(info);
+    }
+
+protected:
+    LocationInfoPtr info;
+    LocationPtr location;
+};
+
+TEST_F(LocationTest, getsId)
+{
+    ASSERT_THAT(location->getId(), StrEq(info->mId));
+}
+
+TEST_F(LocationTest, getsLat)
+{
+    ASSERT_THAT(location->getLatitude(), DoubleEq(info->mLatitude));
+}
+
+TEST_F(LocationTest, getsLon)
+{
+    ASSERT_THAT(location->getLongitude(), DoubleEq(info->mLongitude));
+}
+
+TEST_F(LocationTest, getsName)
+{
+    ASSERT_THAT(location->getName(), StrEq(info->mName));
 }

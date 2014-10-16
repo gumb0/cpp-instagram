@@ -2,6 +2,7 @@
 #define CPP_INSTAGRAM_MEDIA_H
 
 #include "Images.h"
+#include "Location.h"
 #include "NonCopyable.h"
 #include "Videos.h"
 
@@ -30,6 +31,8 @@ namespace Instagram
         virtual ImagesPtr getImages() const = 0;
         // throws if trying to get video of media with type != MediaType::Video
         virtual VideosPtr getVideos() const = 0;
+        // returns null pointer if location is not set
+        virtual LocationPtr getLocation() const = 0;
     };
 
     typedef std::shared_ptr<Media> MediaPtr;

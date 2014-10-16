@@ -37,6 +37,9 @@
     <ClCompile Include="..\src\MediaDataImpl.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\LocationImpl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\cpp-instagram\Client.h">
@@ -127,6 +130,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LocationInfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cpp-instagram\Location.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LocationImpl.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

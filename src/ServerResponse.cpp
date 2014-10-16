@@ -160,16 +160,23 @@ namespace
         return videoInfo;
     }
 
+    std::string parseOptionalStringSubvalue(const Json::Value& value, const char* key)
+    {
+        const Json::Value& subvalue = getOptionalSubvalue(value, key);
+
+        return subvalue.empty() ? std::string() : subvalue.asString();
+    }
+ 
     LocationInfoPtr parseLocation(const Json::Value& value)
     {
         if (value.empty())
             return LocationInfoPtr();
 
         LocationInfoPtr locationInfo(new LocationInfo);
-        locationInfo->mId = getSubvalue(value, JSON_KEY_ID).asString();
+        locationInfo->mId = parseOptionalStringSubvalue(value, JSON_KEY_ID);
         locationInfo->mLatitude = getSubvalue(value, JSON_KEY_LATITUDE).asDouble();
         locationInfo->mLongitude = getSubvalue(value, JSON_KEY_LONGITUDE).asDouble();
-        locationInfo->mName = getSubvalue(value, JSON_KEY_NAME).asString();
+        locationInfo->mName = parseOptionalStringSubvalue(value, JSON_KEY_NAME);
         return locationInfo;
     }
 }

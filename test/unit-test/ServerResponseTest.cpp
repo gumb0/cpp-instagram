@@ -230,7 +230,26 @@ class ParsingFeedResponseTest : public Test
                     "id": "3"
                 },
                 "location": null
-            } ] })";
+            },
+            { 
+                "tags":[],
+                "type":"image",
+                "location": {"latitude": 51.919455, "longitude": 4.481111667 },
+                "comments": { "count": 0, "data" : [] }, 
+                "filter":"Normal",
+                "created_time":"1413402734",
+                "link":"http:\/\/instagram.com\/p\/uL4AtZokHI\/",
+                "likes" : { "count": 0, "data" : [] }, 
+                "images": { 
+                        "low_resolution":{"url":"http:\/\/scontent-a.cdninstagram.com\/hphotos-xfa1\/t51.2885-15\/10724027_310739932447060_230232520_a.jpg","width":306,"height":306},
+                        "thumbnail":{"url":"http:\/\/scontent-a.cdninstagram.com\/hphotos-xfa1\/t51.2885-15\/10724027_310739932447060_230232520_s.jpg","width":150,"height":150},
+                        "standard_resolution":{"url":"http:\/\/scontent-a.cdninstagram.com\/hphotos-xfa1\/t51.2885-15\/10724027_310739932447060_230232520_n.jpg","width":640,"height":640}},
+                "users_in_photo" : [], 
+                "caption": null,
+                "user_has_liked":false,
+                "id":"832004895533056456_219872191",
+                "user":{"username":"love_aesthetics","website":"","profile_picture":"http:\/\/images.ak.instagram.com\/profiles\/profile_219872191_75sq_1389476691.jpg","full_name":"Ivania Carpio","bio":"","id":"219872191"}
+           } ] })";
 
         ServerResponse response(json);
 
@@ -243,7 +262,7 @@ protected:
 
 TEST_F(ParsingFeedResponseTest, ParsesAllItems)
 {
-    ASSERT_THAT(medias, SizeIs(2));
+    ASSERT_THAT(medias, SizeIs(3));
 }
 
 TEST_F(ParsingFeedResponseTest, ParsesLink)
@@ -361,6 +380,11 @@ TEST_F(ParsingFeedResponseTest, ReturnsLocationId)
     ASSERT_THAT(medias[0].mLocationInfo->mId, StrEq("833"));
 }
 
+TEST_F(ParsingFeedResponseTest, ReturnsEmptyLocationIdIfNotReturned)
+{
+    ASSERT_THAT(medias[2].mLocationInfo->mId, StrEq(""));
+}
+
 TEST_F(ParsingFeedResponseTest, ReturnsLocationLat)
 {
     ASSERT_THAT(medias[0].mLocationInfo->mLatitude, DoubleEq(37.77956816727314));
@@ -374,6 +398,11 @@ TEST_F(ParsingFeedResponseTest, ReturnsLocationLon)
 TEST_F(ParsingFeedResponseTest, ReturnsLocationName)
 {
     ASSERT_THAT(medias[0].mLocationInfo->mName, StrEq("Civic Center BART"));
+}
+
+TEST_F(ParsingFeedResponseTest, ReturnsEmptyNameIfNotReturned)
+{
+    ASSERT_THAT(medias[2].mLocationInfo->mName, StrEq(""));
 }
 
 // TODO user

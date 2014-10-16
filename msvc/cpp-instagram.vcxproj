@@ -44,6 +44,7 @@
     <ClInclude Include="..\src\ExceptionHelpers.h" />
     <ClInclude Include="..\src\ImageInfo.h" />
     <ClInclude Include="..\src\ImagesImpl.h" />
+    <ClInclude Include="..\src\LocationInfo.h" />
     <ClInclude Include="..\src\MediaDataImpl.h" />
     <ClInclude Include="..\src\MediaDataInfo.h" />
     <ClInclude Include="..\src\MediaImpl.h" />

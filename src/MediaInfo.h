@@ -2,6 +2,7 @@
 #define CPP_INSTAGRAM_IMPL_MEDIA_INFO_H
 
 #include "ImageInfo.h"
+#include "LocationInfo.h"
 #include "VideoInfo.h"
 
 #include <vector>
@@ -19,6 +20,7 @@ namespace Instagram
         std::vector<std::string> mTags;
         ImageInfoPtr mImageInfo;
         VideoInfoPtr mVideoInfo;
+        LocationInfoPtr mLocation;
     };
 }
 

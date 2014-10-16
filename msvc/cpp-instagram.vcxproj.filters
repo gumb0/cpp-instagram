@@ -126,6 +126,9 @@
     <ClInclude Include="..\src\VideoInfo.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\LocationInfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">

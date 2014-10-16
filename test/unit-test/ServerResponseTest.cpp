@@ -346,7 +346,37 @@ TEST_F(ParsingFeedResponseTest, ParsesStandardResolutionVideo)
     ASSERT_THAT(medias[1].mVideoInfo->mStandardResolution, NotNull());
 }
 
-// TODO location, user
+TEST_F(ParsingFeedResponseTest, ParsesLocation)
+{
+    ASSERT_THAT(medias[0].mLocation, NotNull());
+}
+
+TEST_F(ParsingFeedResponseTest, ReturnsNullIfNoLocation)
+{
+    ASSERT_THAT(medias[1].mLocation, IsNull());
+}
+
+TEST_F(ParsingFeedResponseTest, ReturnsLocationId)
+{
+    ASSERT_THAT(medias[0].mLocation->mId, StrEq("833"));
+}
+
+TEST_F(ParsingFeedResponseTest, ReturnsLocationLat)
+{
+    ASSERT_THAT(medias[0].mLocation->mLatitude, DoubleEq(37.77956816727314));
+}
+
+TEST_F(ParsingFeedResponseTest, ReturnsLocationLon)
+{
+    ASSERT_THAT(medias[0].mLocation->mLongitude, DoubleEq(-122.41387367248539));
+}
+
+TEST_F(ParsingFeedResponseTest, ReturnsLocationName)
+{
+    ASSERT_THAT(medias[0].mLocation->mName, StrEq("Civic Center BART"));
+}
+
+// TODO user
 
 TEST(ParsingIncorrectFeedResponseTest, ThrowsIfJsonHasNoId)
 {

@@ -38,6 +38,10 @@ namespace
     const char* JSON_KEY_WIDTH = "width";
     const char* JSON_KEY_HEIGHT = "height";
     const char* JSON_KEY_URL = "url";
+    const char* JSON_KEY_LOCATION = "location";
+    const char* JSON_KEY_LATITUDE = "latitude";
+    const char* JSON_KEY_LONGITUDE = "longitude";
+    const char* JSON_KEY_NAME = "name";
 
     const char* MEDIA_TYPE_IMAGE = "image";
     const char* MEDIA_TYPE_VIDEO = "video";
@@ -155,6 +159,19 @@ namespace
         videoInfo->mStandardResolution = parseMediaDataSubvalue(value, JSON_KEY_STANDARD_RESOLUTION);
         return videoInfo;
     }
+
+    LocationInfoPtr parseLocation(const Json::Value& value)
+    {
+        if (value.empty())
+            return LocationInfoPtr();
+
+        LocationInfoPtr locationInfo(new LocationInfo);
+        locationInfo->mId = getSubvalue(value, JSON_KEY_ID).asString();
+        locationInfo->mLatitude = getSubvalue(value, JSON_KEY_LATITUDE).asDouble();
+        locationInfo->mLongitude = getSubvalue(value, JSON_KEY_LONGITUDE).asDouble();
+        locationInfo->mName = getSubvalue(value, JSON_KEY_NAME).asString();
+        return locationInfo;
+    }
 }
 
 ServerResponse::ServerResponse(const std::string& response) : mData(getData(response))
@@ -215,6 +232,7 @@ MediaInfo ServerResponse::parseMedia(const Json::Value& value)
     mediaInfo.mImageInfo = parseImages(getSubvalue(value, JSON_KEY_IMAGES));
     if (mediaInfo.mType == MediaType::Video)
         mediaInfo.mVideoInfo = parseVideos(getSubvalue(value, JSON_KEY_VIDEOS));
+    mediaInfo.mLocation = parseLocation(getOptionalSubvalue(value, JSON_KEY_LOCATION));
 
     return mediaInfo;
 }

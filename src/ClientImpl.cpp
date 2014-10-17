@@ -4,6 +4,7 @@
 #include "ExceptionHelpers.h"
 #include "MediaImpl.h"
 #include "ServerResponse.h"
+#include "StdioApiImpl.h"
 #include "UserImpl.h"
 
 #include <algorithm>
@@ -15,7 +16,8 @@ namespace
     CurlPtr CreateCurl()
     {
         CurlApiPtr curlApi(new CurlApiImpl);
-        return CurlPtr(new CurlImpl(curlApi));
+        StdioApiPtr stdio(new StdioApiImpl);
+        return CurlPtr(new CurlImpl(curlApi, stdio));
     }
 }
 

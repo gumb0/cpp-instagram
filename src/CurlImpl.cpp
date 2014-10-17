@@ -1,6 +1,8 @@
 #include "CurlImpl.h"
 #include "ExceptionHelpers.h"
 
+#include <functional>
+
 using namespace Instagram;
 
 namespace
@@ -8,8 +10,9 @@ namespace
     const char* SSL_CERTIFICATE_PATH = "ca-bundle.crt";
 }
 
-CurlImpl::CurlImpl(CurlApiPtr curlApi) : 
+CurlImpl::CurlImpl(CurlApiPtr curlApi, StdioApiPtr stdio) :
     mCurlApi(curlApi),
+    mStdio(stdio),
     mHandle(mCurlApi->curl_easy_init())
 {
     if (!mHandle)
@@ -74,4 +77,25 @@ void CurlImpl::perform()
 {
     if (CURLcode result = mCurlApi->curl_easy_perform(mHandle))
         ThrowCurl(CURL_PERFORM_FAILED, result);
+}
+
+void CurlImpl::download(const std::string& url, const std::string& localPath)
+{
+    setUrl(url);
+    setGetMethod();
+
+    std::shared_ptr<FILE> file(mStdio->openFileForWrite(localPath), 
+        std::bind(&StdioApi::closeFile, mStdio, std::placeholders::_1));
+    setFileReceiveCallback(file);
+
+    perform();
+}
+
+void CurlImpl::setFileReceiveCallback(std::shared_ptr<FILE> file)
+{
+    if (CURLcode result = mCurlApi->curl_easy_setopt_func(mHandle, CURLOPT_WRITEFUNCTION, 0))
+        ThrowCurl(CURL_SETTING_WRITE_FUNCTION_FAILED, result);
+
+    if (CURLcode result = mCurlApi->curl_easy_setopt_ptr(mHandle, CURLOPT_WRITEDATA, file.get()))
+        ThrowCurl(CURL_SETTING_WRITE_DATA_FAILED, result);
 }

@@ -22,6 +22,7 @@ namespace Instagram
         USER_JSON_KEY_NOT_FOUND,
         UNKNOWN_MEDIA_TYPE,
         GET_VIDEOS_FROM_NOT_VIDEO_MEDIA,
+        FILE_OPEN_FOR_WRITE_FAILED
     };
 
     //////////////////////////////////////////////////////////////////////////

@@ -20,7 +20,8 @@ namespace
         { RESPONSE_CONTAINS_SERVER_ERROR, "Server returned error: " },
         { USER_JSON_KEY_NOT_FOUND, "Key not found in JSON data: " },
         { UNKNOWN_MEDIA_TYPE, "Unknown media type." },
-        { GET_VIDEOS_FROM_NOT_VIDEO_MEDIA, "Getting videos from media not of video type." }
+        { GET_VIDEOS_FROM_NOT_VIDEO_MEDIA, "Getting videos from media not of video type." },
+        { FILE_OPEN_FOR_WRITE_FAILED, "Failed to open file for write: " }
     };
 
     const int CODE_MESSAGE_PAIRS_SIZE = sizeof(CODE_MESSAGE_PAIRS) / sizeof(CODE_MESSAGE_PAIRS[0]);

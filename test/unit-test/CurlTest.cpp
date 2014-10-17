@@ -2,6 +2,7 @@
 #include "CurlInitializer.h"
 #include "Exception.h"
 #include "MockCurlApi.h"
+#include "MockStdioApi.h"
 
 #include <functional>
 #include <gmock/gmock.h>
@@ -37,7 +38,7 @@ TEST(CurlConstructTest, ThrowsIfEasyInitFails)
     EXPECT_CALL(*curlApi, curl_easy_init()).WillOnce(Return(static_cast<CURL*>(0)));
 
     CurlPtr curl;
-    ASSERT_THROW(curl.reset(new CurlImpl(curlApi)), Instagram::Exception);
+    ASSERT_THROW(curl.reset(new CurlImpl(curlApi, StdioApiPtr())), Instagram::Exception);
 }
 
 class CurlTest : public Test
@@ -48,10 +49,11 @@ protected:
         DefaultValue<CURLcode>::Set(CURLE_OK);
 
         curlApi.reset(new MockCurlApi);
+        stdio.reset(new MockStdioApi);
 
         EXPECT_CALL(*curlApi, curl_easy_init()).WillOnce(Return(handle));
 
-        curl.reset(new CurlImpl(curlApi));
+        curl.reset(new CurlImpl(curlApi, stdio));
     }
 
     virtual void TearDown()
@@ -66,6 +68,7 @@ protected:
     CURL* handle = reinterpret_cast<CURL*>(123);
 
     std::shared_ptr<MockCurlApi> curlApi;
+    std::shared_ptr<MockStdioApi> stdio;
     CurlPtr curl;
 };
 
@@ -102,6 +105,27 @@ TEST_F(CurlTest, PerformsGetRequest)
     ASSERT_THAT(callbackResult, Eq(strlen(response)));
 }
 
+TEST_F(CurlTest, PerformsDownload)
+{
+    std::string url = "http://example.com/example.jpg";
+    EXPECT_CALL(*curlApi, curl_easy_setopt_string(handle, CURLOPT_URL, StrEq(url)));
+    EXPECT_CALL(*curlApi, curl_easy_setopt_long(handle, CURLOPT_HTTPGET, 1));
+
+    EXPECT_CALL(*curlApi, curl_easy_setopt_func(handle, CURLOPT_WRITEFUNCTION, 0));
+
+    std::string path = "1.jpg";
+    FILE* file = reinterpret_cast<FILE*>(123);
+    EXPECT_CALL(*stdio, openFileForWrite(StrEq(path))).WillOnce(Return(file));
+
+    EXPECT_CALL(*curlApi, curl_easy_setopt_ptr(handle, CURLOPT_WRITEDATA, file));
+
+    EXPECT_CALL(*curlApi, curl_easy_perform(handle));
+
+    EXPECT_CALL(*stdio, closeFile(file));
+
+    curl->download(url, path);
+}
+
 class CurlErrorsTest : public Test
 {
 protected:
@@ -112,7 +136,7 @@ protected:
         curlApi.reset(new NiceMock<MockCurlApi>);
 
         EXPECT_CALL(*curlApi, curl_easy_init()).WillOnce(Return(reinterpret_cast<CURL*>(1)));
-        curl.reset(new CurlImpl(curlApi));
+        curl.reset(new CurlImpl(curlApi, StdioApiPtr(new MockStdioApi)));
     }
 
     virtual void TearDown()
@@ -165,4 +189,18 @@ TEST_F(CurlErrorsTest, ThrowsIfPerformFails)
     EXPECT_CALL(*curlApi, curl_easy_perform(_)).WillOnce(Return(CURLE_OUT_OF_MEMORY));
 
     ASSERT_THROW(curl->get(""), Instagram::Exception);
+}
+
+TEST_F(CurlErrorsTest, DownloadThrowsIfSetWriteFunctionFails)
+{
+    EXPECT_CALL(*curlApi, curl_easy_setopt_func(_, CURLOPT_WRITEFUNCTION, _)).WillOnce(Return(CURLE_OUT_OF_MEMORY));
+
+    ASSERT_THROW(curl->download("", ""), Instagram::Exception);
+}
+
+TEST_F(CurlErrorsTest, DownloadThrowsIfSetWriteDataFails)
+{
+    EXPECT_CALL(*curlApi, curl_easy_setopt_ptr(_, CURLOPT_WRITEDATA, _)).WillOnce(Return(CURLE_OUT_OF_MEMORY));
+
+    ASSERT_THROW(curl->download("", ""), Instagram::Exception);
 }

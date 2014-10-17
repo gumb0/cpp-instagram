@@ -22,6 +22,7 @@
   <ItemGroup>
     <ClInclude Include="MockCurl.h" />
     <ClInclude Include="MockCurlApi.h" />
+    <ClInclude Include="MockStdioApi.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\msvc\cpp-instagram.vcxproj">

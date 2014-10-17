@@ -12,5 +12,6 @@
   <ItemGroup>
     <ClInclude Include="MockCurlApi.h" />
     <ClInclude Include="MockCurl.h" />
+    <ClInclude Include="MockStdioApi.h" />
   </ItemGroup>
 </Project>

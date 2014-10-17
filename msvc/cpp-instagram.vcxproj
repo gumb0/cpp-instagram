@@ -21,6 +21,7 @@
     <ClCompile Include="..\src\MediaDataImpl.cpp" />
     <ClCompile Include="..\src\MediaImpl.cpp" />
     <ClCompile Include="..\src\ServerResponse.cpp" />
+    <ClCompile Include="..\src\StdioApiImpl.cpp" />
     <ClCompile Include="..\src\UrlBuilder.cpp" />
     <ClCompile Include="..\src\UserImpl.cpp" />
     <ClCompile Include="..\src\VideosImpl.cpp" />
@@ -53,6 +54,8 @@
     <ClInclude Include="..\src\MediaImpl.h" />
     <ClInclude Include="..\src\MediaInfo.h" />
     <ClInclude Include="..\src\ServerResponse.h" />
+    <ClInclude Include="..\src\StdioApi.h" />
+    <ClInclude Include="..\src\StdioApiImpl.h" />
     <ClInclude Include="..\src\UrlBuilder.h" />
     <ClInclude Include="..\src\UserImpl.h" />
     <ClInclude Include="..\src\UserInfo.h" />
@@ -100,7 +103,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -115,7 +118,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

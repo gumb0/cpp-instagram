@@ -40,6 +40,9 @@
     <ClCompile Include="..\src\LocationImpl.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\StdioApiImpl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\cpp-instagram\Client.h">
@@ -136,6 +139,12 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LocationImpl.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StdioApi.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StdioApiImpl.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,6 +14,7 @@ namespace Instagram
         virtual int getWidth() const = 0;
         virtual int getHeight() const = 0;
         virtual std::string getUrl() const = 0;
+        virtual void download(const std::string& localPath) const = 0;
     };
 
     typedef std::shared_ptr<MediaData> MediaDataPtr;

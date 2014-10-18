@@ -4,7 +4,9 @@
 
 using namespace Instagram;
 
-MediaDataImpl::MediaDataImpl(const MediaDataInfo& info) : mInfo(info)
+MediaDataImpl::MediaDataImpl(CurlPtr curl, const MediaDataInfo& info) : 
+    mCurl(curl),
+    mInfo(info)
 {
 }
 
@@ -23,9 +25,14 @@ std::string MediaDataImpl::getUrl() const
     return mInfo.mUrl;
 }
 
-MediaDataPtr Instagram::CreateMediaDataImpl(MediaDataInfoPtr info)
+void MediaDataImpl::download(const std::string& localPath) const
+{
+    mCurl->download(mInfo.mUrl, localPath);
+}
+
+MediaDataPtr Instagram::CreateMediaDataImpl(CurlPtr curl, MediaDataInfoPtr info)
 {
     assert(info);
 
-    return MediaDataPtr(new MediaDataImpl(*info));
+    return MediaDataPtr(new MediaDataImpl(curl, *info));
 }

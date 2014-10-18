@@ -5,11 +5,11 @@
 
 using namespace Instagram;
 
-ImagesImpl::ImagesImpl(const ImageInfo& imageInfo) : 
+ImagesImpl::ImagesImpl(CurlPtr curl, const ImageInfo& imageInfo) :
     mImageInfo(imageInfo), 
-    mLowResolution(CreateMediaDataImpl(imageInfo.mLowResolution)),
-    mStandardResolution(CreateMediaDataImpl(imageInfo.mStandardResolution)),
-    mThumbnail(CreateMediaDataImpl(imageInfo.mThumbnail))
+    mLowResolution(CreateMediaDataImpl(curl, imageInfo.mLowResolution)),
+    mStandardResolution(CreateMediaDataImpl(curl, imageInfo.mStandardResolution)),
+    mThumbnail(CreateMediaDataImpl(curl, imageInfo.mThumbnail))
 {
 }
 
@@ -28,9 +28,9 @@ MediaDataPtr ImagesImpl::getThumbnail() const
     return mThumbnail;
 }
 
-ImagesPtr Instagram::CreateImagesImpl(ImageInfoPtr imageInfo)
+ImagesPtr Instagram::CreateImagesImpl(CurlPtr curl, ImageInfoPtr imageInfo)
 {
     assert(imageInfo);
 
-    return ImagesPtr(new ImagesImpl(*imageInfo));
+    return ImagesPtr(new ImagesImpl(curl, *imageInfo));
 }

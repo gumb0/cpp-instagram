@@ -3,6 +3,7 @@
 #include "LocationImpl.h"
 #include "MediaDataImpl.h"
 #include "MediaImpl.h"
+#include "MockCurl.h"
 #include "VideosImpl.h"
 
 #include <gmock/gmock.h>
@@ -51,7 +52,7 @@ class MediaTest : public Test
         mediaInfo.mImageInfo = CreateImageInfo();
         mediaInfo.mLocationInfo = CreateLocationInfo();
 
-        media = CreateMediaImpl(mediaInfo);
+        media = CreateMediaImpl(CurlPtr(), mediaInfo);
     }
 
 protected:
@@ -112,7 +113,7 @@ class ImageMediaTest : public Test
         mediaInfo.mType = MediaType::Image;
         mediaInfo.mImageInfo = CreateImageInfo();
 
-        media = CreateMediaImpl(mediaInfo);
+        media = CreateMediaImpl(CurlPtr(), mediaInfo);
     }
 
 protected:
@@ -134,7 +135,7 @@ class ImagesTest : public Test
 {
     virtual void SetUp()
     {
-        images = CreateImagesImpl(CreateImageInfo());
+        images = CreateImagesImpl(CurlPtr(), CreateImageInfo());
     }
 
 protected:
@@ -161,15 +162,18 @@ class MediaDataTest : public Test
 {
     virtual void SetUp()
     {
+        curl.reset(new MockCurl);
+
         info.reset(new MediaDataInfo);
         info->mWidth = 640;
         info->mHeight = 480;
         info->mUrl = "url";
         
-        mediaData = CreateMediaDataImpl(info);
+        mediaData = CreateMediaDataImpl(curl, info);
     }
 
 protected:
+    std::shared_ptr<MockCurl> curl;
     MediaDataInfoPtr info;
     MediaDataPtr mediaData;
 };
@@ -189,6 +193,13 @@ TEST_F(MediaDataTest, getsUrl)
     ASSERT_THAT(mediaData->getUrl(), StrEq(info->mUrl));
 }
 
+TEST_F(MediaDataTest, downloadsByUrl)
+{
+    const std::string localPath = "path";
+    EXPECT_CALL(*curl, download(StrEq(info->mUrl), StrEq(localPath)));
+
+    mediaData->download(localPath);
+}
 
 class VideoMediaTest : public Test
 {
@@ -199,7 +210,7 @@ class VideoMediaTest : public Test
         mediaInfo.mImageInfo = CreateImageInfo();
         mediaInfo.mVideoInfo = CreateVideoInfo();;
 
-        media = CreateMediaImpl(mediaInfo);
+        media = CreateMediaImpl(CurlPtr(), mediaInfo);
     }
 
 protected:
@@ -220,7 +231,7 @@ class VideosTest : public Test
 {
     virtual void SetUp()
     {
-        videos = CreateVideosImpl(CreateVideoInfo());
+        videos = CreateVideosImpl(CurlPtr(), CreateVideoInfo());
     }
 
 protected:

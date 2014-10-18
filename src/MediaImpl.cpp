@@ -6,10 +6,10 @@
 
 using namespace Instagram;
 
-MediaImpl::MediaImpl(const MediaInfo& mediaInfo) : 
+MediaImpl::MediaImpl(CurlPtr curl, const MediaInfo& mediaInfo) :
     mInfo(mediaInfo), 
-    mImages(CreateImagesImpl(mediaInfo.mImageInfo)),
-    mVideos(mediaInfo.mType == MediaType::Video ? CreateVideosImpl(mediaInfo.mVideoInfo) : nullptr),
+    mImages(CreateImagesImpl(curl, mediaInfo.mImageInfo)),
+    mVideos(mediaInfo.mType == MediaType::Video ? CreateVideosImpl(curl, mediaInfo.mVideoInfo) : nullptr),
     mLocation(mediaInfo.mLocationInfo ? CreateLocationImpl(mediaInfo.mLocationInfo) : nullptr)
 {
 }
@@ -72,7 +72,7 @@ LocationPtr MediaImpl::getLocation() const
     return mLocation;
 }
 
-MediaPtr Instagram::CreateMediaImpl(const MediaInfo& mediaInfo)
+MediaPtr Instagram::CreateMediaImpl(CurlPtr curl, const MediaInfo& mediaInfo)
 {
-    return MediaPtr(new MediaImpl(mediaInfo));
+    return MediaPtr(new MediaImpl(curl, mediaInfo));
 }

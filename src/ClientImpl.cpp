@@ -8,6 +8,7 @@
 #include "UserImpl.h"
 
 #include <algorithm>
+#include <functional>
 
 using namespace Instagram;
 
@@ -44,7 +45,8 @@ Feed ClientImpl::getFeed(int count /* = 0 */, const std::string& minId /* = std:
     std::vector<MediaInfo> medias = response.parseFeed();
 
     Feed feed;
-    std::transform(medias.begin(), medias.end(), std::back_inserter(feed), CreateMediaImpl);
+    std::transform(medias.begin(), medias.end(), std::back_inserter(feed), 
+        std::bind(CreateMediaImpl, mCurl, std::placeholders::_1));
 
     return feed;
 }

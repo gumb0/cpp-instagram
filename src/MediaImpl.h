@@ -1,6 +1,7 @@
 #ifndef CPP_INSTAGRAM_IMPL_MEDIA_IMPL_H
 #define CPP_INSTAGRAM_IMPL_MEDIA_IMPL_H
 
+#include "Curl.h"
 #include "Media.h"
 #include "MediaInfo.h"
 
@@ -9,7 +10,7 @@ namespace Instagram
     class MediaImpl : public Media
     {
     public:
-        explicit MediaImpl(const MediaInfo& mediaInfo);
+        MediaImpl(CurlPtr curl, const MediaInfo& mediaInfo);
 
         virtual std::string getId() const;
         virtual std::string getLink() const;
@@ -30,7 +31,7 @@ namespace Instagram
         const LocationPtr mLocation;
     };
 
-    MediaPtr CreateMediaImpl(const MediaInfo& mediaInfo);
+    MediaPtr CreateMediaImpl(CurlPtr curl, const MediaInfo& mediaInfo);
 }
 
 #endif

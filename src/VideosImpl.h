@@ -1,6 +1,7 @@
 #ifndef CPP_INSTAGRAM_IMPL_VIDEOS_IMPL_H
 #define CPP_INSTAGRAM_IMPL_VIDEOS_IMPL_H
 
+#include "Curl.h"
 #include "VideoInfo.h"
 #include "Videos.h"
 
@@ -9,7 +10,7 @@ namespace Instagram
     class VideosImpl : public Videos
     {
     public:
-        explicit VideosImpl(const VideoInfo& videoInfos);
+        VideosImpl(CurlPtr curl, const VideoInfo& videoInfos);
 
         virtual MediaDataPtr getLowBandwidth() const;
         virtual MediaDataPtr getLowResolution() const;
@@ -22,7 +23,7 @@ namespace Instagram
         const MediaDataPtr mStandardResolution;
     };
 
-    VideosPtr CreateVideosImpl(VideoInfoPtr videoInfo);
+    VideosPtr CreateVideosImpl(CurlPtr curl, VideoInfoPtr videoInfo);
 }
 
 #endif

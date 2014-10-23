@@ -40,7 +40,7 @@ void downloadPopularImages()
     }
     catch (const Exception& e)
     {
-        std::cerr << e.GetMessage() << std::endl;
+        std::cerr << e.getMessage() << std::endl;
     }
 }
   

@@ -37,17 +37,17 @@ namespace Instagram
         {
         }
 
-        int GetErrorCode() const
+        int getErrorCode() const
         {
             return mErrorCode;
         }
 
-        std::string GetMessage() const
+        std::string getMessage() const
         {
             return mMessage;
         }
         
-        int GetCurlErrorCode() const
+        int getCurlErrorCode() const
         {
             return mCurlErrorCode;
         }

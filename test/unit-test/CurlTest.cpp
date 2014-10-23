@@ -215,3 +215,5 @@ TEST_F(CurlErrorsTest, DownloadThrowsIfSetWriteDataFails)
 
     ASSERT_THROW(curl->download("", ""), Instagram::Exception);
 }
+
+// TODO throw if HTTP error response returned

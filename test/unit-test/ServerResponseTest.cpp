@@ -405,6 +405,8 @@ TEST_F(ParsingFeedResponseTest, ReturnsEmptyNameIfNotReturned)
     ASSERT_THAT(medias[2].mLocationInfo->mName, StrEq(""));
 }
 
+// TODO location can contain only id without coordinates, see media 837491777045931774_451632184
+
 TEST_F(ParsingFeedResponseTest, ParsesUserId)
 {
     ASSERT_THAT(medias[0].mUserId, StrEq("3"));

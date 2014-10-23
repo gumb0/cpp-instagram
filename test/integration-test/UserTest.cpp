@@ -1,4 +1,5 @@
 #include "AuthenticatedClient.h"
+#include "Exception.h"
 
 #include <gmock/gmock.h>
 #include <memory>
@@ -33,6 +34,12 @@ TEST_F(ClientTest, findsUserById)
 
     user->downloadProfilePicture(user->getUsername() + ".jpg");
 }
+
+TEST_F(ClientTest, gettingNotExistingUserThrows)
+{
+    ASSERT_THROW(client->findUserById("123"), Instagram::Exception);
+}
+
 
 TEST_F(ClientTest, getsPopularMedias)
 {

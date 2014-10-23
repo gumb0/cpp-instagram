@@ -14,6 +14,7 @@ namespace Instagram
     {
     public:
         virtual FILE* openFileForWrite(const std::string& path) = 0;
+        virtual size_t writeToFile(const void* buffer, size_t size, size_t count, FILE* file) = 0;
         virtual void closeFile(FILE* file) = 0;
     };
 

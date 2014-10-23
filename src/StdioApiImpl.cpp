@@ -1,4 +1,3 @@
-#include "ExceptionHelpers.h"
 #include "StdioApiImpl.h"
 
 using namespace Instagram;
@@ -10,11 +9,12 @@ namespace
 
 FILE* StdioApiImpl::openFileForWrite(const std::string& path)
 {
-    FILE* f = fopen(path.c_str(), OPEN_MODE_WRITE_BINARY);
-    if (!f)
-        Throw(FILE_OPEN_FOR_WRITE_FAILED, path);
+    return fopen(path.c_str(), OPEN_MODE_WRITE_BINARY);
+}
 
-    return f;
+size_t StdioApiImpl::writeToFile(const void* buffer, size_t size, size_t count, FILE* file)
+{
+    return fwrite(buffer, size, count, file);
 }
 
 void StdioApiImpl::closeFile(FILE* file)

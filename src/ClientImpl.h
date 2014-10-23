@@ -20,17 +20,17 @@ namespace Instagram
         // Client methods
         virtual UserPtr findUserById(const std::string& id) const;
 
-        virtual Feed getPopularMedias() const;
+        virtual MediaList getPopularMedias() const;
 
         // AuthenticatedClient methods
 
         // 0 passed to cout will make it ignored
         // empty string passed to minId/maxId makes them ignored
-        virtual Feed getFeed(int count = 0, const std::string& minId = std::string(), const std::string& maxId = std::string()) const;
+        virtual MediaList getFeed(int count = 0, const std::string& minId = std::string(), const std::string& maxId = std::string()) const;
 
     private:
         ServerResponse getFromUrl(const std::string& url) const;
-        Feed parseMediaList(const ServerResponse& response) const;
+        MediaList parseMediaList(const ServerResponse& response) const;
 
     private:
         CurlPtr mCurl;

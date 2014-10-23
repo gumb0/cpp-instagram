@@ -16,7 +16,7 @@ namespace Instagram
         virtual UserPtr findUserById(const std::string& id) const = 0;
 
         // TODO rename Feed
-        virtual Feed getPopularMedias() const = 0;
+        virtual MediaList getPopularMedias() const = 0;
     };
 
     typedef std::shared_ptr<Client> ClientPtr;

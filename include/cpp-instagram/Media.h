@@ -37,7 +37,7 @@ namespace Instagram
     };
 
     typedef std::shared_ptr<Media> MediaPtr;
-    typedef std::vector<MediaPtr> Feed;
+    typedef std::vector<MediaPtr> MediaList;
 }
 
 #endif

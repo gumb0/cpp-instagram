@@ -53,7 +53,7 @@ TEST_F(ClientTest, GetsPopularMedias)
     const std::string request = std::string("https://api.instagram.com/v1/media/popular?client_id=" + clientId);
     EXPECT_CALL(*curl, get(StrEq(request))).WillOnce(Return(MEDIA_LIST_RESPONSE));
 
-    Feed medias = client->getPopularMedias();
+    MediaList medias = client->getPopularMedias();
     ASSERT_THAT(medias, SizeIs(1));
 }
 
@@ -83,6 +83,6 @@ TEST_F(AuthenticatedClientTest, GetsFeed)
 
     EXPECT_CALL(*curl, get(StrEq(request))).WillOnce(Return(MEDIA_LIST_RESPONSE));
 
-    Feed feed = client->getFeed(count, minId, maxId);
+    MediaList feed = client->getFeed(count, minId, maxId);
     ASSERT_THAT(feed, SizeIs(1));
 }

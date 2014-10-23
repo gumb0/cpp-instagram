@@ -5,6 +5,8 @@
 #include "CurlApi.h"
 #include "StdioApi.h"
 
+#include <functional>
+
 namespace Instagram
 {
     class CurlImpl : public Curl
@@ -20,14 +22,17 @@ namespace Instagram
         virtual void download(const std::string& url, const std::string& localPath);
 
     private:
+        typedef std::function<size_t(const void*, size_t, size_t)> FileWriteFunction;
+            
         static size_t onDataReceived(char* buffer, size_t size, size_t nmemb, void* context);
+        static size_t onFileDataReceived(char* buffer, size_t size, size_t nmemb, void* context);
 
         void setUrl(const std::string& url);
         void setGetMethod();
         void setSslCertificatePath();
 
         void setReceiveCallback(std::string& outResult);
-        void setFileReceiveCallback(std::shared_ptr<FILE> file);
+        void setFileReceiveCallback(FileWriteFunction& function);
 
         void perform();
 

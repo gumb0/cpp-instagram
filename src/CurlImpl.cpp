@@ -1,9 +1,8 @@
 #include "CurlImpl.h"
 #include "ExceptionHelpers.h"
 
-#include <functional>
-
 using namespace Instagram;
+using namespace std::placeholders;
 
 namespace
 {
@@ -84,18 +83,27 @@ void CurlImpl::download(const std::string& url, const std::string& localPath)
     setUrl(url);
     setGetMethod();
 
-    std::shared_ptr<FILE> file(mStdio->openFileForWrite(localPath), 
-        std::bind(&StdioApi::closeFile, mStdio, std::placeholders::_1));
-    setFileReceiveCallback(file);
+    std::shared_ptr<FILE> file(mStdio->openFileForWrite(localPath), std::bind(&StdioApi::closeFile, mStdio, _1));
+    if (!file)
+        Throw(FILE_OPEN_FOR_WRITE_FAILED, localPath);
+
+    FileWriteFunction fileWriteFunction = std::bind(&StdioApi::writeToFile, mStdio, _1, _2, _3, file.get());
+    setFileReceiveCallback(fileWriteFunction);
 
     perform();
 }
 
-void CurlImpl::setFileReceiveCallback(std::shared_ptr<FILE> file)
+void CurlImpl::setFileReceiveCallback(FileWriteFunction& fileWriteFunction)
 {
-    if (CURLcode result = mCurlApi->curl_easy_setopt_func(mHandle, CURLOPT_WRITEFUNCTION, 0))
+    if (CURLcode result = mCurlApi->curl_easy_setopt_func(mHandle, CURLOPT_WRITEFUNCTION, onFileDataReceived))
         ThrowCurl(CURL_SETTING_WRITE_FUNCTION_FAILED, result);
 
-    if (CURLcode result = mCurlApi->curl_easy_setopt_ptr(mHandle, CURLOPT_WRITEDATA, file.get()))
+    if (CURLcode result = mCurlApi->curl_easy_setopt_ptr(mHandle, CURLOPT_WRITEDATA, &fileWriteFunction))
         ThrowCurl(CURL_SETTING_WRITE_DATA_FAILED, result);
+}
+
+size_t CurlImpl::onFileDataReceived(char* buffer, size_t size, size_t nmemb, void* context)
+{
+    const FileWriteFunction* fileWriteFunction = static_cast<FileWriteFunction*>(context);
+    return (*fileWriteFunction)(buffer, size, nmemb);
 }

@@ -15,7 +15,6 @@ namespace Instagram
     public:
         virtual UserPtr findUserById(const std::string& id) const = 0;
 
-        // TODO rename Feed
         virtual MediaList getPopularMedias() const = 0;
     };
 

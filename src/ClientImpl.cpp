@@ -47,7 +47,6 @@ MediaList ClientImpl::getPopularMedias() const
 
 MediaList ClientImpl::createMediaListFromResponse(const ServerResponse& response) const
 {
-    // TODO rename parseFeed
     std::vector<MediaInfo> medias = response.parseMediaList();
 
     MediaList feed;

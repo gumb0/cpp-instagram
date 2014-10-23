@@ -31,7 +31,7 @@ ClientImpl::ClientImpl(CurlPtr curl, ApiUrlsPtr apiUrls) :
 UserPtr ClientImpl::findUserById(const std::string& id) const
 {
     ServerResponse response(getFromUrl(mApiUrls->getUserById(id)));
-    return UserPtr(new UserImpl(response.parseUser()));
+    return CreateUserImpl(mCurl, response.parseUser());
 }
 
 ServerResponse ClientImpl::getFromUrl(const std::string& url) const

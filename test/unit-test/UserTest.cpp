@@ -1,4 +1,5 @@
 #include "Exception.h"
+#include "MockCurl.h"
 #include "UserImpl.h"
 
 #include <gmock/gmock.h>
@@ -11,13 +12,16 @@ class UserTest : public Test
 {
     virtual void SetUp()
     {
+        curl.reset(new MockCurl);
+
         userInfo = { "id", "userName", "full name", "profile pic", "bio", "website", { 1, 2, 3 } };
-        user.reset(new UserImpl(userInfo));
+        user = CreateUserImpl(curl, userInfo);
     }
 
 protected:
+    std::shared_ptr<MockCurl> curl;
     UserInfo userInfo;
-    std::unique_ptr<User> user;
+    UserPtr user;
 };
 
 TEST_F(UserTest, getsId)
@@ -35,9 +39,17 @@ TEST_F(UserTest, getsFullName)
     ASSERT_THAT(user->getFullName(), StrEq(userInfo.mFullName));
 }
 
-TEST_F(UserTest, getsProfilePicture)
+TEST_F(UserTest, getsProfilePictureUrl)
 {
-    ASSERT_THAT(user->getProfilePicture(), StrEq(userInfo.mProfilePicture));
+    ASSERT_THAT(user->getProfilePictureUrl(), StrEq(userInfo.mProfilePicture));
+}
+
+TEST_F(UserTest, downloadsProfilePicture)
+{
+    const std::string localPath = "path";
+    EXPECT_CALL(*curl, download(StrEq(userInfo.mProfilePicture), StrEq(localPath)));
+
+    user->downloadProfilePicture(localPath);
 }
 
 TEST_F(UserTest, getsBio)

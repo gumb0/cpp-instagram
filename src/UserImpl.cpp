@@ -1,11 +1,11 @@
 #include "UserImpl.h"
 #include "ExceptionHelpers.h"
 
-#include <json/json.h>
-
 using namespace Instagram;
 
-UserImpl::UserImpl(const UserInfo& userInfo) : mUserInfo(userInfo)
+UserImpl::UserImpl(CurlPtr curl, const UserInfo& userInfo) : 
+    mCurl(curl),
+    mUserInfo(userInfo)
 {
 }
 
@@ -24,9 +24,14 @@ std::string UserImpl::getFullName() const
     return mUserInfo.mFullName;
 }
 
-std::string UserImpl::getProfilePicture() const
+std::string UserImpl::getProfilePictureUrl() const
 {
     return mUserInfo.mProfilePicture;
+}
+
+void UserImpl::downloadProfilePicture(const std::string& localPath) const
+{
+    mCurl->download(mUserInfo.mProfilePicture, localPath);
 }
 
 std::string UserImpl::getBio() const
@@ -52,4 +57,10 @@ int UserImpl::getFollowsCount() const
 int UserImpl::getFollowedByCount() const
 {
     return mUserInfo.mCounts.mFollowedBy;
+}
+
+
+UserPtr Instagram::CreateUserImpl(CurlPtr curl, const UserInfo& userInfo)
+{
+    return UserPtr(new UserImpl(curl, userInfo));
 }

@@ -11,6 +11,7 @@ namespace
     
     const std::string GET_USER_BY_ID = "users/%1%";
     const std::string GET_FEED = "users/self/feed";
+    const std::string GET_POPULAR_MEDIAS = "media/popular";
 
     const std::string COUNT_PARAM = "count";
     const std::string MIN_ID_PARAM = "min_id";
@@ -52,6 +53,11 @@ std::string ApiUrls::getFeed(int count, const std::string& minId, const std::str
         urlBuilder.addParam(MAX_ID_PARAM, maxId);
 
     return urlBuilder.getResult();
+}
+
+std::string ApiUrls::getPopularMedias() const
+{
+    return getPathWithAccessParam(GET_POPULAR_MEDIAS).getResult();
 }
 
 ApiUrlsPtr Instagram::CreateNonauthenticatedApiUrls(const std::string& clientId)

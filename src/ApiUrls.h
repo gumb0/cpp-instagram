@@ -22,6 +22,8 @@ namespace Instagram
         // empty string passed to minId/maxId makes them ignored
         std::string getFeed(int count, const std::string& minId, const std::string& maxId) const;
 
+        std::string getPopularMedias() const;
+
     private:
         UrlBuilder getPathWithAccessParam(const std::string& path) const;
 

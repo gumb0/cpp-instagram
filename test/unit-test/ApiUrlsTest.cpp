@@ -20,6 +20,12 @@ TEST_F(NonAuthenticatedApiUrlsTest, ConstructsUserByIdUrl)
     ASSERT_THAT(apiUrls->getUserById(userId), StrEq("https://api.instagram.com/v1/users/" + userId + "?client_id="+clientId));
 }
 
+TEST_F(NonAuthenticatedApiUrlsTest, ConstructsPopularMediasUrl)
+{
+    const std::string userId = "123";
+    ASSERT_THAT(apiUrls->getPopularMedias(), StrEq("https://api.instagram.com/v1/media/popular?client_id=" + clientId));
+}
+
 class AuthenticatedApiUrlsTest : public Test
 {
 protected:

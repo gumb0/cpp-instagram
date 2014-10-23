@@ -6,10 +6,19 @@
 using namespace Instagram;
 using namespace testing;
 
-TEST(UserTest, findsUserById)
+class ClientTest : public Test
 {
-    ClientPtr client = CreateClient("d7b1086490044ada88da482a87b073f3");
+protected:
+    virtual void SetUp()
+    {
+        client = CreateClient("d7b1086490044ada88da482a87b073f3");
+    }
 
+    ClientPtr client;
+};
+
+TEST_F(ClientTest, findsUserById)
+{
     UserPtr user = client->findUserById("1479058533");
 
     EXPECT_THAT(user->getId(), StrEq("1479058533"));
@@ -23,6 +32,17 @@ TEST(UserTest, findsUserById)
     EXPECT_THAT(user->getFollowedByCount(), 10);
 
     user->downloadProfilePicture(user->getUsername() + ".jpg");
+}
+
+TEST_F(ClientTest, getsPopularMedias)
+{
+    MediaList feed = client->getPopularMedias();
+
+    for (MediaPtr media : feed)
+    {
+        const std::string id = media->getId();
+        media->getImages()->getStandardResolution()->download(id + ".jpg");
+    }
 }
 
 TEST(FeedTest, getsFeed)

@@ -39,16 +39,28 @@ ServerResponse ClientImpl::getFromUrl(const std::string& url) const
     return ServerResponse(mCurl->get(url));
 }
 
-Feed ClientImpl::getFeed(int count /* = 0 */, const std::string& minId /* = std::string() */, const std::string& maxId /* = std::string() */) const
+Feed ClientImpl::getPopularMedias() const
 {
-    ServerResponse response(getFromUrl(mApiUrls->getFeed(count, minId, maxId)));
+    ServerResponse response(getFromUrl(mApiUrls->getPopularMedias()));
+    return parseMediaList(response);
+}
+
+Feed ClientImpl::parseMediaList(const ServerResponse& response) const
+{
+    // TODO rename parseFeed
     std::vector<MediaInfo> medias = response.parseFeed();
 
     Feed feed;
-    std::transform(medias.begin(), medias.end(), std::back_inserter(feed), 
+    std::transform(medias.begin(), medias.end(), std::back_inserter(feed),
         std::bind(CreateMediaImpl, mCurl, std::placeholders::_1));
 
     return feed;
+}
+
+Feed ClientImpl::getFeed(int count /* = 0 */, const std::string& minId /* = std::string() */, const std::string& maxId /* = std::string() */) const
+{
+    ServerResponse response(getFromUrl(mApiUrls->getFeed(count, minId, maxId)));
+    return parseMediaList(response);
 }
 
 ClientPtr Instagram::CreateClient(const std::string& clientId)

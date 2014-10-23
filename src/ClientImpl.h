@@ -20,6 +20,8 @@ namespace Instagram
         // Client methods
         virtual UserPtr findUserById(const std::string& id) const;
 
+        virtual Feed getPopularMedias() const;
+
         // AuthenticatedClient methods
 
         // 0 passed to cout will make it ignored
@@ -28,6 +30,7 @@ namespace Instagram
 
     private:
         ServerResponse getFromUrl(const std::string& url) const;
+        Feed parseMediaList(const ServerResponse& response) const;
 
     private:
         CurlPtr mCurl;

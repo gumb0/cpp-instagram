@@ -19,21 +19,29 @@ requirements
 sample code
 ----
 ``` cpp
-  #include "AuthenticatedClient.h"
-  
-  using namespace Instagram;
+#include "cpp-instagram/AuthenticatedClient.h"
+#include "cpp-instagram/Exception.h"
 
-  void downloadPopularImages()
-  {
-    AuthenticatedClientPtr client = CreateAuthenticatedClient(userToken);
-  
-    MediaList medias = client->getPopularMedias();
+using namespace Instagram;
 
-    for (MediaPtr media : medias)
+void downloadPopularImages()
+{
+    try
     {
-      const std::string id = media->getId();
-      media->getImages()->getStandardResolution()->download(id + ".jpg");
+        AuthenticatedClientPtr client = CreateAuthenticatedClient(userToken);
+
+        MediaList medias = client->getPopularMedias();
+
+        for (MediaPtr media : medias)
+        {
+            const std::string id = media->getId();
+            media->getImages()->getStandardResolution()->download(id + ".jpg");
+        }
     }
-  }
+    catch (const Exception& e)
+    {
+        std::cerr << e.GetMessage() << std::endl;
+    }
+}
   
 ```

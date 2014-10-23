@@ -30,7 +30,7 @@ namespace Instagram
 
     private:
         ServerResponse getFromUrl(const std::string& url) const;
-        MediaList parseMediaList(const ServerResponse& response) const;
+        MediaList createMediaListFromResponse(const ServerResponse& response) const;
 
     private:
         CurlPtr mCurl;

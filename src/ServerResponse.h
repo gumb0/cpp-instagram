@@ -16,7 +16,7 @@ namespace Instagram
         explicit ServerResponse(const std::string& response);
 
         UserInfo parseUser() const;
-        std::vector<MediaInfo> parseFeed() const;
+        std::vector<MediaInfo> parseMediaList() const;
 
     private:
         static MediaInfo parseMedia(const Json::Value& value);

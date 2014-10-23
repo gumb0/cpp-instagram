@@ -253,7 +253,7 @@ class ParsingFeedResponseTest : public Test
 
         ServerResponse response(json);
 
-        medias = response.parseFeed();
+        medias = response.parseMediaList();
     }
 
 protected:
@@ -428,5 +428,5 @@ TEST(ParsingIncorrectFeedResponseTest, ThrowsIfJsonHasNoId)
                  } 
             }]})");
 
-    ASSERT_THROW(response.parseFeed(), Instagram::Exception);
+    ASSERT_THROW(response.parseMediaList(), Instagram::Exception);
 }

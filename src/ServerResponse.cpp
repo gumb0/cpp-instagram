@@ -225,7 +225,7 @@ UserCounts ServerResponse::parseCounts(const Json::Value& value) const
     return res;
 }
 
-std::vector<MediaInfo> ServerResponse::parseFeed() const
+std::vector<MediaInfo> ServerResponse::parseMediaList() const
 {
     std::vector<MediaInfo> feed;
     std::transform(mData.begin(), mData.end(), std::back_inserter(feed), parseMedia);

@@ -16,32 +16,8 @@ requirements
 * jsoncpp https://github.com/open-source-parsers/jsoncpp
 * Google Mock for tests https://code.google.com/p/googlemock
 
-sample code
+sample app invocation
 ----
-``` cpp
-#include "cpp-instagram/AuthenticatedClient.h"
-#include "cpp-instagram/Exception.h"
-
-using namespace Instagram;
-
-void downloadPopularImages()
-{
-    try
-    {
-        AuthenticatedClientPtr client = CreateAuthenticatedClient(userToken);
-
-        MediaList medias = client->getPopularMedias();
-
-        for (MediaPtr media : medias)
-        {
-            const std::string id = media->getId();
-            media->getImages()->getStandardResolution()->download(id + ".jpg");
-        }
-    }
-    catch (const Exception& e)
-    {
-        std::cerr << e.getMessage() << std::endl;
-    }
-}
-  
+```
+  ./cpp-instagram --token <your_CLIENT_ID>
 ```

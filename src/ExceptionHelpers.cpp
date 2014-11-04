@@ -1,12 +1,12 @@
 #include "ExceptionHelpers.h"
 
-#include <unordered_map>
+#include <map>
 
 using namespace Instagram;
 
 namespace
 {
-    const std::pair<ErrorCode, const char*> CODE_MESSAGE_PAIRS[] = 
+    const std::pair<ErrorCode, const char*> CODE_MESSAGE_PAIRS[] =
     {
         { CURL_GLOBAL_INIT_FAILED, "curl_global_init() failed." },
         { CURL_EASY_INIT_FAILED, "curl_easy_init() failed." },
@@ -25,13 +25,13 @@ namespace
     };
 
     const int CODE_MESSAGE_PAIRS_SIZE = sizeof(CODE_MESSAGE_PAIRS) / sizeof(CODE_MESSAGE_PAIRS[0]);
-    const std::unordered_map<ErrorCode, const char*> ERROR_MESSAGE_MAP(CODE_MESSAGE_PAIRS, CODE_MESSAGE_PAIRS + CODE_MESSAGE_PAIRS_SIZE);
+    const std::map<ErrorCode, const char*> ERROR_MESSAGE_MAP(CODE_MESSAGE_PAIRS, CODE_MESSAGE_PAIRS + CODE_MESSAGE_PAIRS_SIZE);
 
     const char* CURL_ERROR_CODE = " CURL error code: ";
 
     std::string GetMessageFromMap(ErrorCode error)
     {
-        std::unordered_map<ErrorCode, const char*>::const_iterator it = ERROR_MESSAGE_MAP.find(error);
+        std::map<ErrorCode, const char*>::const_iterator it = ERROR_MESSAGE_MAP.find(error);
         return (it != ERROR_MESSAGE_MAP.end() ? it->second : std::string());
     }
 }

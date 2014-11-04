@@ -6,7 +6,11 @@ using namespace std::placeholders;
 
 namespace
 {
-    const char* SSL_CERTIFICATE_PATH = "ca-bundle.crt";
+#ifdef _WIN32
+	const char* SSL_CERTIFICATE_PATH = "ca-bundle.crt";
+#else
+	const char* SSL_CERTIFICATE_PATH = "/etc/ssl/certs/ca-certificates.crt";
+#endif
 }
 
 CurlImpl::CurlImpl(CurlApiPtr curlApi, StdioApiPtr stdio) :

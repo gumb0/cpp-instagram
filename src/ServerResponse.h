@@ -10,7 +10,7 @@
 
 namespace Instagram
 {
-    class ServerResponse : NonCopyable
+    class ServerResponse //: NonCopyable //TODO: return this inheritance!
     {
     public:
         explicit ServerResponse(const std::string& response);

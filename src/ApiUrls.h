@@ -23,6 +23,7 @@ namespace Instagram
         std::string getFeed(int count, const std::string& minId, const std::string& maxId) const;
 
         std::string getPopularMedias() const;
+        std::string getMediasByTag(std::string, int count, const std::string& minId = std::string(), const std::string& maxId = std::string()) const;
 
     private:
         UrlBuilder getPathWithAccessParam(const std::string& path) const;

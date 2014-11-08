@@ -4,6 +4,7 @@
 #include "ApiUrls.h"
 #include "AuthenticatedClient.h"
 #include "Curl.h"
+#include "Tag.h"
 
 namespace Instagram
 {
@@ -21,6 +22,7 @@ namespace Instagram
         virtual UserPtr findUserById(const std::string& id) const;
 
         virtual MediaList getPopularMedias() const;
+        MediaList getRecentMediasByTag(const std::string& tag, int count) const;
 
         // AuthenticatedClient methods
 

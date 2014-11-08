@@ -45,6 +45,12 @@ MediaList ClientImpl::getPopularMedias() const
     return createMediaListFromResponse(response);
 }
 
+MediaList ClientImpl::getRecentMediasByTag(const std::string& tag, int count) const
+{
+	ServerResponse response(getFromUrl(mApiUrls->getMediasByTag(tag, count)));
+	return createMediaListFromResponse(response);
+}
+
 MediaList ClientImpl::createMediaListFromResponse(const ServerResponse& response) const
 {
     std::vector<MediaInfo> medias = response.parseMediaList();

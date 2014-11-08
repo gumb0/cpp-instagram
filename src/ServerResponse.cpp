@@ -165,7 +165,7 @@ namespace
     {
         const Json::Value& subvalue = getOptionalSubvalue(value, key);
 
-        return subvalue.empty() ? std::string() : subvalue.asString();
+        return subvalue.isConvertibleTo(Json::stringValue) ? std::string() : subvalue.asString();
     }
  
     LocationInfoPtr parseLocation(const Json::Value& value)
@@ -173,12 +173,17 @@ namespace
         if (value.empty())
             return LocationInfoPtr();
 
-        LocationInfoPtr locationInfo(new LocationInfo);
-        locationInfo->mId = parseOptionalStringSubvalue(value, JSON_KEY_ID);
-        locationInfo->mLatitude = getSubvalue(value, JSON_KEY_LATITUDE).asDouble();
-        locationInfo->mLongitude = getSubvalue(value, JSON_KEY_LONGITUDE).asDouble();
-        locationInfo->mName = parseOptionalStringSubvalue(value, JSON_KEY_NAME);
-        return locationInfo;
+        try {
+        	LocationInfoPtr locationInfo(new LocationInfo); //TODO: possible memleak???
+        	locationInfo->mId = parseOptionalStringSubvalue(value, JSON_KEY_ID);
+        	locationInfo->mLatitude = getSubvalue(value, JSON_KEY_LATITUDE).asDouble();
+        	locationInfo->mLongitude = getSubvalue(value, JSON_KEY_LONGITUDE).asDouble();
+			locationInfo->mName = parseOptionalStringSubvalue(value, JSON_KEY_NAME);
+			return locationInfo;
+        }catch(...){
+            return LocationInfoPtr();
+        	//debug info here due to lat/lon unavailable
+        }
     }
 
     std::string parseMediaUser(const Json::Value& value)
